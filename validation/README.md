@@ -354,3 +354,27 @@ Final reviewed-patch replay: `com-fifo-final-20261013`, frame 10,448, normal
 TCP quit, zero unsupported instructions and 1,078,532 native overlay dispatches.
 The tested executable SHA-256 is
 `aa43ee2540c88baee70a430995c69beaaade1c7712f6ba1881b550556e95f62f7`.
+
+## Local versus and light netplay smoke (2026-10-13)
+
+`build-release/local-versus-resume-20261013` completes the interrupted local
+versus route: two separate digital ports, player-two selection, Goku/Frieza
+combat and independent direction inputs. Pad snapshots show only the intended
+port held for each input. Normal TCP quit at frame 7,243, zero unsupported
+instructions. This is virtual-controller validation, not a physical-device test.
+
+The requested light two-peer integration smoke passes in
+`build-release/netplay-smoke-input-20261013`: native-overlay OpenGL peers on
+loopback, rollback enabled, correct two-player selection, Goku/Goku combat,
+independent direction inputs and a host-initiated shared save/load. Both peers
+report successful slot-1 load receipts (generation 2), return to combat, and
+remain active with no reported desync; post-load confirmed ticks advance to
+212/215. Both exit normally through TCP quit, at frames 4,274/4,267, with zero
+unsupported instructions, in 58.3 seconds. Runtime digest samples agree between
+peers. No recomp-net changes were needed. Public lobby/NAT traversal and adverse
+network conditions were outside this owner-approved smoke scope.
+
+The first netplay harness used short transient inputs and stayed at character
+selection. Its automatic completion flag was not sufficient: visual review
+rejected its combat claim. Persistent digital-controller input with explicit
+release corrected the harness. Only the second run counts as combat validation.

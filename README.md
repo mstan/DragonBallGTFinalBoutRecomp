@@ -10,7 +10,8 @@ overlay toolchain staged, cold and warm runs now render combat at 5x internal
 resolution. The Goku-versus-Piccolo corruption is fixed by preserving requested
 CD bytes across pending sector notifications. Native combat movement, a projectile,
 pause/resume, save-state restoration, defeat and the continue countdown have
-passed. Broader roster coverage, memory-card saves, audible audio and multiplayer
+passed. Local two-player combat and a light loopback netplay match/save-load
+smoke also pass. Broader roster coverage, memory-card saves and audible audio
 remain unvalidated; this is not yet a qualified playable port.
 See [validation/README.md](validation/README.md) for the actual validation result.
 No public repository or release has been created.

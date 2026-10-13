@@ -11,7 +11,7 @@ not a second issue tracker.
 | Internal resolution | `beads-rxvr` | Native/1080p/4K comparisons, effective scale telemetry, correct text/effects and acceptable pacing |
 | Loading HLE and precache | `beads-aubo` | Verified caches and guarded adapters, differential correctness, measured cold/warm gains |
 | Adaptive widescreen | `beads-q6ao` | Wider world visibility, correct culling/capacity/HUD/FMVs, live resize and return to 4:3 |
-| Two-player recomp-net | `beads-1q31` | Independent peer input, rollback/digests, identity mismatch rejection, load/rematch and online checks |
+| Two-player recomp-net | `beads-1q31` | Final Bout integration smoke: separate player inputs, session startup, short match, load/rematch, no observed desync |
 | Original dialogue extraction | `beads-bqsp` | Complete cue inventory, reproducible local extraction, trigger and speaker mapping |
 | Recorded-clip replacement | `beads-vbfi` | Owner-reviewed matching, source/edit provenance, reversible pack, audio and netplay validation |
 
@@ -81,11 +81,13 @@ view can be presentation-only. Guest culling and loader adapters still need
 deterministic policy independent of peer window size, cache readiness, disk
 speed or unsnapshotted host state.
 
-Prepare required resources before joining. Test save-state restoration and
-hook rebinding. Compare core, GPU, SPU, MDEC, DMA, SIO and CD digest partitions
-through forced prediction and rollback, including loads, rematches, movie
-transitions, unequal local rendering scales and cache states. Validate content
-mismatch rejection and restoration of offline settings.
+The owner requested light netplay testing on 2026-10-13. Treat recomp-net as
+the existing tested shared engine. Limit this title's acceptance to correct
+player-port mapping, two-peer session startup, a short versus match and one
+load/rematch, with no observed disconnect or desync. Check that title hooks and
+required resources survive the transition. Expand testing only when a concrete
+Final Bout integration defect or a new title hook calls for it; a repeat of the
+shared engine's latency/loss/rollback qualification campaign is not required.
 
 Resource-mod support varies by framework version. Inspect the pinned
 `runtime/src/mod_runtime.cpp` content-negotiation and verification paths before

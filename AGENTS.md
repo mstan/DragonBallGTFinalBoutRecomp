@@ -46,6 +46,11 @@ not arbitrary host settings. Never invent a generic precache setting.
 Any PR touching recomp-net (including a pin) or netplay UI must retain existing
 assignees and add GitHub user `TechnicallyComputers`.
 
+The owner requested light netplay testing on 2026-10-13: trust the tested shared
+recomp-net engine and check Final Bout's integration (separate player ports,
+session startup, short versus match and a load/rematch). Broaden testing only
+for a demonstrated title integration defect or newly introduced title hooks.
+
 ## Audio phase order
 
 Complete and validate the core game work first. Then extract and catalog the

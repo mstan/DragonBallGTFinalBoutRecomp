@@ -378,3 +378,18 @@ The first netplay harness used short transient inputs and stayed at character
 selection. Its automatic completion flag was not sufficient: visual review
 rejected its combat claim. Persistent digital-controller input with explicit
 release corrected the harness. Only the second run counts as combat validation.
+
+
+## Widescreen checkpoint and pause (2026-10-13)
+
+The default-disabled preview builds and executes its native function-entry hook.
+The hidden-presenter smoke in `build-release/widescreen-preview-20261013` shows
+edge-anchored HUD, wider world and repaired gradient coverage at 16:9, and live
+4:3/16:9/21:9/4:3 mode transitions. Normal TCP quit at frame 1,904, zero
+unsupported instructions. The 21:9 white-scene sample needs a sequence/reference
+check; complete culling, stages, effects and menu/movie validation remain open.
+See [implementation and limits](../docs/WIDESCREEN.md).
+
+The owner requested a checkpoint and pause. The private repository and linked
+follow-up issues are recorded in [CHECKPOINT.md](../docs/CHECKPOINT.md). No audio
+extraction or replacement has begun. No runtime test process was left running.

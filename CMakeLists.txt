@@ -37,6 +37,8 @@ psxrecomp_add_game_runtime(psx-runtime
     CODEGEN_SETUP_SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/codegen_setup.c"
 )
 
+target_sources(psx-runtime PRIVATE src/mods/final_bout_widescreen.c)
+
 foreach(_PSX_RUNTIME_CONFIG game.toml game_options.toml)
     add_custom_command(TARGET psx-runtime POST_BUILD
         COMMAND ${CMAKE_COMMAND} -E copy_if_different

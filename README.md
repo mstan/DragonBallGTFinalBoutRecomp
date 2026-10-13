@@ -14,7 +14,8 @@ passed. Local two-player combat and a light loopback netplay match/save-load
 smoke also pass. Broader roster coverage, memory-card saves and audible audio
 remain unvalidated; this is not yet a qualified playable port.
 See [validation/README.md](validation/README.md) for the actual validation result.
-No public repository or release has been created.
+The [repository](https://github.com/mstan/DragonBallGTFinalBoutRecomp) is private.
+No release has been created. See the [paused checkpoint and follow-ups](docs/CHECKPOINT.md).
 
 The requested scope is higher internal resolution, faster loading through HLE
 and precaching, adaptive widescreen, and two-player recomp-net. Original dialogue
@@ -25,8 +26,9 @@ voices are part of the plan.
 ## Configuration and tracked work
 
 The initial renderer target is OpenGL at the shared `1080p` internal-resolution
-preset. Initial framing remains 4:3 until Final Bout's adaptive view is implemented
-and validated. Two-player netplay and the setup UI are enabled for bring-up.
+preset. The default framing remains 4:3. A default-disabled
+[widescreen preview](docs/WIDESCREEN.md) adds adaptive combat framing; broader
+culling and scene validation is still pending. Two-player netplay and the setup UI are enabled for bring-up.
 These settings do not certify graphics, multiplayer, or performance results.
 
 Requirements and acceptance checks are in
@@ -95,7 +97,7 @@ the executable; a manual CMake build alone does not prepare that runtime path.
 - `game.toml`, `catalog_identity.json`, `disc_probe.json`: title and disc identity.
 - `seeds/`, `symbols.toml`, `psx_symbols.h`: initial discovery and symbol map.
 - `psxrecomp/`, `recomp-ui/`: pinned root submodules; recomp-net is nested.
-- `mods/preloaded/`: future title enhancement packages.
+- `src/mods/`, `mods/preloaded/`: title plugins and elective enhancement packages.
 - `docs/`, `validation/`: requirements, deferred audio design, and evidence.
 - `disc/`, `generated/`, `build*/`, `analysis/`, `local-media/`: local ignored data.
 

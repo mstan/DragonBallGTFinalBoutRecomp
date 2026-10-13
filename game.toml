@@ -33,6 +33,7 @@ known_crc32 = [
 seeds = "seeds/ghidra_funcs.txt"
 out_dir = "generated"
 strict = true
+mod_function_entry_funcs = ["0x80028D80"]
 
 [runtime]
 window_title = "Dragon Ball GT: Final Bout Recompiled"
@@ -46,6 +47,15 @@ aspect_ratio = "4:3"
 
 [controller]
 default_mode = "digital"
+
+# Activated by the elective title mod. Menus and movies retain their aspect.
+[widescreen]
+offer = false
+gte_game_mode = true
+native_wide = true
+auto_ui_squash = false
+hud_sprt_squash = false
+clear_reveal = true
 
 # Online mount gate: digests + track count + optional TOC fingerprint
 # (see docs/NETPLAY.md).

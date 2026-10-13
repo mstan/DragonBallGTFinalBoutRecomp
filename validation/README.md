@@ -180,3 +180,91 @@ unsupported-instruction/OpenBIOS callback path and overlay transition, compare
 against the reference execution, and separately account for capture shutdown
 latency. Do not import Nova's claimed RI fix without establishing the same
 cause, patch generated C, or hide a correctness repair behind an audio toggle.
+
+## Native overlay and reference investigation, 2026-10-13
+
+The supported CLI rebuild now stages `overlay_toolchain/` beside the product.
+The previous manual build lacked it. Dependencies and generated game sources
+remain at the recorded pins; no runtime correctness patch has been applied.
+Rebuilt executable SHA-256:
+`fc894b5ac823e8938aca45d77cd9ff32e0992bfeaa608e13d421c58e76888b3b`.
+Rebuild command, with the native toolchain environment and two build jobs:
+
+```powershell
+python psxrecomp/psxrecomp_cli.py rebuild --config game.toml --project-root . --build-dir build-release --no-pgo --cmake-extra=-DPSX_DEBUG_TOOLS=ON
+```
+
+An isolated Beetle PSX reference run used the same bundled OpenBIOS bytes,
+local disc and blank memory card. It reached rendered Goku-versus-Goku combat
+through Battle / COM Battle and responded to pause. Its callback verifier at
+`0x1F6C` remained valid code. This establishes that this BIOS/disc combination
+can enter combat; it does not compare the original Piccolo failure exactly.
+Reference evidence is in `build-release/oracle-openbios-20261013/`.
+
+The original freeze dump contains the actual corrupting writes, not just an
+unsupported-opcode report. At frame 20,692, guest store `0x80042CBC` copies
+script words to a destination repeatedly read from `s3+0x10`. The failing
+object is at `0x800A8FEC`; its destination field is `0x800A8FFC`. The copy
+starts at `0x800A8ED4`, reaches that field after 75 words and overwrites it
+with zero. The next destination becomes `0x12C`; another 1,995 words overwrite
+low RAM through `0x2054`, including the BIOS verifier. The exception dispatcher
+then calls that destroyed code. The source of the invalid script/copy length
+remains unresolved. Raising a reserved-instruction exception alone would not
+repair this corruption. Extracted trace subsets are kept with the original
+ignored evidence, and `beads-6058.2` remains open.
+
+The rebuilt runtime has now rendered Goku-versus-L.Goku using the interpreter
+and Goku-versus-Vegeta with native overlays enabled. A 5x OpenGL capture is
+2560 by 1200 and visibly resolves polygon edges at the higher resolution.
+This is stronger evidence than the earlier FMV capture, but native/1080p/4K
+comparisons, effects and pacing qualification remain outstanding.
+
+The first staged-toolchain session appeared to stop accepting title input.
+It advanced after diagnostic `overlay_native_off`; after native execution
+was enabled again it accepted input and entered combat. That association is
+not yet a demonstrated cause. Shared issue `beads-eio.3.347` records the
+observation. No disabled-native workaround is enabled in the product.
+The mixed diagnostic session ended normally at frame 69,526 with
+`exit_origin=tcp_quit`, zero unsupported midblock instructions, 6,511,487
+native overlay dispatches and 2,133,904 interpreted dispatches. Low-RAM write
+tracing found no verifier changes after BIOS initialization.
+
+A separate warm-cache run used no diagnostic execution switches. Its bounded
+driver matched the main-menu and character-selection images, entered
+Goku-versus-L.Goku combat, captured sustained animation and 5x output, and
+ended normally at frame 6,091 with zero unsupported instructions and
+1,135,261 native overlay dispatches. Injected attack/pause commands alone do
+not establish that every input was consumed; visual control validation remains
+open. Local evidence and drivers are in `build-release/native-baseline-20261013/`
+and `build-release/warm-native-20261013/`.
+
+These are partial baseline results. The original failing pairing, broader
+transition coverage, complete matches/results, local versus, audible audio and memory-card
+save/load still require qualification. Widescreen/HUD/culling, loading HLE,
+netplay and both audio phases remain open.
+
+A subsequent cold-cache run also reached rendered Goku-versus-Trunks combat
+without execution switches: frame 5,942, normal TCP quit, zero unsupported
+instructions, 8,290 native and 210,502 interpreted overlay dispatches. The
+previous warm cache was preserved under a separate title-specific directory;
+no other game's cache was touched. The first cold test stopped too early when
+the guest temporarily disabled display during loading. The revised driver
+tolerates that state for up to 30 seconds. Evidence:
+`build-release/cold-native-20261013/` and
+`build-release/cold-native-retry-20261013/`.
+
+**Control validation remains a blocker (`beads-6058.3`).** In the independent
+`build-release/input-audit-20261013/` Goku-versus-Boo run, sustained Start for
+120 guest frames, release for 120, and another 120-frame hold reached virtual
+port 1 (`pad_status`: connected digital controller, buttons `0xFFF7`). The
+fight continued without a visible pause. The reference run had paused on
+Start. This prevents interpreting animated fights as established playability;
+trace the guest pad buffer, SIO transactions and IRQ handler next.
+
+The follow-up `build-release/pad-trace-20261013/` run confirms that SIO receives
+the held Start bytes (`41 5A F7 FF` poll payload) and returns to `41 5A FF FF`
+on release. OpenBIOS's buffer pointer table at `0xAEDC` names port buffers
+`0x8003BC00` and `0x8003BC28`. This narrows the investigation beyond host input
+injection: next compare those buffers and the game's input consumer against
+the reference. No game-specific Ghidra program is currently in the headless
+registry; these addresses were verified from the local code and RAM captures.

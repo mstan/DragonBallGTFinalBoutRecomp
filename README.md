@@ -5,10 +5,12 @@ serial **SLUS-00493**, using pinned PSXRecomp and recomp-ui dependencies.
 
 This repository is at initial bring-up. A project scaffold, renderer setting,
 or compiled netplay integration does not establish playable-game compatibility.
-The Windows build and opening movie passed. A later check reached the menus,
-character selection and Goku-versus-Piccolo screen, then guest execution ended
-unexpectedly before a fight was validated. Combat, saves, audible audio and
-multiplayer remain unvalidated; this is not yet a qualified playable port.
+The Windows build, opening movie, menus and selection work. With the native
+overlay toolchain staged, cold and warm runs now render combat at 5x internal
+resolution. The earlier Goku-versus-Piccolo failure remains unresolved, and
+combat input still needs repair: held Start reaches the virtual controller
+without pausing the game. Saves, audible audio and multiplayer remain
+unvalidated; this is not yet a qualified playable port.
 See [validation/README.md](validation/README.md) for the actual validation result.
 No public repository or release has been created.
 
@@ -83,6 +85,8 @@ takes precedence over `PSXRECOMP_TOOLCHAIN_DIR`, so set both as shown to avoid
 an inherited toolchain override. Adjust these machine-local paths on other PCs.
 A build failure or unvalidated runtime is
 recorded explicitly in the validation notes.
+Use the CLI rebuild route above to stage the native overlay toolchain beside
+the executable; a manual CMake build alone does not prepare that runtime path.
 
 ## Repository layout
 

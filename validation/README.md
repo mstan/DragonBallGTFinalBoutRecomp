@@ -253,13 +253,13 @@ tolerates that state for up to 30 seconds. Evidence:
 `build-release/cold-native-20261013/` and
 `build-release/cold-native-retry-20261013/`.
 
-**Control validation remains a blocker (`beads-6058.3`).** In the independent
+**Initial control concern (`beads-6058.3`, corrected below).** In the independent
 `build-release/input-audit-20261013/` Goku-versus-Boo run, sustained Start for
 120 guest frames, release for 120, and another 120-frame hold reached virtual
 port 1 (`pad_status`: connected digital controller, buttons `0xFFF7`). The
-fight continued without a visible pause. The reference run had paused on
-Start. This prevents interpreting animated fights as established playability;
-trace the guest pad buffer, SIO transactions and IRQ handler next.
+fight appeared to continue without a visible pause. The reference run had
+paused on Start. These screenshots were insufficient to establish an input
+defect; subsequent trace and visual checks below supersede that conclusion.
 
 The follow-up `build-release/pad-trace-20261013/` run confirms that SIO receives
 the held Start bytes (`41 5A F7 FF` poll payload) and returns to `41 5A FF FF`
@@ -278,3 +278,79 @@ Piccolo selection (Down, Right four times, Cross) subsequently reached
 Piccolo-versus-Pan combat in `build-release/piccolo-source-20261013/`. Fighter
 role or pairing is now part of the reproduction matrix; do not classify all
 Piccolo use as broken.
+
+The pause investigation now has positive evidence. In
+`build-release/pause-edge-audit-20261013/`, interpreted execution stores the
+Start edge at `0x800A9CE8`, sets pause flag `0x800A868C` to one at frame 4,499
+(store PC `0x8006A22C`), and clears it on the second press at frame 5,479
+(store PC `0x8006A180`). `released.png` visibly shows PAUSE; the final capture
+shows resumed combat. Earlier conclusions drawn from isolated captures were
+premature. There is no demonstrated input conversion or pause logic defect.
+
+An independent `build-release/native-pause-proof-20261013/` run uses the
+default native overlay path without execution switches. Six samples across
+held Start and released Start retain pause flag one, and `released-1.png`
+visibly shows PAUSE. The second press clears the flag and animation resumes.
+It exits normally by TCP quit at frame 8,676, with zero unsupported instructions
+and 1,751,471 native overlay dispatches. No runtime patch was required.
+Movement/attack and two-port qualification remain separate open checks.
+
+## CD sector corruption fixed (2026-10-13)
+
+The invalid COM script was already corrupt before the copy loop. Final Bout's
+streaming decompressor reads a three-sector file at LBAs 18209 through 18211.
+At compressed ring offset `0x1000`, it should receive `D1 E1 D5 06` from sector
+18211. The failing runtime instead delivered `50 73 64 70` (the next file's
+`Psdp` header) from sector 18212. That changes a back-reference offset and
+removes the script terminator, leading to the previously documented low-RAM
+corruption. Timing traces show sector 18212 pending behind 18211, with zero
+lost INT1 notifications; absence of lost interrupts did not imply correct data.
+
+The shared controller now separates the announced decoder slot from the
+BFRD-latched FIFO. Pending notifications cannot redirect bytes already requested
+for DMA. Multi-sector DMA retains automatic refills, including an arrival in
+the middle of draining a sector. Explicit BFRD rearming can reload the retained
+announced sector after software clears its FIFO. No timing or speed workaround
+is enabled for the game.
+
+The CD state section preserves its legacy prefix and appends the decoder ring,
+indices and pending notification deadline. Preflight accepts the old format and
+validates the extension before restoring machine state. Tests cover delayed
+notification between BFRD and DMA, both DMA refill cases, BFRD rearming, legacy
+and current snapshots, pending deadline restoration and malformed extensions.
+The new controller test fails against the original implementation. Adversarial
+review added a mid-drain arrival case that failed the first candidate fix and
+passes after the refill correction. Release CTest: `cdrom_sector_fifo_test`,
+`cdrom_irq_mask_test`, and `cdrom_lid_state_test`: 3/3 passed.
+
+Local game evidence (default native overlays, no execution switches):
+
+- `com-fifo-warm-20261013`: old failing slot 2 loads, script begins with the
+  expected descending words 8 through 1 and its terminator, sustained
+  Goku/Piccolo combat, frame 5,097, normal TCP quit, zero unsupported instructions,
+  902,448 native overlay dispatches.
+- `com-fifo-fresh-20261013`: boot, main menu, COM selection, Goku/Piccolo combat;
+  frame 13,512, normal TCP quit, zero unsupported instructions, 2,575,047 native
+  overlay dispatches. Selection-only states were used to vary the random CPU
+  opponent; no combat or RAM state from the old build was loaded. Movement,
+  a projectile, PAUSE and resumed combat are captured. This uses a warm native
+  cache and is not a claim of cold-cache qualification for the patch.
+- `com-fifo-round-20261013`: restores a newly saved combat state, reaches Goku's
+  defeat and CONTINUE countdown, then returns to the opening movie; frame
+  12,149, normal TCP quit, zero unsupported instructions, 1,915,410 native
+  dispatches. Save-state restoration is distinct from memory-card save/load,
+  which remains unqualified.
+
+All directories above are under ignored `build-release/`. An earlier heavily
+traced candidate run (`com-fifo-rearm-20261013`) corrected the script but stopped
+under the starvation watchdog at frame 1,889; subsequent runs did not reproduce
+it. That observation is retained for investigation, not counted as a passing
+run or explained away as proven compilation overhead. Full roster/stage coverage,
+win/progression, two-port local versus, audible audio and memory-card saves are
+still open. Widescreen/HUD/culling, loading HLE, netplay and audio work remain
+separate phases.
+
+Final reviewed-patch replay: `com-fifo-final-20261013`, frame 10,448, normal
+TCP quit, zero unsupported instructions and 1,078,532 native overlay dispatches.
+The tested executable SHA-256 is
+`aa43ee2540c88baee70a430995c69beaaade1c7712f6ba1881b550556e95f62f7`.

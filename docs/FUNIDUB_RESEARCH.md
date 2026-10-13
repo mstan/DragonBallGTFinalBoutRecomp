@@ -4,9 +4,9 @@ Audited 2026-10-13 under `beads-6058.1`. The owner reaffirmed core gameplay
 validation first, with audio research now. This is a metadata and source audit;
 no audio was extracted, decoded, auditioned, replaced, or injected.
 
-The [gameplay check](../validation/README.md#gameplay-check-2026-10-13) reached
-menus, character selection and Goku versus Piccolo, then guest execution ended
-unexpectedly. The prerequisite for starting the audio implementation is unmet.
+The [gameplay checks](../validation/README.md) now include combat and a repaired
+CD-sector corruption path. Core qualification remains incomplete, so audio
+extraction and replacement implementation are still deferred.
 
 ## Supplied research archive
 

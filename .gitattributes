@@ -1,0 +1,4 @@
+# Keep title sources and shell scripts consistent across Windows and Unix.
+* text=auto eol=lf
+*.ico binary
+*.png binary

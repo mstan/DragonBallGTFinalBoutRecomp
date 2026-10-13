@@ -1,0 +1,65 @@
+# DragonBallGTFinalBoutRecomp
+
+## Tracking and scope
+
+Use the central Beads database at `F:\Software\beads\issues`; never initialize
+a database in this repository. System epic: `beads-eio`. Game epic:
+`beads-6058`. Initial scaffold: `beads-jsz8`. Search and claim the relevant
+child issue before substantive work, update evidence, and close only validated
+outcomes. The feature dependency graph lives in Beads.
+
+Work solo unless the owner authorizes subagents for the current task. For the
+initial setup, the owner explicitly requested GPT-6.1 Sol workers with
+adversarial review. This does not authorize delegation on future tasks.
+
+## Source and dependency rules
+
+- Target the supplied USA disc, `SLUS-00493`. Identity is in
+  `game.toml`, `catalog_identity.json`, and `disc_probe.json`.
+- Keep disc images, boot EXE, generated game C, retail BIOS, Ghidra databases,
+  original/third-party audio, video, private subtitles, and extracted asset
+  packs out of Git. Local media lives under ignored `disc/`, `analysis/`,
+  or `local-media/`. Commit extraction/edit recipes and hashes when needed.
+- Root submodules `psxrecomp/` and `recomp-ui/` and their nested gitlinks
+  are the dependency pins. Do not inherit another worktree's dirty state or
+  float dependency branches during a reproducible build.
+- Read framework code/docs at the pinned revision; the sibling framework
+  checkout may be on an older unrelated branch.
+- Do not copy title-specific hooks, addresses, culling predicates, HUD packet
+  layouts, loader bypasses, or controller assumptions from other games.
+- Use the headless Ghidra MCP registry workflow if needed. Never launch its
+  GUI or commit `.gpr`/`.rep`; export human annotations under
+  `ghidra/annotations/`.
+
+## Product requirements
+
+The requested destination is higher internal resolution, faster loading through
+verified HLE and precaching, adaptive widescreen, and two-player recomp-net.
+Configuration or compilation alone is not gameplay validation. Maintain an
+original/reference path for comparison. Correctness fixes work by default;
+elective enhancements may be optional.
+
+Internal-resolution settings belong in `game.toml [video]`.
+`game_options.toml` is for reverse-engineered native game option persistence,
+not arbitrary host settings. Never invent a generic precache setting.
+
+Any PR touching recomp-net (including a pin) or netplay UI must retain existing
+assignees and add GitHub user `TechnicallyComputers`.
+
+## Audio phase order
+
+Complete and validate the core game work first. Then extract and catalog the
+original dialogue as the penultimate phase. Existing-recording Funimation-cast
+replacement is the final phase. Do not start either during scaffold work.
+
+Replacement must use existing recorded excerpts, with source/hash/timecode and
+edit provenance. No voice cloning or generated speech. Menu and in-fight cues
+are both in scope; verify the actual supplied revision's language and cast.
+The owner will provide source TV media later. See `docs/VOICE_REPLACEMENT.md`.
+
+## Windows
+
+Use explicit native executables when PATH includes MSYS shims. Do not execute a
+bare data path or mix shells for filesystem mutations. Verify the exact scoped
+absolute target before recursive deletion; use PowerShell/.NET, never
+`cmd /c del`, `rmdir`, `move`, `copy`, or `mklink`.

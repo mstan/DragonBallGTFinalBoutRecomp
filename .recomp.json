@@ -1,0 +1,13 @@
+{
+  "$schema": "https://recomp.fyi/schema/v1.json",
+  "game": "Dragon Ball GT: Final Bout",
+  "system": "PS1",
+  "type": "recomp",
+  "toolchain": "psxrecomp",
+  "status": "exploring",
+  "project": "DragonBallGTFinalBoutRecomp",
+  "original": {
+    "region": "USA",
+    "serial": "SLUS-00493"
+  }
+}

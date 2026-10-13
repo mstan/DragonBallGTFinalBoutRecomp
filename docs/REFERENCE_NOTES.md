@@ -3,6 +3,10 @@
 The owner supplied these references during setup on 2026-10-12. They are
 research inputs; no code, patch, media or Ghidra database was imported.
 
+The 2026-10-13 [FuniDub audit](FUNIDUB_RESEARCH.md) reviews the owner's research
+ZIP, inspects the supplied BT3 ISO metadata, and pins verified community AFL
+name lists and further format/context leads. No audio has been extracted.
+
 ## Brazilian translation/redub
 
 The [audio design](VOICE_REPLACEMENT.md#owner-provided-research-leads) records

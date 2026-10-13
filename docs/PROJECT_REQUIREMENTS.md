@@ -16,7 +16,11 @@ not a second issue tracker.
 | Recorded-clip replacement | `beads-vbfi` | Owner-reviewed matching, source/edit provenance, reversible pack, audio and netplay validation |
 
 The last two phases are ordered after all core features: extraction first,
-replacement last. No source TV/game recordings have been supplied for replacement.
+replacement last. The owner supplied a BT3 USA PS2 ISO on 2026-10-13 and
+reaffirmed core validation first. The optional final feature is **FuniDub**:
+the launcher prepares a local replacement pack automatically from that ISO
+using a reviewed mapping. See [the launcher contract](VOICE_REPLACEMENT.md#funidub-launcher-contract)
+and [metadata/source audit](FUNIDUB_RESEARCH.md). Audio extraction remains deferred.
 
 ## Resolution and adaptive view
 

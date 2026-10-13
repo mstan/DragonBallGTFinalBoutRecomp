@@ -55,7 +55,12 @@ replacement is the final phase. Do not start either during scaffold work.
 Replacement must use existing recorded excerpts, with source/hash/timecode and
 edit provenance. No voice cloning or generated speech. Menu and in-fight cues
 are both in scope; verify the actual supplied revision's language and cast.
-The owner will provide source TV media later. See `docs/VOICE_REPLACEMENT.md`.
+The owner supplied a BT3 USA PS2 ISO on 2026-10-13 and named the feature
+FuniDub: choose the ISO in the launcher, then prepare and map clips locally.
+They explicitly reaffirmed core gameplay first, audio research now. The ZIP
+and online AFLs are research leads, not validated target cue mappings.
+TV media is a possible later source for measured gaps. See
+`docs/VOICE_REPLACEMENT.md` and `docs/FUNIDUB_RESEARCH.md`.
 
 ## Windows
 

@@ -1,12 +1,14 @@
-﻿# Dragon Ball GT: Final Bout Recompiled
+# Dragon Ball GT: Final Bout Recompiled
 
 Initial native recompilation project for **Dragon Ball GT - Final Bout (USA)**,
 serial **SLUS-00493**, using pinned PSXRecomp and recomp-ui dependencies.
 
 This repository is at initial bring-up. A project scaffold, renderer setting,
 or compiled netplay integration does not establish playable-game compatibility.
-The initial Windows build passed and a bounded smoke test reached the opening
-movie; menus, combat and multiplayer remain unvalidated.
+The Windows build and opening movie passed. A later check reached the menus,
+character selection and Goku-versus-Piccolo screen, then guest execution ended
+unexpectedly before a fight was validated. Combat, saves, audible audio and
+multiplayer remain unvalidated; this is not yet a qualified playable port.
 See [validation/README.md](validation/README.md) for the actual validation result.
 No public repository or release has been created.
 
@@ -47,8 +49,11 @@ verification found MD5 `2f869f926514278b72ffbd671e69b9f7` and SHA-1
 external dump-database certification.
 
 Disc data and the extracted boot executable remain local under ignored `disc/`.
-No dialogue or other game audio has been extracted. TV/game recordings for voice
-replacement will be supplied or identified later by the owner.
+No dialogue or other game audio has been extracted. The owner supplied a BT3
+USA PS2 ISO and research ZIP for the eventual **FuniDub** feature. Its intended
+launcher flow is to choose the donor ISO and prepare a local mapped voice pack
+automatically. The [research audit](docs/FUNIDUB_RESEARCH.md) records verified
+metadata and mapping leads; audio implementation still follows core validation.
 
 ## Development
 

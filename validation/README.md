@@ -268,3 +268,13 @@ on release. OpenBIOS's buffer pointer table at `0xAEDC` names port buffers
 injection: next compare those buffers and the game's input consumer against
 the reference. No game-specific Ghidra program is currently in the headless
 registry; these addresses were verified from the local code and RAM captures.
+
+The original Goku-versus-Piccolo failure **reproduced with native overlays
+enabled** in `build-release/pad-consumer-20261013/`: frame 4,475, unexpected
+guest return, identical unsupported word/PC and callback context, after
+166,987 native and 64,372 interpreted overlay dispatches. Staging the overlay
+toolchain therefore does not resolve this defect. A controlled player-one
+Piccolo selection (Down, Right four times, Cross) subsequently reached
+Piccolo-versus-Pan combat in `build-release/piccolo-source-20261013/`. Fighter
+role or pairing is now part of the reproduction matrix; do not classify all
+Piccolo use as broken.

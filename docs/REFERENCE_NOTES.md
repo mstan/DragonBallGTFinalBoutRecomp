@@ -72,3 +72,14 @@ The author's specific transition fix remained manually unvalidated in this snaps
 Use the configured headless Ghidra MCP workflow for future analysis and commit
 human annotation exports only. Track core/overlay follow-up in `beads-2x2x`
 and `beads-aubo`; deferred audio inventory remains `beads-bqsp`.
+
+### Independent combat-failure finding, 2026-10-13
+
+Our trace reproduces the reported `0x80042CBC` writes, but does not support
+the note's interpretation that they intentionally rebuild a BIOS handler
+table. The instruction is a script copy loop. It overwrites its own destination
+field in a game object at `0x800A8FEC`, then redirects subsequent writes into
+low RAM. OpenBIOS's verifier at `0x1F6C` is destroyed downstream. The source
+of the invalid script/copy length still requires investigation; implementing
+RI delivery alone does not establish a repair. See the local evidence and
+exact write sequence in [validation](../validation/README.md#native-overlay-and-reference-investigation-2026-10-13).

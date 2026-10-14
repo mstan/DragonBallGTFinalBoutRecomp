@@ -514,3 +514,9 @@ HLE/precaching and audio replacement remain parked.
 
 Updated executable SHA-256:
 `05fa9b95a6a830c3ae9f462f0a9cc20c28182099bab19178cbf7f352a885794e`.
+
+PR #663 merged on 2026-10-14 at
+`f9c287f523428aea816fb91cd4ec7d499dcdea8a`. A full Git tree comparison against
+the tested `a36754b7` head is identical. The project adopts the landed commit
+in its submodule and framework_pins.txt; no additional QA campaign is needed
+for a commit identity change with the same source tree.

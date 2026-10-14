@@ -14,15 +14,16 @@ unfinished, not implicitly accepted or removed from the longer-term backlog.
 The resumed backdrop fix passed composed 16:9/21:9 captures, return to 4:3,
 and a short moving demo scene. The owner then reviewed the visible session and
 answered "Looks okay." The framework now pins
-`a36754b7eeda86768393eb6bb55af44540ea0aa5`, which includes the landed CD fix and adds
+`f9c287f523428aea816fb91cd4ec7d499dcdea8a`, which includes the landed CD fix and adds
 guarded opaque-sprite background tags. Title guards recognize the complete
 scrolling cloud composite while excluding nearby effects. Guest culling and
 packet admission are unchanged. The widescreen feature remains an elective,
 default-disabled preview; memory cards and win/progression remain open.
 The sprite extension is in [upstream PR #663](https://github.com/RetroPortingToolKit/psxrecomp/pull/663),
-rebased onto master `d3db61b1` after CD PR #657 merged as `2fca087a` on
-2026-10-14. Its three focused renderer tests and Final Bout rebuild pass on
-that base. Brief composed captures verify the backdrop and 4:3 return;
+merged as `f9c287f5` on 2026-10-14 after CD PR #657 merged as `2fca087a`.
+The merged source tree exactly matches the tested `a36754b7` revision. Its
+three focused renderer tests and Final Bout rebuild pass. Brief composed
+captures verify the backdrop and 4:3 return;
 persistent digital input resumes the restored demo scene. See validation for
 the exact evidence and limits. The visible review session exited
 normally, and its temporary widescreen mod selection was restored.

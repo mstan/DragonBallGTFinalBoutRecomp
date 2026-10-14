@@ -137,7 +137,9 @@ The shared extension is [PR #663](https://github.com/RetroPortingToolKit/psxreco
 After CD PR #657 merged, the same patch was rebased onto master `d3db61b1` as
 `a36754b7`. Its review diff contains only the sprite extension, API documentation
 and tests. The focused renderer tests and a short Final Bout replay pass on
-the updated base; no further visual campaign was requested.
+the updated base; no further visual campaign was requested. PR #663 merged as
+`f9c287f523428aea816fb91cd4ec7d499dcdea8a`; the merged source tree exactly
+matches the tested rebased head, and Final Bout now pins the landed revision.
 
 The short composed-capture replay in `build-release/sky-fix-20261014` verifies
 cloud coverage at 16:9/21:9 and identity at 4:3, then resumes the demo briefly.

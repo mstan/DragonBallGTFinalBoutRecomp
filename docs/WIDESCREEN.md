@@ -235,3 +235,28 @@ fixture instead reached stages 1/5; its filenames do not establish stage identit
 The owner's quick city visual check is pending. Other stage visits, terrain
 culling at the reveal edges and broader gameplay remain unqualified. Recomp-ui
 is reopened for that check; see validation for the exact evidence and hash.
+
+### Retained composites and remaining intermittent overlap
+
+The owner subsequently reported occasional background overlap/flicker on the
+green stage. A read-only forty-capture watch landed in the opening movie and
+did not reproduce it. The closing diagnostics show dynamic resolution disabled,
+no automatic up/down steps, and no native-wide surface reallocation. That
+session does not connect the symptom to a resolution change.
+
+Review nevertheless found a separate shared correctness defect: `dyn_apply`
+preserved only the reveal margins when fast mirroring was enabled, although
+tagged backgrounds own the full wide composite and presentation cannot copy
+the canonical centre over it. The new cleared surface then lost centre pixels
+until redraw. The fix uses the renderer's existing `wide_center_is_canonical()`
+predicate, preserving the ordinary fast path. Both held wide banks pass whole-
+surface pixel comparisons through 3x -> 5x -> 3x; the original condition fails
+the same regression. Guest-visible VRAM remains unchanged.
+
+The project pins tested framework `28e12c737252036ac406263f230b7934f2fe9afa`,
+[PR #665](https://github.com/RetroPortingToolKit/psxrecomp/pull/665), pending upstream
+integration. It includes the previously landed CD and sprite fixes. Framework
+ownership is `beads-h696`; game symptom ownership stays `beads-q6ao`.
+An 18.80-second native integration verifies explicit scale steps, composed
+21:9 coverage and 4:3 return. The rare overlap remains unresolved; no claim of
+all-stage live acceptance or a flicker cure follows from this separate fix.

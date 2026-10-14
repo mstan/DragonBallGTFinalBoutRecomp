@@ -639,3 +639,57 @@ extraction/replacement or loading enhancement work was performed.
 
 Executable SHA-256:
 `3b1b54820dff3f33c1b3815981e6ea4258294a4a1b3aa61a1d72cb3c301ea8fb`.
+
+## Retained native-wide composites during resolution changes (2026-10-14)
+
+The owner reports occasional green-stage background overlap/flicker and permits
+closing the game for work. Read-only `owner-stage-background-20261014/watch-*`
+captures landed in the opening movie; they do not reproduce a combat defect.
+That visible session exits normally at frame44,729 after 811.33 seconds. Its
+closing diagnostics report dynamic resolution disabled, zero automatic up/down
+steps and zero native-wide reallocations. It therefore does not establish the
+cause of the owner's intermittent symptom.
+
+Independent review found a separate GL scale-step correctness bug: `dyn_apply`
+uses a margins-only condition that omits the full-background-composite latch,
+although presentation correctly forbids canonical centre copying in that mode.
+The cleared new FBO loses its centre until redraw. Framework branch
+`work/native-wide-dynres-composite`, commit `28e12c737252036ac406263f230b7934f2fe9afa`,
+reuses `wide_center_is_canonical()` for rescale column selection. Shared Beads
+ownership is `beads-h696`; [PR #665](https://github.com/RetroPortingToolKit/psxrecomp/pull/665)
+is open pending upstream integration. The local game pins this reviewed commit;
+CD and sprite correctness fixes remain included and enabled.
+
+The bounded `run_gl_scale_invariance.py --steps-only` check runs on the native
+Windows Clang22/SDL3/NVIDIA GL3.3 toolchain. Existing canonical scale/mask checks
+pass49/49; the added two-bank retained-composite checks pass25/25. The new test
+compares every pixel at 3x -> 5x -> 3x before redraw and verifies native VRAM
+unchanged. A negative control changing only the production condition back to
+the original leaves canonical checks passing but fails the new regression with
+4,096,000 centre pixel mismatches per bank. Fixed source bytes are restored.
+Standalone test adapters were updated for current renderer APIs; independent
+review verified types and guards for the six embedding fixtures. The first
+attempt's missing-symbol link failure is retained separately, not counted as
+a passing run. No broad title or renderer matrix was run.
+
+Evidence remains ignored under
+`F:/Projects/psxrecomp/worktrees/native-wide-dynres-composite/build/`:
+`dynres-composite-fixed/scale-4nrgv68c/receipt.json` and
+`dynres-composite-original/scale-g5c964xn/receipt.json`.
+
+The README native rebuild passes at two jobs. The isolated
+`build-release/wide-dynres-smoke-20261014` run restores the green demo with a
+completion receipt, checks explicit 3x/5x/3x steps inside one handler, then
+captures 21:9 and returns to 4:3. Every scale step succeeds with unchanged
+guest-visible VRAM hash `d4d0224ff7c4ee4c`; restored scale5, mismatches0. Composed
+captures show covered background; final mode0/margin0. Normal TCP exit zero at
+frame1,149 after18.80 seconds, no forced termination or reported unsupported
+instructions. Default watchdog, real host audio, dynamic resolution enabled
+for this targeted step check, debug toggles0. Mod state restored byte-for-byte.
+
+Recomp-ui is reopened without injected inputs or a test-state load in
+`build-release/owner-wide-dynres-20261014`. The rare owner-reported overlap
+remains unresolved; this separate scale-step fix is not claimed as its cure.
+
+Updated executable SHA-256:
+`5fc0ccea337b762fb16ecde5faddc3e112e67aed8041cf2acabbb85731769a2b`.

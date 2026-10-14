@@ -657,7 +657,9 @@ The cleared new FBO loses its centre until redraw. Framework branch
 `work/native-wide-dynres-composite`, commit `28e12c737252036ac406263f230b7934f2fe9afa`,
 reuses `wide_center_is_canonical()` for rescale column selection. Shared Beads
 ownership is `beads-h696`; [PR #665](https://github.com/RetroPortingToolKit/psxrecomp/pull/665)
-is open pending upstream integration. The local game pins this reviewed commit;
+merged upstream on 2026-10-14 as `6e177accccef7460a9cb9f5c1e40bc0144452d1c`.
+The merge tree exactly matches the tested commit, which is retained in upstream
+history. The local game already pins this landed commit;
 CD and sprite correctness fixes remain included and enabled.
 
 The bounded `run_gl_scale_invariance.py --steps-only` check runs on the native

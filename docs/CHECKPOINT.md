@@ -29,8 +29,9 @@ The owner's latest report is rare green-stage background overlap/flicker.
 It remains unresolved. A separate shared GL defect found during review now
 preserves retained full-wide composites across resolution steps; focused tests
 and a short game integration pass. The local framework pin is `28e12c73` from
-[PR #665](https://github.com/RetroPortingToolKit/psxrecomp/pull/665), still awaiting
-upstream integration, tracked under framework `beads-h696`. The owner's captured
+[PR #665](https://github.com/RetroPortingToolKit/psxrecomp/pull/665), merged upstream
+on 2026-10-14 as `6e177acc`, tracked under framework `beads-h696`. The merge tree
+matches the already-tested pin, which is retained in upstream history. The owner's captured
 session had no runtime resolution steps, so this is not evidence that the rare
 overlap is fixed. Recomp-ui is reopened for the owner's brief check.
 

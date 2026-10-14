@@ -254,8 +254,9 @@ surface pixel comparisons through 3x -> 5x -> 3x; the original condition fails
 the same regression. Guest-visible VRAM remains unchanged.
 
 The project pins tested framework `28e12c737252036ac406263f230b7934f2fe9afa`,
-[PR #665](https://github.com/RetroPortingToolKit/psxrecomp/pull/665), pending upstream
-integration. It includes the previously landed CD and sprite fixes. Framework
+[PR #665](https://github.com/RetroPortingToolKit/psxrecomp/pull/665), merged upstream
+on 2026-10-14 as `6e177acc`. The merge tree exactly matches this tested pin,
+which remains in upstream history. It includes the landed CD and sprite fixes. Framework
 ownership is `beads-h696`; game symptom ownership stays `beads-q6ao`.
 An 18.80-second native integration verifies explicit scale steps, composed
 21:9 coverage and 4:3 return. The rare overlap remains unresolved; no claim of

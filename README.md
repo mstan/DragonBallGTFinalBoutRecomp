@@ -37,6 +37,11 @@ preset. The default framing remains 4:3. A default-disabled
 culling and scene validation is still pending. Two-player netplay and the setup UI are enabled for bring-up.
 These settings do not certify graphics, multiplayer, or performance results.
 
+This build locks the emulated controller to Digital. The launcher keeps the
+physical device picker and hides the Analog/D-Pad selector; stale Analog
+preferences cannot override the title's mode. Widescreen is an elective
+feature in the Mods page.
+
 Requirements and acceptance checks are in
 [docs/PROJECT_REQUIREMENTS.md](docs/PROJECT_REQUIREMENTS.md).
 [docs/VOICE_REPLACEMENT.md](docs/VOICE_REPLACEMENT.md) records the deferred audio

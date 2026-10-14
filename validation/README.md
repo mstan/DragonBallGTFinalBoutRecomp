@@ -520,3 +520,16 @@ PR #663 merged on 2026-10-14 at
 the tested `a36754b7` head is identical. The project adopts the landed commit
 in its submodule and framework_pins.txt; no additional QA campaign is needed
 for a commit identity change with the same source tree.
+
+## Controller mode restriction (2026-10-14)
+
+The owner's visible physical-controller boot reported "Controller 1 port is
+not connected properly." Its local settings selected Analog for the DualSense,
+overriding the title's Digital default. The existing engine/UI contract supports
+`[controller] lock_mode = true`: this build now declares that restriction beside
+`default_mode = "digital"`. The device picker stays available; the incompatible
+mode selector is hidden, and the runtime clamps stale preferences even for a
+direct boot. No engine or recomp-ui change, regeneration or rebuild is required
+for this runtime configuration change. The launcher is reopened for the owner's
+controller and widescreen checks. This records the observed warning and the
+configuration correction; successful physical gameplay remains a human check.

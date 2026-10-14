@@ -47,6 +47,8 @@ aspect_ratio = "4:3"
 
 [controller]
 default_mode = "digital"
+# The current port accepts a standard digital pad; stale Analog settings must not override it.
+lock_mode = true
 
 # Activated by the elective title mod. Menus and movies retain their aspect.
 [widescreen]

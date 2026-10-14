@@ -1,9 +1,10 @@
 # Recorded dialogue replacement
 
 This is a deferred design contract, not an extraction or replacement result.
-Original dialogue extraction is the penultimate phase (`beads-bqsp`).
-Recorded-clip replacement is the final phase (`beads-vbfi`), after the baseline,
-resolution, loading, widescreen and netplay work is validated.
+Current owner priorities (2026-10-14): fix the moving-camera background defect
+now, original audio extraction/inventory next (`beads-bqsp`), recorded-clip
+replacement later (`beads-vbfi`). Loading enhancements remain deferred and no
+longer gate the audio phase. Do not perform voice work during the background fix.
 
 The requested direction is a Funimation-cast performance assembled from existing
 recordings, for example Sean Schemmel and Chris Sabat. No voice cloning,
@@ -52,6 +53,11 @@ gain/loudness matching and conventional cleanup can support editing. Never
 invent missing words or performances with generated voices. Artistic liberties
 should be visible in the mapping and reviewed by the owner. Where no suitable
 clip exists, keep the original cue and mark the gap.
+
+The owner permits suitable generic BT3 introductions and combat grunts rather
+than requiring literal 1:1 wording for every cue. Record these as substitutions
+with their target context and semantic fit. The expected small voice inventory
+is a lead to confirm during extraction, not a coverage claim.
 
 ## Delivery and checks
 

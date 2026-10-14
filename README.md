@@ -24,10 +24,11 @@ extraction is the penultimate phase; an optional Funimation-cast voice pack
 assembled from existing recordings is the final phase. No generated or cloned
 voices are part of the plan.
 
-The owner parked HLE/precaching and audio replacement investigation on
-2026-10-14. The resumed work resolved the widescreen flash question and tiled
-cloud-backdrop gap, with a targeted smoke and quick human visual acceptance.
-Those parked features remain unfinished.
+Current owner priorities (2026-10-14): fix the moving-camera cloud-background
+flicker, original audio extraction/inventory next, recorded voice replacement
+later. HLE/precaching stays deferred because loading is acceptable. No audio has
+been extracted. The earlier paused/brief widescreen smoke did not establish
+stable background coverage through the camera movement now reported by the owner.
 
 ## Configuration and tracked work
 

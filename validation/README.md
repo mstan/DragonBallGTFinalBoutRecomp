@@ -533,3 +533,46 @@ direct boot. No engine or recomp-ui change, regeneration or rebuild is required
 for this runtime configuration change. The launcher is reopened for the owner's
 controller and widescreen checks. This records the observed warning and the
 configuration correction; successful physical gameplay remains a human check.
+
+## Moving-camera cloud flicker repair (2026-10-14)
+
+The owner's Trunks/Goku screenshots demonstrate a real intermittent backdrop
+defect after the earlier visual acceptance. The targeted moving Goku/Goku replay
+in `build-release/sky-camera-before-20261014` reproduces narrow clouds in five
+of twelve composed captures. Thirty-six object/packet snapshots establish that
+odd horizontal source scroll introduces a 40-byte, one-pixel FT4 strip at each
+row start. The sprite-only guard rejected these valid mixed composites.
+
+The Sol 6.1 worker updated the title hook to validate FT4 edges, sprites, the
+exact map/atlas sequence, geometry and links as one bounded composite. Independent
+review identified PsyQ's queued DMA callback: current object source scroll can
+differ from submitted packets. The final implementation derives bounded origin
+candidates from packet UVs and requires the complete four-row/gradient proof
+before tagging. Guest data, GTE, culling and the shared renderer are unchanged.
+
+A bounded offline packet audit accepts all 36 snapshots and both banks, plus
+the earlier shifted-pool capture. Nine malformed packet/map/link cases reject;
+aligned crop zero and crop 31 with an FT4-only first edge pass. Recognition is
+unchanged when live source scroll is varied independently. The independent
+review and parent review found no remaining blocker in the final implementation.
+
+The README CLI rebuild succeeded with two jobs and staged overlay_toolchain.
+`build-release/sky-camera-final-20261014` restores the same demo with a completion
+receipt, resumes through persistent digital input, samples moving-camera/effect
+activity, and returns from 21:9 to 4:3. All twelve composed captures show covered
+clouds; return mode is zero with zero reveal. Normal TCP quit at frame 2,663,
+exit zero, 43.91 seconds, zero unsupported instructions, no forced termination.
+The run uses fixed effective 5x, real host audio, default watchdog and
+`PSX_DEBUG_TOGGLES=0` / `PSX_DYNRES=0`. Owner mod selection is restored byte-for-byte.
+
+This is a focused green-stage demo rendering regression, not complete-game or
+controlled-combat acceptance. Recomp-ui is reopened for a brief owner check.
+Intermediate `sky-camera-after-20261014` captures are retained; the final run
+includes the queue-independent refinement and the 4:3 return check.
+
+Updated priorities are background repair now, original voice extraction/inventory
+next, recorded replacement later. Loading HLE/precaching is deferred and no
+longer blocks extraction. No audio was extracted during this task.
+
+Final executable SHA-256:
+`eb820d17e4a2d70d498f7d178f37033cec30f843c4a402061e9abdc4e6bc4490`.

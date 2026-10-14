@@ -5,8 +5,12 @@ validation first, with audio research now. This is a metadata and source audit;
 no audio was extracted, decoded, auditioned, replaced, or injected.
 
 The [gameplay checks](../validation/README.md) now include combat and a repaired
-CD-sector corruption path. Core qualification remains incomplete, so audio
-extraction and replacement implementation are still deferred.
+CD-sector corruption path. The owner updated priorities on 2026-10-14:
+background flicker fix now, original audio extraction/inventory next, voice
+replacement later. Loading work remains deferred. No extraction or voice work
+is authorized as part of the current background-fix task. The owner accepts
+suitable generic BT3 introductions/grunts with explicit substitution provenance;
+the actual cue count and coverage still need inventory.
 
 ## Supplied research archive
 

@@ -11,6 +11,18 @@ targeted smoke, then use quick human visual/audio review. The owner heard the
 latest host-audio smoke and said it sounded okay. These parked features are
 unfinished, not implicitly accepted or removed from the longer-term backlog.
 
+Latest priority update: fix the owner-reported moving-camera background flicker
+now, original audio extraction/inventory next, recorded replacement later.
+Loading work remains deferred. The newer motion report supersedes any claim
+that the earlier short visual acceptance proves stable cloud coverage.
+
+The moving-camera defect is now repaired in the title hook: odd-scroll FT4
+edge strips and sprites are validated as one complete background, using packet
+UVs so queued submissions do not depend on current source scroll. The final
+44-second replay has covered clouds in twelve composed captures and returns to
+4:3; independent review passes. Recomp-ui is reopened for the owner's check.
+No audio extraction or replacement work occurred during this repair.
+
 The resumed backdrop fix passed composed 16:9/21:9 captures, return to 4:3,
 and a short moving demo scene. The owner then reviewed the visible session and
 answered "Looks okay." The framework now pins

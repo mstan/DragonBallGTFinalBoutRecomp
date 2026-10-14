@@ -21,6 +21,11 @@ a quick human check is sufficient; expand only for concrete defects.
 The owner then parked audio replacement investigation and HLE/precaching.
 Do not resume either without a new request. The active work is the demonstrated
 widescreen backdrop defect, a targeted smoke and quick human visual review.
+The latest owner priority is: fix moving-camera background flicker now, original
+audio extraction/inventory next, recorded voice replacement later. Loading work
+stays deferred. Update this order without starting voice work during the
+background fix. Suitable generic BT3 introductions and combat grunts may be
+mapped later with explicit substitution provenance rather than literal matches.
 
 ## Source and dependency rules
 

@@ -105,62 +105,99 @@ static int sky_layout_matches(int *top) {
     return 1;
 }
 
-static int sky_texture_matches(uint32_t draw_mode, uint32_t uv,
-                               uint32_t width) {
-    uint32_t i;
-    /* Each submitted tile must belong to this object's actual source atlas.
-     * Edge tiles may crop U; the qualified producer has no vertical crop. */
-    for (i = 0; i < 128u; ++i) {
-        uint32_t source_uv = psx_mod_read_word(0x801B1008u + i * 8u);
-        uint32_t source_page = psx_mod_read_word(0x801B100Cu + i * 8u) >> 16;
-        int u_delta = (int)(uv & 255u) - (int)(source_uv & 255u);
-        if (draw_mode == (0xE1000200u | (source_page & 0x1FFu)) &&
-            (uv & 0xFFFFFF00u) == (source_uv & 0xFFFFFF00u) &&
-            u_delta >= 0 && (uint32_t)u_delta + width <= 32u)
-            return 1;
-    }
-    return 0;
+static int sky_source(uint32_t row, uint32_t column,
+                      uint32_t *uv, uint32_t *draw_mode) {
+    uint32_t index = psx_mod_read_half(0x801B0008u +
+                                     (row * 32u + column) * 2u);
+    uint32_t flags = psx_mod_read_word(0x800A9BDCu);
+    /* Follow this object's map, not merely any tile sharing its atlas.
+     * Bound the map index before reading the fixed 128-entry source atlas. */
+    if (index >= 128u) return 0;
+    *uv = psx_mod_read_word(0x801B1008u + index * 8u);
+    *draw_mode = 0xE1000200u | ((flags >> 17) & 0x180u) |
+        ((flags >> 23) & 0x60u) |
+        ((psx_mod_read_word(0x801B100Cu + index * 8u) >> 16) & 0x1Fu);
+    return 1;
 }
 
-static int tag_sky_composite(uint32_t first) {
-    uint32_t bank, packet, row, count = 0;
-    int top;
-    if (first >= 0x801D0000u && first < 0x801D3000u) bank = 0x801D0000u;
-    else if (first >= 0x801D3000u && first < 0x801D6000u) bank = 0x801D3000u;
-    else return 0;
-    if ((int16_t)psx_mod_read_half(first + 12u) != -256 ||
-        !sky_layout_matches(&top) ||
-        (int16_t)psx_mod_read_half(first + 14u) != top) return 0;
-    packet = first;
+static int sky_sprite_matches(uint32_t packet, uint32_t next, int x, int y,
+                              uint32_t width, uint32_t uv,
+                              uint32_t draw_mode) {
+    return psx_mod_read_word(packet) == (0x05000000u | next) &&
+        psx_mod_read_word(packet + 4u) == draw_mode &&
+        psx_mod_read_word(packet + 8u) == 0x64808080u &&
+        (int16_t)psx_mod_read_half(packet + 12u) == x &&
+        (int16_t)psx_mod_read_half(packet + 14u) == y &&
+        psx_mod_read_word(packet + 16u) == uv &&
+        psx_mod_read_word(packet + 20u) == (0x00200000u | width);
+}
+
+static int sky_edge_matches(uint32_t packet, int y, uint32_t uv,
+                            uint32_t draw_mode) {
+    uint32_t bottom_uv = (uv & 255u) | (((uv + 0x2000u) & 0xFF00u));
+    /* 8002101C..80021188: an odd source X emits a one-pixel FT4 strip
+     * before the even-width SPRT. UV2/3 upper halves are unwritten padding. */
+    return psx_mod_read_word(packet) ==
+            (0x09000000u | ((packet + 40u) & 0xFFFFFFu)) &&
+        psx_mod_read_word(packet + 4u) == 0x2C808080u &&
+        (int16_t)psx_mod_read_half(packet + 8u) == -256 &&
+        (int16_t)psx_mod_read_half(packet + 10u) == y &&
+        psx_mod_read_word(packet + 12u) == uv &&
+        (int16_t)psx_mod_read_half(packet + 16u) == -255 &&
+        (int16_t)psx_mod_read_half(packet + 18u) == y &&
+        psx_mod_read_half(packet + 20u) == (uv & 0xFFFFu) &&
+        psx_mod_read_half(packet + 22u) == (draw_mode & 0x1FFu) &&
+        (int16_t)psx_mod_read_half(packet + 24u) == -256 &&
+        (int16_t)psx_mod_read_half(packet + 26u) == y + 32 &&
+        psx_mod_read_half(packet + 28u) == bottom_uv &&
+        (int16_t)psx_mod_read_half(packet + 32u) == -255 &&
+        (int16_t)psx_mod_read_half(packet + 34u) == y + 32 &&
+        psx_mod_read_half(packet + 36u) == bottom_uv;
+}
+
+static int sky_composite_matches(uint32_t first, uint32_t bank, int top,
+                                 uint32_t scroll, uint32_t *primitives,
+                                 uint32_t *primitive_count, uint32_t *gradient) {
+    uint32_t packet = first, row, count = 0;
     for (row = 0; row < 4u; ++row) {
         int x = -256;
-        uint32_t columns = 0;
+        int y = top + (int)row * 32;
+        uint32_t column = scroll / 32u, crop = scroll % 32u, columns = 0;
         while (x < 256) {
-            uint32_t tag, size, width, next;
-            if (packet > bank + 0x3000u - 24u || columns == 17u) return 0;
-            tag = psx_mod_read_word(packet);
-            size = psx_mod_read_word(packet + 20u);
-            width = size & 0xFFFFu;
-            /* Last tile links back to the selected four-entry sky OT, not
-             * to the adjacent gradient (which sorts in a different OT). */
-            next = row == 3u && x + (int)width == 256
-                ? (bank == 0x801D0000u ? 0x001E3000u : 0x001E4000u)
-                : ((packet + 24u) & 0xFFFFFFu);
-            if ((tag >> 24) != 5u ||
-                (tag & 0xFFFFFFu) != next ||
-                psx_mod_read_word(packet + 8u) != 0x64808080u ||
-                (int16_t)psx_mod_read_half(packet + 12u) != x ||
-                (int16_t)psx_mod_read_half(packet + 14u) != top + (int)row * 32 ||
-                !width || width > 32u || (size >> 16) != 32u ||
-                x + (int)width > 256 ||
-                (columns && x + (int)width < 256 && width != 32u) ||
-                !sky_texture_matches(psx_mod_read_word(packet + 4u),
-                                     psx_mod_read_word(packet + 16u), width))
+            uint32_t uv, draw_mode, width = 32u - crop, next;
+            if (columns == 17u || !sky_source(row, column, &uv, &draw_mode))
                 return 0;
+            if (width > (uint32_t)(256 - x)) width = (uint32_t)(256 - x);
+            if (!columns) {
+                uv = (uv & 0xFFFFFF00u) | (((uv & 255u) + crop) & 255u);
+                if (scroll & 1u) {
+                    if (packet > bank + 0x3000u - 40u || count == 72u ||
+                        !sky_edge_matches(packet, y, uv, draw_mode)) return 0;
+                    primitives[count++] = packet;
+                    packet += 40u;
+                    ++x;
+                    --width;
+                }
+                /* The producer rounds the first SPRT U to an even texel. */
+                uv = (uv & 0xFFFFFF00u) | (((uv & 255u) + 1u) & 254u);
+            }
+            if (width) {
+                if (packet > bank + 0x3000u - 24u || count == 72u) return 0;
+                /* Last tile links back to the selected four-entry sky OT, not
+                 * to the adjacent gradient (which sorts in a different OT). */
+                next = row == 3u && x + (int)width == 256
+                    ? (bank == 0x801D0000u ? 0x001E3000u : 0x001E4000u)
+                    : ((packet + 24u) & 0xFFFFFFu);
+                if (!sky_sprite_matches(packet, next, x, y, width, uv,
+                                        draw_mode)) return 0;
+                /* E1 precedes SPRT; the service adds four to this word. */
+                primitives[count++] = packet + 4u;
+                packet += 24u;
+            }
             x += (int)width;
-            packet += 24u;
             ++columns;
-            ++count;
+            column = (column + 1u) % 32u;
+            crop = 0;
         }
     }
     /* The same producer's full-width gradient follows the tiled sky. Validate
@@ -168,13 +205,49 @@ static int tag_sky_composite(uint32_t first) {
     if (packet > bank + 0x3000u - 36u ||
         !gradient_shape_matches(packet, psx_mod_read_word(packet) >> 24,
                                 psx_mod_read_word(packet + 4u) >> 24)) return 0;
-    gpu_ws_tag_background_prim(packet);
-    for (row = 0; row < count; ++row)
-        /* The compound E1 precedes SPRT; the service adds four to this word. */
-        gpu_ws_tag_background_prim(first + row * 24u + 4u);
-    psx_mod_counter_add("finalbout.ws.sky", count);
-    psx_mod_counter_add("finalbout.ws.gradient", 1u);
+    *primitive_count = count;
+    *gradient = packet;
     return 1;
+}
+
+static int tag_sky_composite(uint32_t first) {
+    uint32_t bank, opcode, first_uv, column;
+    uint32_t primitives[72];
+    int top;
+    if (first >= 0x801D0000u && first < 0x801D3000u) bank = 0x801D0000u;
+    else if (first >= 0x801D3000u && first < 0x801D6000u) bank = 0x801D3000u;
+    else return 0;
+    if ((first & 3u) || first > bank + 0x3000u - 24u) return 0;
+    opcode = psx_mod_read_word(first + 4u) >> 24;
+    if (opcode == 0xE1u) {
+        if ((int16_t)psx_mod_read_half(first + 12u) != -256) return 0;
+        first_uv = psx_mod_read_word(first + 16u);
+    } else if (opcode == 0x2Cu) {
+        if ((int16_t)psx_mod_read_half(first + 8u) != -256) return 0;
+        first_uv = psx_mod_read_word(first + 12u);
+    } else return 0;
+    if (!sky_layout_matches(&top) ||
+        top < -32768 || top > 32767 - 128) return 0;
+    /* PsyQ can queue the DMA submission while the next frame advances the
+     * object's source X. Recover the submitted origin from packet UVs instead.
+     * At most 32 row-zero map entries can supply a candidate; only a complete
+     * four-row match permits tags, including the odd crop-31 FT4-only edge. */
+    for (column = 0; column < 32u; ++column) {
+        uint32_t source_uv, draw_mode, crop, count, gradient, i;
+        if (!sky_source(0u, column, &source_uv, &draw_mode) ||
+            (first_uv & 0xFFFFFF00u) != (source_uv & 0xFFFFFF00u)) continue;
+        crop = ((first_uv & 255u) - (source_uv & 255u)) & 255u;
+        if (crop >= 32u || (crop & 1u) != (opcode == 0x2Cu ? 1u : 0u) ||
+            !sky_composite_matches(first, bank, top, column * 32u + crop,
+                                   primitives, &count, &gradient)) continue;
+        gpu_ws_tag_background_prim(gradient);
+        for (i = 0; i < count; ++i)
+            gpu_ws_tag_background_prim(primitives[i]);
+        psx_mod_counter_add("finalbout.ws.sky", count);
+        psx_mod_counter_add("finalbout.ws.gradient", 1u);
+        return 1;
+    }
+    return 0;
 }
 
 static void tag_list(CPUState *cpu, uint32_t address) {
@@ -200,7 +273,8 @@ static void tag_list(CPUState *cpu, uint32_t address) {
         } else if (is_gradient(packet, words, opcode)) {
             gpu_ws_tag_background_prim(packet);
             psx_mod_counter_add("finalbout.ws.gradient", 1u);
-        } else if (words == 5u && opcode == 0xE1u) {
+        } else if ((words == 5u && opcode == 0xE1u) ||
+                   (words == 9u && opcode == 0x2Cu)) {
             (void)tag_sky_composite(packet);
         }
         current = tag & 0xFFFFFFu;

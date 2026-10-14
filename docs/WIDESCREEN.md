@@ -122,7 +122,7 @@ Repeating the visible slice would incorrectly repeat half the panorama.
 
 The title hook now validates the producer instructions, object/map layout,
 actual texture atlas, four continuous rows spanning -256..256, exact opaque
-sprite commands, dimensions and DMA links. Up to 68 tiles plus the adjacent
+sprite commands, dimensions and DMA links. Up to 72 cloud primitives plus the adjacent
 G4 must match before any are tagged. The pool walk is bounded to its 0x3000-byte
 bank. Earlier effects can shift the composite, so fixed pool-base identity is
 insufficient: the sampled sky starts at `0x801D3078` and its gradient at
@@ -147,3 +147,33 @@ It exits normally in 25.05 seconds at frame 1,530, zero unsupported instructions
 with the default watchdog. The owner subsequently accepted the visible review.
 See [validation](../validation/README.md#cloud-backdrop-fix-and-human-acceptance-2026-10-14)
 for the executable hash, counters and exact acceptance limits.
+
+### Moving-camera parity fix
+
+The owner's subsequent Trunks/Goku captures exposed alternating full-width and
+authored-width clouds. The earlier paused/brief motion smoke did not establish
+continuous background coverage. A targeted moving Goku/Goku replay reproduces
+the same gap, including five of twelve composed captures.
+
+The producer at `0x8002101C..0x80021188` uses an opaque, one-pixel FT4 strip at
+the start of each row when horizontal source scroll is odd, then draws the
+even-aligned sprites. The old sprite-only guard rejected these legitimate
+mixed layouts. Aligned, cropped-even and cropped-odd composites contain
+64/68/72 cloud primitives; an odd crop of 31 leaves the first edge with no
+first sprite. The hook now validates each producer-defined layout, exact map
+order, atlas/UV/page data, geometry and links before tagging the whole composite.
+The unused high halves of FT4 UV2/UV3 are padding, not identity fields.
+
+PsyQ can queue the DMA callback (`0x80029090` enqueue, `0x80029254` callback).
+The completed packets can therefore refer to an earlier source scroll than the
+current object. The hook derives at most 32 possible origins from serialized
+UVs and the fixed map, then proves all four rows and the adjacent gradient.
+Candidate failure leaves no tags. It does not cache or alter guest state.
+The existing instruction/object/vertical-layout, RAM/bank and packet guards
+remain; guest culling is unchanged. This is a title fix using the landed renderer
+service, with no shared engine change.
+
+The final short camera replay shows covered clouds in all twelve composed
+captures, including odd scroll positions, and returns to 4:3 mode zero. The
+independent Sol 6.1 review found no remaining blocker. See the validation record
+for the exact run and hash. Broader stage/culling qualification is still separate.

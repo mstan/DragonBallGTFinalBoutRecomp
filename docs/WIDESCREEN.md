@@ -177,3 +177,61 @@ The final short camera replay shows covered clouds in all twelve composed
 captures, including odd scroll positions, and returns to 4:3 mode zero. The
 independent Sol 6.1 review found no remaining blocker. See the validation record
 for the exact run and hash. Broader stage/culling qualification is still separate.
+
+### Stage layout coverage
+
+The owner's subsequent Goku/L.Goku blue-city capture is stage 6. The earlier
+four-row cloud guard could not recognize its eleven-row panorama. A separate
+stage 4 capture also exposed a valid panorama with no following G4. These are
+different authored layouts, beyond the earlier green-stage parity repair.
+
+The stage descriptor table at `0x800545CC`, stride 20, identifies eleven HAIKEI
+resource groups. Independently decoding the supplied disc with the game's
+`0x8001663C` decoder establishes these layouts; the decoded stage 2 map/atlas
+matches captured combat RAM byte for byte. All tiles are 32x32 and every map
+index fits its own atlas. Dimensions below describe the source map; the game
+draws a scrolling 512-pixel-wide slice.
+
+| Stage ID | Map columns x rows | Atlas entries | Following G4s |
+| --- | --- | --- | --- |
+| 0 | 32x3 | 48 | 1 |
+| 1 | 32x6 | 96 | 0 |
+| 2 | 32x4 | 128 | 1 |
+| 3 | 16x2 | 2 | 1 |
+| 4 | 32x11 | 96 | 0 |
+| 5 | 16x2 | 2 | 2 |
+| 6 | 24x11 | 112 | 1 |
+| 7 | 24x11 | 112 | 1 |
+| 8 | 32x3 | 48 | 1 |
+| 9 | 32x7 | 96 | 0 |
+| 10 | 32x2 | 36 | 3 |
+
+The hook matches each exact stage's resource headers, object dimensions,
+origin/scale/pointers and actual atlas count. It proves the complete panorama
+and the stage's expected G4 suffix before tagging. Stages 1/4/9 legitimately
+have no G4 suffix; adjacent effect packets remain excluded. Stage 3 uses its
+verified alternate ordering-table terminal. Stage 5 disables the panorama in
+the initializer and stays excluded; its original gradient handling remains.
+Submitted packet Y now supplies the vertical origin, just as serialized UVs
+supply source X, so queued camera updates cannot invalidate a completed packet.
+
+The largest panorama has 198 primitives and occupies 4,928 bytes. Even adding
+the maximum three G4s gives 5,036 bytes, below the existing 12,288-byte bank.
+This is recognition of existing guest packets, not wider guest admission or a
+packet-buffer expansion. No shared engine, guest RAM/GTE or culling change.
+
+Independent Sol 6.1 review executed the actual captured MIPS initializer and
+panorama producer against all eleven assets, both banks and four scroll crops:
+88 serialized layouts match the audit, including odd strips and wraparound.
+Boundary checks and seventeen malformed cases pass. This is offline packet
+coverage, not eleven live stage visits.
+
+The rebuilt native hook was exercised on stages 1/2/4/5, with composed captures
+at 16:9/21:9 and a return to 4:3. Green and the tall gradient-free panorama cover
+the displayed width; the disabled-panorama stage retains gradient coverage.
+Legacy city snapshots restore to a title/selection screen with leftover combat
+RAM and cannot establish a live city pass. A bounded attempt to select a city
+fixture instead reached stages 1/5; its filenames do not establish stage identity.
+The owner's quick city visual check is pending. Other stage visits, terrain
+culling at the reveal edges and broader gameplay remain unqualified. Recomp-ui
+is reopened for that check; see validation for the exact evidence and hash.

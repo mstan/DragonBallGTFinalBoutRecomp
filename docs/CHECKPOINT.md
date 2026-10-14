@@ -16,6 +16,15 @@ now, original audio extraction/inventory next, recorded replacement later.
 Loading work remains deferred. The newer motion report supersedes any claim
 that the earlier short visual acceptance proves stable cloud coverage.
 
+The owner subsequently reported a narrow blue-city background (stage 6).
+The hook now recognizes the eleven disc-certified stage layouts, including
+eleven-row panoramas, stages without a G4 suffix and stage 3's alternate OT.
+Independent Sol 6.1 review executed the actual MIPS producer for 88 asset/bank/
+scroll cases and passed. The native rebuild and live stage 1/2/4/5 checks pass;
+all eleven stages have not been visited live. Legacy city saves restore outside
+combat, so city visual confirmation remains the owner's quick check.
+Recomp-ui is open with the updated build. Voice work has not started.
+
 The moving-camera defect is now repaired in the title hook: odd-scroll FT4
 edge strips and sprites are validated as one complete background, using packet
 UVs so queued submissions do not depend on current source scroll. The final

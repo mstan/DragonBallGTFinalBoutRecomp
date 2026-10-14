@@ -576,3 +576,66 @@ longer blocks extraction. No audio was extracted during this task.
 
 Final executable SHA-256:
 `eb820d17e4a2d70d498f7d178f37033cec30f843c4a402061e9abdc4e6bc4490`.
+
+## Additional stage backdrop layouts (2026-10-14)
+
+The owner reported the blue-city backdrop still occupying the authored width.
+The prior green-stage guard covered only four rows; this stage has eleven.
+The independent asset inventory certifies eleven stage IDs and eight map sizes
+from the actual HAIKEI resources and the stage descriptor table at `800545CC`.
+The title hook now matches each exact layout/atlas, stage-specific G4 counts
+and stage 3's alternate OT. Submitted packet Y replaces live camera Y in the
+composite proof. The largest existing panorama is 4,928 bytes / 198 primitives;
+even three G4s fit within the existing 0x3000-byte packet bank. No guest packet
+admission, culling, RAM/GTE or shared engine change.
+
+`build-release/stage-background-offline-20261014` retains the decoder/audit and
+independent Sol 6.1 review. Eighty-eight source-derived cases cover eleven
+assets, both banks and crops 0/2/1/31 at map wraparound. Exact bank-end cases
+accept; one-word crossings and seventeen packet/map/object mutations reject.
+Queued source-X/object-Y/camera-Y changes preserve recognition. The independent
+review executes the actual captured MIPS initializer and producer in Unicorn;
+its serialized packet words agree for all 88 cases. Stage 5's enabled synthetic
+cases are explicitly counterfactual: the actual initializer disables its
+panorama, which the hook continues to reject. This is offline serialization
+coverage, not native C-hook or eleven-stage runtime acceptance.
+
+The README native CLI rebuild passed with two jobs and staged overlay_toolchain.
+`build-release/stage-background-before-20261014` revealed that legacy city slots
+1/2 actually restore to title/selection with leftover city packets, display320
+and no combat tags. They are source-only evidence, not city visual acceptance.
+Its slot 3 is an actual stage 4 fight with an eleven-row, gradient-free panorama;
+the old guard leaves that backdrop narrow.
+
+`build-release/stage-background-final-20261014` reaches a fresh stage 1 fight,
+display512, effective5x and native-wide margin170. Its composed capture shows
+covered mountain background with 3,264 sky tag calls and 8,704 background hits,
+zero rejected/mismatched/stale background tags at that sample. An attract-mode
+city search was stopped through normal runtime quit; it did not capture city6.
+Runtime exit zero in 192.67 seconds, no forced termination. The finder helper's
+connection error follows that deliberate quit and is not a game failure.
+
+`build-release/stage-background-city-final-20261014` attempts an isolated city
+selection-table override, but the route subsequently reaches stage 5. The
+`city-motion-*` filenames therefore denote stage 5, as their metadata records;
+they do not prove city6. No such override is in the product. The final targeted
+sequence restores known slots with completion receipts and captures three
+moving samples each of stage 4 (tall panorama/no G4), stage 2 (green clouds)
+and stage 5 (disabled panorama/gradients) at 21:9, then returns to 4:3 mode0,
+margin0. The backgrounds cover the displayed width. Final counters report
+102,032 background hits, zero rejected/mismatched tags and 264 stale lookups
+rejected by the existing freshness guard. Stage 4's terrain has an abrupt edge
+in the reveal; world admission/culling fidelity is not accepted by this check.
+Normal TCP exit zero at frame12,600, 209.70 seconds, no forced termination or
+reported unsupported instructions. All these native runs use real host audio,
+fixed effective5x, the default watchdog, debug toggles0 and dynamic resolution0.
+Temporary mod state is restored byte-for-byte; isolated saves stay ignored.
+
+The owner launcher is reopened in `build-release/owner-stage-background-20261014`
+with the current personal mod/device settings, without injected input or a
+test-state load. All eleven source layouts were checked, but live checks cover
+stages1/2/4/5 only; city6 and other live stage visits remain unaccepted. No audio
+extraction/replacement or loading enhancement work was performed.
+
+Executable SHA-256:
+`3b1b54820dff3f33c1b3815981e6ea4258294a4a1b3aa61a1d72cb3c301ea8fb`.

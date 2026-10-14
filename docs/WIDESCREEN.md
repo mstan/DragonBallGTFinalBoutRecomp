@@ -133,8 +133,11 @@ the existing background service to opaque variable textured rectangles
 (0x64/65). Full-command/address/freshness guards and canonical rendering remain
 intact. Only the native-wide mirror stretches the qualified composite. The
 title does not change guest RAM, GTE, timing, culling or object admission.
-The shared extension is [draft PR #663](https://github.com/RetroPortingToolKit/psxrecomp/pull/663),
-stacked on the CD fix so its review diff stays scoped to the renderer change.
+The shared extension is [PR #663](https://github.com/RetroPortingToolKit/psxrecomp/pull/663).
+After CD PR #657 merged, the same patch was rebased onto master `d3db61b1` as
+`a36754b7`. Its review diff contains only the sprite extension, API documentation
+and tests. The focused renderer tests and a short Final Bout replay pass on
+the updated base; no further visual campaign was requested.
 
 The short composed-capture replay in `build-release/sky-fix-20261014` verifies
 cloud coverage at 16:9/21:9 and identity at 4:3, then resumes the demo briefly.

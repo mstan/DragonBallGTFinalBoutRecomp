@@ -480,3 +480,37 @@ forced termination. Its launcher restored the temporary mod selection.
 
 Tested executable SHA-256:
 `c959bd543b7ebd2f803256c18404da8fcd323018036032ec55ab48d8807b0713`.
+
+## Upstream CD adoption and PR #663 rebase (2026-10-14)
+
+Verified CD PR #657 merged at `2fca087a1bb65fa2aabf88891a2f0777467893b2`
+on 2026-10-14. The owner assigned its four-title regression work to another
+session. PR #663 is now based on master `d3db61b199e07e757526a2fa1881fd15c95b3659`,
+with rebased head `a36754b7eeda86768393eb6bb55af44540ea0aa5`. Its diff remains
+three files: the opaque-sprite acceptance condition, API documentation and
+targeted tests. All three renderer tests listed above passed again on this
+base. The README CLI rebuild succeeded at two jobs and staged overlay_toolchain.
+
+`build-release/widescreen-upstream-adoption-20261014` restores the paused demo
+with a successful receipt and verifies composed 16:9/21:9 sky coverage and
+4:3 identity. Normal TCP quit, exit zero, frame 1,166, 21.72 seconds, zero
+unsupported instructions. Its short Start injection did not demonstrate
+resume. A bounded follow-up (`widescreen-upstream-motion-20261014`) confirmed
+the pause flag remained set; missing PAUSE text alone is not resume evidence.
+
+`build-release/widescreen-upstream-input-20261014` uses persistent digital
+input with explicit neutral/release. Start changes the guest pause flag at
+`0x800A868C` from 1 to 0; composed captures show continued demo motion and
+effects. Normal TCP quit, exit zero, frame 1,563, 26.23 seconds, zero unsupported
+instructions or forced termination. This validates restoration and resume of
+the existing demo state, not controlled combat or a new CD-transition route.
+The earlier short-input result does not establish an engine input defect.
+
+All runs use fixed effective 5x, real host audio, default watchdog, and
+`PSX_DEBUG_TOGGLES=0` / `PSX_DYNRES=0`. Temporary mod selections were restored.
+The owner reaffirmed that general working behavior is sufficient and requested
+no further validation campaign. Earlier human acceptance remains recorded;
+HLE/precaching and audio replacement remain parked.
+
+Updated executable SHA-256:
+`05fa9b95a6a830c3ae9f462f0a9cc20c28182099bab19178cbf7f352a885794e`.

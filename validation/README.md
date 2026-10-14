@@ -393,3 +393,90 @@ See [implementation and limits](../docs/WIDESCREEN.md).
 The owner requested a checkpoint and pause. The private repository and linked
 follow-up issues are recorded in [CHECKPOINT.md](../docs/CHECKPOINT.md). No audio
 extraction or replacement has begun. No runtime test process was left running.
+
+## Resumed widescreen investigation (2026-10-14)
+
+The owner authorized resumption and Sol 6.1 workers with adversarial review.
+The checkout, submodule pin and executable hash matched the documented
+checkpoint. Upstream CD PR #657 remains open and unmerged. Central Beads push
+completed successfully in 47 seconds with the supported wrapper.
+
+The inconclusive 21:9 white frame is now explained by the stage flash: composed
+mod-off 4:3 and adaptive 21:9 sequences both show white, gray fade, and recovery
+with fighters/HUD preserved. Independent visual review agreed. Evidence and
+scope are in [WIDESCREEN.md](../docs/WIDESCREEN.md#resumed-investigation-2026-10-14).
+This covers the restored Goku/Frieza scene only; it does not qualify camera
+extremes, other stages, dynamic effects, transitions, or full culling.
+
+Two earlier mod-off sequence attempts remain failed/inconclusive:
+`build-release/widescreen-sequence-20261014` and
+`build-release/widescreen-sequence-retry-20261014`. Both hit the starvation
+watchdog around capture/restoration activity, with no unsupported instructions.
+The earlier automatic slow-frame stack is not a stack of the eventual abort;
+neither a guest corruption nor a native compiler cause is established. The
+successful diagnostic sequence used a longer watchdog, disabled live debug
+video toggles and fixed resolution. It cannot erase those failures or serve
+as default-runtime stability evidence. Shared observation `beads-eio.3.347`
+remains open.
+
+The culling audit rejected changing apparent horizontal checks that also mutate
+gameplay state. No guest culling change was made. Audio extraction and FuniDub
+implementation remain deferred behind the open core requirements.
+
+The subsequent rebuilt native smoke (`build-release/core-resume-20261014`)
+boots through the movie/title and menus into Goku/Goku demo combat at effective
+5x, accepts pause, and completes a state save receipt. Review of the visible
+`DEMO ON` indicator corrected the initial controlled-combat/attack claim:
+this run establishes scene rendering, not player-controlled combat. It uses
+real host audio output, the default watchdog and disabled live debug video
+toggles. It exits normally via TCP at frame 10,334, zero unsupported
+instructions, after 172.25 seconds. Host audio is active with nonzero samples
+and zero reported underruns; the owner heard this run and said it sounded okay.
+That accepts the sampled audio, without claiming every cue was checked.
+
+The short smoke found an actual stage-specific widescreen gap: the green
+Goku/Goku stage's tiled cloud sky stops at the authored horizontal edges.
+The stage uses a different backdrop packet layout from the previously tested
+rocky stage. This is a targeted follow-up under `beads-q6ao`, not grounds for
+an exhaustive QA campaign. The owner explicitly requested quick human visual
+and audio review after rudimentary checks.
+
+Smoke executable SHA-256:
+`bdccd714c70cfa489ca63407c81d28a162343b3dbfcb5c7be9dd61a74b7d55c9`.
+
+## Cloud-backdrop fix and human acceptance (2026-10-14)
+
+The framework extension accepts explicitly tagged opaque variable textured
+rectangles through the existing guarded background service. Three targeted
+native tests passed: `gpu_textured_dot_nw_shift_exec_test`,
+`gpu_render_pass_provenance_test`, and `ws_hud_anchor_test`. Independent Sol 6.1
+review and parent review found no blocker in the final engine/title changes.
+Review rejected an earlier fixed-player-side HUD proposal because it would
+expose hidden fields at X=512; the final code retains signed-X anchoring.
+
+The README CLI rebuild completed with two jobs and staged the native overlay
+toolchain. `build-release/sky-fix-20261014` restores the paused green-stage demo
+with a completion receipt, captures composed 16:9/21:9/4:3 presentations, then
+resumes briefly at 21:9. Clouds now cover the former flat side strips, the HUD
+remains edge anchored, and 4:3 returns to identity. Normal `tcp_quit` at frame
+1,530, exit code zero, 25.05 seconds, no unsupported instructions or forced
+termination. This uses real host audio, fixed effective 5x, default watchdog,
+and `PSX_DEBUG_TOGGLES=0` / `PSX_DYNRES=0`.
+
+Final background statistics: 5,443 tag calls, 15,638 hits, zero rejected tags
+or content mismatches, and 1,025 stale lookups rejected by the existing
+freshness guard. These counts are not a claim of zero stale lookups. No visible
+backdrop gap was found in the paused or moving captures.
+
+`build-release/human-review-20261014` then opens the same scene in a visible
+window. The owner answered "Looks okay" to the quick clouds/HUD/motion review.
+Together with the earlier audible-audio acceptance, this meets the owner's
+requested lightweight review for these changes. It does not establish memory
+cards, wins/progression, full roster/stage coverage or widened guest culling.
+No broad netplay retest was performed. HLE/precaching and audio replacement
+investigation are parked by the owner.
+The visible session exited normally through TCP after 112.39 seconds, with no
+forced termination. Its launcher restored the temporary mod selection.
+
+Tested executable SHA-256:
+`c959bd543b7ebd2f803256c18404da8fcd323018036032ec55ab48d8807b0713`.

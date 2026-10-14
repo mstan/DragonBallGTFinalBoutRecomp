@@ -12,6 +12,16 @@ Work solo unless the owner authorizes subagents for the current task. For the
 initial setup, the owner explicitly requested GPT-6.1 Sol workers with
 adversarial review. This does not authorize delegation on future tasks.
 
+For the resumed 2026-10-14 task, the owner freshly authorized Sol 6.1 workers
+with adversarial review. Keep QA proportionate: short automated smoke and
+targeted regression checks, followed by the owner's quick high-level visual
+and audio review. Do not run exhaustive roster/stage/rendering campaigns when
+a quick human check is sufficient; expand only for concrete defects.
+
+The owner then parked audio replacement investigation and HLE/precaching.
+Do not resume either without a new request. The active work is the demonstrated
+widescreen backdrop defect, a targeted smoke and quick human visual review.
+
 ## Source and dependency rules
 
 - Target the supplied USA disc, `SLUS-00493`. Identity is in

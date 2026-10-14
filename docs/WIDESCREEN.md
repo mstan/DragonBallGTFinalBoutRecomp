@@ -2,6 +2,8 @@
 
 Status: default-disabled **0.1.0 preview**, awaiting full culling, scene and HUD
 qualification. Tracking: `beads-q6ao`, [GitHub #2](https://github.com/mstan/DragonBallGTFinalBoutRecomp/issues/2).
+The owner accepted a quick visible clouds/HUD/motion review on 2026-10-14;
+broader compatibility claims remain outside that acceptance.
 
 ## Implementation and evidence
 
@@ -64,3 +66,79 @@ disabled by default; the CD correctness fix remains enabled by default.
 Earlier local profile directories are `widescreen-profile-20261013` (RAM,
 primitive census, DMA history, disassembly) and `widescreen-diagnostic-20261013`
 (composed comparison of native-wide and squash). Their media stays out of Git.
+
+## Resumed investigation, 2026-10-14
+
+The white scene is a stage flash, rather than a demonstrated widescreen defect.
+In `build-release/widescreen-sequence-diagnostic-20261014`, mod-off 4:3 frame
+sequence image `07` shows the same white background with fighters/HUD preserved
+as adaptive 21:9 image `08`. Both then fade through gray and return to the rocky
+stage. This comparison uses the original framing path in the same recomp build;
+it is not an independent hardware/emulator fidelity comparison.
+
+The two serial runs use the checkpoint executable above, fixed effective 5x
+resolution, hidden full presentation, dummy audio and composed captures with
+completion receipts. They exit through `tcp_quit`, with zero unsupported
+instructions, at frames 1,331 and 2,355 (22.0 and 38.6 seconds). The diagnostic
+sets `PSX_DEBUG_TOGGLES=0`, `PSX_DYNRES=0` and a 60-second starvation threshold.
+It is visual evidence, not default-runtime stability or audible-audio acceptance.
+Two earlier capture attempts hit the default watchdog; they remain recorded in
+the validation notes and shared observation issue, without an assigned cause.
+
+Adaptive 4:3/16:9/21:9/4:3 sequences show covered backgrounds, edge HUD placement,
+and return to mode zero. No stale, rejected or mismatched tags were reported.
+Each size restores the same slot before sampling, so this establishes
+resize-plus-restore behavior, not uninterrupted live-resize compatibility.
+Animation timing differs between samples; pixel identity is not established.
+
+### Culling boundaries independently checked
+
+Two independent offline audits of the captured combat overlay agree that
+`0x8004020C` dispatches model primitive groups to builders in
+`0x800402D4..0x80041B84`. The 18 builders reject nonpositive NCLIP MAC0 and
+advance preassigned packet storage even on rejection (for example, `+0x58`
+at `0x800403EC`, and `+0x98` at `0x80041B74`). No horizontal extent predicate
+was found inside that interval. This does not exclude object admission or
+other effect/render paths, and it is not a reason to disable backface culling.
+
+The apparent `abs(projected X) > 256` checks at `0x8006DD18/40` also control
+player flags and orientation/action state. Widening them based on local window
+aspect would change gameplay. They are not qualified rendering hooks.
+
+Ordering-table descriptors at `0x800A9E08/30/58/80/A8/D8` describe
+2,048/64/1,024/1,024/4/4 depth buckets, respectively. Multiple primitives share
+a bucket; these counts do not prove packet capacity. The 480 records beginning
+at `0x8007329C`, stride `0x30`, are paired packet storage, not a proven actor
+limit. Guest admission remains unchanged pending an actual rendering defect
+and a complete capacity argument.
+
+### Scrolling cloud composite fix
+
+The green Goku/Goku demo stage exposed a real gap: its tiled cloud strip stayed
+inside the authored width while the surrounding scene widened. Its panorama
+object at `0x800A9BDC` points to a 32-column by four-row map of 32-pixel tiles
+at `0x800A9C00`; the producer draws a scrolling 512x128 slice of that source.
+Repeating the visible slice would incorrectly repeat half the panorama.
+
+The title hook now validates the producer instructions, object/map layout,
+actual texture atlas, four continuous rows spanning -256..256, exact opaque
+sprite commands, dimensions and DMA links. Up to 68 tiles plus the adjacent
+G4 must match before any are tagged. The pool walk is bounded to its 0x3000-byte
+bank. Earlier effects can shift the composite, so fixed pool-base identity is
+insufficient: the sampled sky starts at `0x801D3078` and its gradient at
+`0x801D36D8`, after five excluded effect packets.
+
+Framework commit `d9f0964d5c0cb981eeb206dff2c92f683741c3d6` narrowly extends
+the existing background service to opaque variable textured rectangles
+(0x64/65). Full-command/address/freshness guards and canonical rendering remain
+intact. Only the native-wide mirror stretches the qualified composite. The
+title does not change guest RAM, GTE, timing, culling or object admission.
+The shared extension is [draft PR #663](https://github.com/RetroPortingToolKit/psxrecomp/pull/663),
+stacked on the CD fix so its review diff stays scoped to the renderer change.
+
+The short composed-capture replay in `build-release/sky-fix-20261014` verifies
+cloud coverage at 16:9/21:9 and identity at 4:3, then resumes the demo briefly.
+It exits normally in 25.05 seconds at frame 1,530, zero unsupported instructions,
+with the default watchdog. The owner subsequently accepted the visible review.
+See [validation](../validation/README.md#cloud-backdrop-fix-and-human-acceptance-2026-10-14)
+for the executable hash, counters and exact acceptance limits.

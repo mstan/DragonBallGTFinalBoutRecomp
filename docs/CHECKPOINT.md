@@ -1,4 +1,29 @@
-# Paused checkpoint: 2026-10-13
+# Checkpoint and resumed work
+
+Resumed by the owner on 2026-10-14 from `36ba6d1`; the owner subsequently
+authorized Sol 6.1 subagents with adversarial review for this task. The record
+below describes the original checkpoint. Current evidence is appended to
+`validation/README.md` and `docs/WIDESCREEN.md`; the port remains incomplete.
+
+Current owner scope (2026-10-14): park audio replacement investigation and
+HLE/precaching. Finish the demonstrated widescreen backdrop gap, run a short
+targeted smoke, then use quick human visual/audio review. The owner heard the
+latest host-audio smoke and said it sounded okay. These parked features are
+unfinished, not implicitly accepted or removed from the longer-term backlog.
+
+The resumed backdrop fix passed composed 16:9/21:9 captures, return to 4:3,
+and a short moving demo scene. The owner then reviewed the visible session and
+answered "Looks okay." The framework now pins
+`d9f0964d5c0cb981eeb206dff2c92f683741c3d6`, which retains the CD fix and adds
+guarded opaque-sprite background tags. Title guards recognize the complete
+scrolling cloud composite while excluding nearby effects. Guest culling and
+packet admission are unchanged. The widescreen feature remains an elective,
+default-disabled preview; memory cards and win/progression remain open.
+The sprite extension is in [draft upstream PR #663](https://github.com/RetroPortingToolKit/psxrecomp/pull/663),
+stacked on the still-unmerged CD PR #657. The visible review session exited
+normally, and its temporary widescreen mod selection was restored.
+
+## Original paused checkpoint (2026-10-13)
 
 The owner requested a safe commit, private repository, follow-up issues, and a
 pause. Work is paused after the first widescreen preview smoke; the overall port

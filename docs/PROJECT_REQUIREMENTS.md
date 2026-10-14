@@ -4,6 +4,12 @@ This is the acceptance contract for Final Bout's requested features. Progress
 and dependencies belong in central Beads under `beads-6058`; this document is
 not a second issue tracker.
 
+Owner clarification, 2026-10-14: use rudimentary automated checks and targeted
+regressions, then defer high-level visual/audio acceptance to a quick human
+check. The requirements below describe the intended behavior, not a demand
+for an exhaustive automated QA campaign. Investigate demonstrated defects;
+record untested scope without repeatedly retesting accepted shared systems.
+
 | Work | Owning issue | Required evidence |
 | --- | --- | --- |
 | Initial project | `beads-jsz8` | Real disc identity, pinned dependencies, safe asset ignores, reproducible setup and honest validation record |

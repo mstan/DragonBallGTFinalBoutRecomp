@@ -11,17 +11,23 @@ resolution. The Goku-versus-Piccolo corruption is fixed by preserving requested
 CD bytes across pending sector notifications. Native combat movement, a projectile,
 pause/resume, save-state restoration, defeat and the continue countdown have
 passed. Local two-player combat and a light loopback netplay match/save-load
-smoke also pass. Broader roster coverage, memory-card saves and audible audio
-remain unvalidated; this is not yet a qualified playable port.
+smoke also pass. The owner accepted sampled host audio and a quick visible
+widescreen review on 2026-10-14. Memory-card saves, win/progression and broader
+coverage remain open; this is not yet a complete-game compatibility claim.
 See [validation/README.md](validation/README.md) for the actual validation result.
 The [repository](https://github.com/mstan/DragonBallGTFinalBoutRecomp) is private.
-No release has been created. See the [paused checkpoint and follow-ups](docs/CHECKPOINT.md).
+No release has been created. See the [checkpoint and follow-ups](docs/CHECKPOINT.md).
 
 The requested scope is higher internal resolution, faster loading through HLE
 and precaching, adaptive widescreen, and two-player recomp-net. Original dialogue
 extraction is the penultimate phase; an optional Funimation-cast voice pack
 assembled from existing recordings is the final phase. No generated or cloned
 voices are part of the plan.
+
+The owner parked HLE/precaching and audio replacement investigation on
+2026-10-14. The resumed work resolved the widescreen flash question and tiled
+cloud-backdrop gap, with a targeted smoke and quick human visual acceptance.
+Those parked features remain unfinished.
 
 ## Configuration and tracked work
 

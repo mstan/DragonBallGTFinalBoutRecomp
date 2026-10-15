@@ -1,0 +1,1468 @@
+{
+  "schema": "finalbout-extended-voice-mappings-1",
+  "qualification": "Curated generic context candidates. Source/target hashes and exact sample edits are resolved by extend_recipe.py; no accepted transcript or performer identity is inferred from ASR.",
+  "raw_files": {
+    "BATTLE/DEMOXA01.STR": {
+      "lba": 23833,
+      "size": 15090432
+    },
+    "BATTLE/DEMOXA02.STR": {
+      "lba": 30249,
+      "size": 15090432
+    },
+    "BATTLE/DEMOXA03.STR": {
+      "lba": 36665,
+      "size": 14601216
+    },
+    "BATTLE/FINISH.STR": {
+      "lba": 42873,
+      "size": 11966976
+    }
+  },
+  "retained_xa": [
+    {
+      "file": "BATTLE/FINISH.STR",
+      "channel": 17,
+      "reason": "Native state171 switches to DEMOXA53 after11 normal interpreter ticks; asynchronous CD start latency leaves usable PCM budget unqualified. Original cue retained."
+    }
+  ],
+  "extra_spu": [
+    {
+      "character_id": 0,
+      "instrument": 13,
+      "wave": 12,
+      "sources": [
+        {
+          "codec": "adx",
+          "bank": 3197,
+          "slot": 92
+        }
+      ],
+      "note": "Adult GT Goku uses BT3 adult Goku (End); complete ultimate-attack exertion replaces native Genkidama-name candidate"
+    },
+    {
+      "character_id": 10,
+      "instrument": 7,
+      "wave": 7,
+      "sources": [
+        {
+          "codec": "adx",
+          "bank": 3217,
+          "slot": 91
+        }
+      ],
+      "note": "Matching Piccolo; complete generic attack threat replaces native Gekiretsu Kodan-name candidate"
+    }
+  ],
+  "xa": [
+    {
+      "file": "BATTLE/DEMOXA01.STR",
+      "channel": 0,
+      "character_id": 0,
+      "category": "energy-technique",
+      "sources": [
+        {
+          "codec": "adx",
+          "bank": 3197,
+          "slot": 87
+        }
+      ],
+      "note": "Shared original adult Goku channel for character IDs 0/5/11; BT3 adult Goku (End) energy technique call; era/form substitution"
+    },
+    {
+      "file": "BATTLE/DEMOXA01.STR",
+      "channel": 1,
+      "character_id": 0,
+      "category": "energy-technique",
+      "sources": [
+        {
+          "codec": "adx",
+          "bank": 3197,
+          "slot": 87
+        }
+      ],
+      "note": "Shared original adult Goku channel for character IDs 0/5/11; BT3 adult Goku (End) energy technique call; era/form substitution"
+    },
+    {
+      "file": "BATTLE/DEMOXA01.STR",
+      "channel": 2,
+      "character_id": 1,
+      "category": "energy-technique",
+      "sources": [
+        {
+          "codec": "adx",
+          "bank": 3257,
+          "slot": 87
+        }
+      ],
+      "note": "Matching Pan; generic energy technique call; exact native attack-name equivalence not claimed"
+    },
+    {
+      "file": "BATTLE/DEMOXA01.STR",
+      "channel": 3,
+      "character_id": 1,
+      "category": "energy-technique",
+      "sources": [
+        {
+          "codec": "adx",
+          "bank": 3257,
+          "slot": 92
+        }
+      ],
+      "note": "Matching Pan; complete ultimate-attack exertion reused for another energy attack"
+    },
+    {
+      "file": "BATTLE/DEMOXA01.STR",
+      "channel": 4,
+      "character_id": 2,
+      "category": "energy-technique",
+      "sources": [
+        {
+          "codec": "adx",
+          "bank": 3201,
+          "slot": 87
+        }
+      ],
+      "note": "Shared original child Goku channel for character IDs 2/15; BT3 GT base child Goku energy technique call"
+    },
+    {
+      "file": "BATTLE/DEMOXA01.STR",
+      "channel": 5,
+      "character_id": 2,
+      "category": "energy-technique",
+      "sources": [
+        {
+          "codec": "adx",
+          "bank": 3201,
+          "slot": 87
+        }
+      ],
+      "note": "Shared original child Goku channel for character IDs 2/15; BT3 GT base child Goku energy technique call"
+    },
+    {
+      "file": "BATTLE/DEMOXA01.STR",
+      "channel": 6,
+      "character_id": 3,
+      "category": "energy-technique",
+      "sources": [
+        {
+          "codec": "adx",
+          "bank": 3235,
+          "slot": 87
+        }
+      ],
+      "note": "GT Trunks uses Z-era base Trunks; Burning Attack call candidate"
+    },
+    {
+      "file": "BATTLE/DEMOXA01.STR",
+      "channel": 7,
+      "character_id": 3,
+      "category": "energy-technique",
+      "sources": [
+        {
+          "codec": "adx",
+          "bank": 3235,
+          "slot": 92
+        }
+      ],
+      "note": "GT Trunks uses Z-era base Trunks; Finish Buster call candidate"
+    },
+    {
+      "file": "BATTLE/DEMOXA01.STR",
+      "channel": 8,
+      "character_id": 4,
+      "category": "energy-technique",
+      "sources": [
+        {
+          "codec": "adx",
+          "bank": 3229,
+          "slot": 87
+        }
+      ],
+      "note": "GT Super Vegeta uses Vegeta (End) Super Saiyan; complete energy-attack exertion, no literal Big Bang wording claim"
+    },
+    {
+      "file": "BATTLE/DEMOXA01.STR",
+      "channel": 9,
+      "character_id": 4,
+      "category": "energy-technique",
+      "sources": [
+        {
+          "codec": "adx",
+          "bank": 3229,
+          "slot": 91
+        }
+      ],
+      "note": "GT Super Vegeta uses Vegeta (End) Super Saiyan; complete generic ultimate-attack threat, no literal Final Flash wording claim"
+    },
+    {
+      "file": "BATTLE/DEMOXA01.STR",
+      "channel": 12,
+      "character_id": 6,
+      "category": "energy-technique",
+      "sources": [
+        {
+          "codec": "adx",
+          "bank": 3211,
+          "slot": 91
+        }
+      ],
+      "note": "Matching adult Gohan; complete generic attack threat replaces native energy call"
+    },
+    {
+      "file": "BATTLE/DEMOXA01.STR",
+      "channel": 13,
+      "character_id": 6,
+      "category": "energy-technique",
+      "sources": [
+        {
+          "codec": "adx",
+          "bank": 3211,
+          "slot": 91
+        }
+      ],
+      "note": "Matching adult Gohan; complete generic attack threat replaces native energy call"
+    },
+    {
+      "file": "BATTLE/DEMOXA01.STR",
+      "channel": 14,
+      "character_id": 7,
+      "category": "energy-technique",
+      "sources": [
+        {
+          "codec": "adx",
+          "bank": 3301,
+          "slot": 87
+        }
+      ],
+      "note": "Matching Perfect Cell; energy technique call candidate"
+    },
+    {
+      "file": "BATTLE/DEMOXA01.STR",
+      "channel": 15,
+      "character_id": 8,
+      "category": "energy-technique",
+      "sources": [
+        {
+          "codec": "adx",
+          "bank": 3311,
+          "slot": 87
+        }
+      ],
+      "note": "Matching Kid Buu; complete energy-attack exertion"
+    },
+    {
+      "file": "BATTLE/DEMOXA02.STR",
+      "channel": 0,
+      "character_id": 8,
+      "category": "energy-technique",
+      "sources": [
+        {
+          "codec": "adx",
+          "bank": 3311,
+          "slot": 89
+        }
+      ],
+      "note": "Matching Kid Buu; complete attack laugh/exertion reused for another energy attack"
+    },
+    {
+      "file": "BATTLE/DEMOXA02.STR",
+      "channel": 1,
+      "character_id": 9,
+      "category": "energy-technique",
+      "sources": [
+        {
+          "codec": "adx",
+          "bank": 3288,
+          "slot": 89
+        }
+      ],
+      "note": "Matching final-form Frieza; complete generic attack threat replaces native Death Ball call"
+    },
+    {
+      "file": "BATTLE/DEMOXA02.STR",
+      "channel": 2,
+      "character_id": 10,
+      "category": "energy-technique",
+      "sources": [
+        {
+          "codec": "adx",
+          "bank": 3217,
+          "slot": 87
+        }
+      ],
+      "note": "Matching Piccolo; Special Beam Cannon call candidate"
+    },
+    {
+      "file": "BATTLE/DEMOXA02.STR",
+      "channel": 3,
+      "character_id": 10,
+      "category": "energy-technique",
+      "sources": [
+        {
+          "codec": "adx",
+          "bank": 3217,
+          "slot": 91
+        }
+      ],
+      "note": "Matching Piccolo; complete generic attack threat replaces native attack call"
+    },
+    {
+      "file": "BATTLE/DEMOXA02.STR",
+      "channel": 6,
+      "character_id": 16,
+      "category": "energy-technique",
+      "sources": [
+        {
+          "codec": "adx",
+          "bank": 3236,
+          "slot": 87
+        }
+      ],
+      "note": "Super Trunks uses adjacent Super Saiyan Trunks form; Burning Attack call candidate"
+    },
+    {
+      "file": "BATTLE/DEMOXA02.STR",
+      "channel": 7,
+      "character_id": 16,
+      "category": "energy-technique",
+      "sources": [
+        {
+          "codec": "adx",
+          "bank": 3237,
+          "slot": 87
+        }
+      ],
+      "note": "Matching Super Trunks; Finish Buster call candidate"
+    },
+    {
+      "file": "BATTLE/DEMOXA02.STR",
+      "channel": 8,
+      "character_id": 13,
+      "category": "energy-technique",
+      "sources": [
+        {
+          "codec": "adx",
+          "bank": 3246,
+          "slot": 92
+        }
+      ],
+      "note": "Matching Super Vegetto; complete energy technique recording, omitted separate Final lead-in; no phrase splice"
+    },
+    {
+      "file": "BATTLE/DEMOXA02.STR",
+      "channel": 9,
+      "character_id": 14,
+      "category": "energy-technique",
+      "sources": [
+        {
+          "codec": "adx",
+          "bank": 3204,
+          "slot": 87
+        }
+      ],
+      "note": "Matching adult Super Saiyan 4 Goku; energy technique call candidate"
+    },
+    {
+      "file": "BATTLE/DEMOXA02.STR",
+      "channel": 10,
+      "character_id": 14,
+      "category": "energy-technique",
+      "sources": [
+        {
+          "codec": "adx",
+          "bank": 3204,
+          "slot": 87
+        }
+      ],
+      "note": "Matching adult Super Saiyan 4 Goku; energy technique call reused for another energy attack"
+    },
+    {
+      "file": "BATTLE/DEMOXA02.STR",
+      "channel": 13,
+      "character_id": 12,
+      "category": "energy-technique",
+      "sources": [
+        {
+          "codec": "adx",
+          "bank": 3236,
+          "slot": 87
+        }
+      ],
+      "note": "Matching Super Saiyan Trunks; Burning Attack call candidate"
+    },
+    {
+      "file": "BATTLE/DEMOXA02.STR",
+      "channel": 14,
+      "character_id": 12,
+      "category": "energy-technique",
+      "sources": [
+        {
+          "codec": "adx",
+          "bank": 3236,
+          "slot": 92
+        }
+      ],
+      "note": "Matching Super Saiyan Trunks; complete generic attack threat replaces native Finish Buster call"
+    },
+    {
+      "file": "BATTLE/DEMOXA03.STR",
+      "channel": 0,
+      "character_id": 17,
+      "category": "energy-technique",
+      "sources": [
+        {
+          "codec": "adx",
+          "bank": 3337,
+          "slot": 91
+        }
+      ],
+      "note": "Giant Baby uses BT3 Great Ape Baby; complete generic attack threat, no literal Final Death Ball wording claim"
+    },
+    {
+      "file": "BATTLE/DEMOXA03.STR",
+      "channel": 1,
+      "character_id": 17,
+      "category": "energy-technique",
+      "sources": [
+        {
+          "codec": "adx",
+          "bank": 3337,
+          "slot": 92
+        }
+      ],
+      "note": "Giant Baby uses BT3 Great Ape Baby; complete ultimate-attack exertion replaces Revenge Death Ball call"
+    },
+    {
+      "file": "BATTLE/DEMOXA03.STR",
+      "channel": 2,
+      "character_id": 9,
+      "category": "energy-technique",
+      "sources": [
+        {
+          "codec": "adx",
+          "bank": 3288,
+          "slot": 91
+        }
+      ],
+      "note": "Matching final-form Frieza; complete generic attack threat replaces native attack call"
+    },
+    {
+      "file": "BATTLE/DEMOXA03.STR",
+      "channel": 3,
+      "character_id": 13,
+      "category": "energy-technique",
+      "sources": [
+        {
+          "codec": "adx",
+          "bank": 3246,
+          "slot": 89
+        }
+      ],
+      "note": "Matching Super Vegetto; complete generic attack phrase replaces native attack call"
+    },
+    {
+      "file": "BATTLE/FINISH.STR",
+      "channel": 0,
+      "character_id": 0,
+      "category": "meteor-attack",
+      "sources": [
+        {
+          "codec": "spu",
+          "bank": 3197,
+          "slot": 16
+        },
+        {
+          "codec": "spu",
+          "bank": 3197,
+          "slot": 17
+        },
+        {
+          "codec": "spu",
+          "bank": 3197,
+          "slot": 18
+        },
+        {
+          "codec": "spu",
+          "bank": 3197,
+          "slot": 19
+        },
+        {
+          "codec": "spu",
+          "bank": 3197,
+          "slot": 20
+        },
+        {
+          "codec": "spu",
+          "bank": 3197,
+          "slot": 21
+        },
+        {
+          "codec": "spu",
+          "bank": 3197,
+          "slot": 22
+        },
+        {
+          "codec": "spu",
+          "bank": 3197,
+          "slot": 23
+        },
+        {
+          "codec": "spu",
+          "bank": 3197,
+          "slot": 24
+        },
+        {
+          "codec": "spu",
+          "bank": 3197,
+          "slot": 25
+        }
+      ],
+      "note": "Adult GT Goku uses BT3 adult Goku (End); complete physical attack-exertion used for a meteor scene, not a literal taunt translation"
+    },
+    {
+      "file": "BATTLE/FINISH.STR",
+      "channel": 1,
+      "character_id": 1,
+      "category": "meteor-attack",
+      "sources": [
+        {
+          "codec": "spu",
+          "bank": 3257,
+          "slot": 16
+        },
+        {
+          "codec": "spu",
+          "bank": 3257,
+          "slot": 17
+        },
+        {
+          "codec": "spu",
+          "bank": 3257,
+          "slot": 18
+        },
+        {
+          "codec": "spu",
+          "bank": 3257,
+          "slot": 19
+        },
+        {
+          "codec": "spu",
+          "bank": 3257,
+          "slot": 20
+        },
+        {
+          "codec": "spu",
+          "bank": 3257,
+          "slot": 21
+        },
+        {
+          "codec": "spu",
+          "bank": 3257,
+          "slot": 22
+        },
+        {
+          "codec": "spu",
+          "bank": 3257,
+          "slot": 23
+        },
+        {
+          "codec": "spu",
+          "bank": 3257,
+          "slot": 24
+        },
+        {
+          "codec": "spu",
+          "bank": 3257,
+          "slot": 25
+        }
+      ],
+      "note": "Matching character/form; complete physical attack-exertion used for a meteor scene, not a literal taunt translation"
+    },
+    {
+      "file": "BATTLE/FINISH.STR",
+      "channel": 2,
+      "character_id": 2,
+      "category": "meteor-attack",
+      "sources": [
+        {
+          "codec": "spu",
+          "bank": 3201,
+          "slot": 16
+        },
+        {
+          "codec": "spu",
+          "bank": 3201,
+          "slot": 17
+        },
+        {
+          "codec": "spu",
+          "bank": 3201,
+          "slot": 18
+        },
+        {
+          "codec": "spu",
+          "bank": 3201,
+          "slot": 19
+        },
+        {
+          "codec": "spu",
+          "bank": 3201,
+          "slot": 20
+        },
+        {
+          "codec": "spu",
+          "bank": 3201,
+          "slot": 21
+        },
+        {
+          "codec": "spu",
+          "bank": 3201,
+          "slot": 22
+        },
+        {
+          "codec": "spu",
+          "bank": 3201,
+          "slot": 23
+        },
+        {
+          "codec": "spu",
+          "bank": 3201,
+          "slot": 24
+        },
+        {
+          "codec": "spu",
+          "bank": 3201,
+          "slot": 25
+        }
+      ],
+      "note": "Matching character/form; complete physical attack-exertion used for a meteor scene, not a literal taunt translation"
+    },
+    {
+      "file": "BATTLE/FINISH.STR",
+      "channel": 3,
+      "character_id": 3,
+      "category": "meteor-attack",
+      "sources": [
+        {
+          "codec": "spu",
+          "bank": 3235,
+          "slot": 16
+        },
+        {
+          "codec": "spu",
+          "bank": 3235,
+          "slot": 17
+        },
+        {
+          "codec": "spu",
+          "bank": 3235,
+          "slot": 18
+        },
+        {
+          "codec": "spu",
+          "bank": 3235,
+          "slot": 19
+        },
+        {
+          "codec": "spu",
+          "bank": 3235,
+          "slot": 20
+        },
+        {
+          "codec": "spu",
+          "bank": 3235,
+          "slot": 21
+        },
+        {
+          "codec": "spu",
+          "bank": 3235,
+          "slot": 22
+        },
+        {
+          "codec": "spu",
+          "bank": 3235,
+          "slot": 23
+        },
+        {
+          "codec": "spu",
+          "bank": 3235,
+          "slot": 24
+        },
+        {
+          "codec": "spu",
+          "bank": 3235,
+          "slot": 25
+        }
+      ],
+      "note": "GT Trunks uses Z-era base Trunks; complete physical attack-exertion used for a meteor scene, not a literal taunt translation"
+    },
+    {
+      "file": "BATTLE/FINISH.STR",
+      "channel": 4,
+      "character_id": 4,
+      "category": "meteor-attack",
+      "sources": [
+        {
+          "codec": "spu",
+          "bank": 3229,
+          "slot": 16
+        },
+        {
+          "codec": "spu",
+          "bank": 3229,
+          "slot": 17
+        },
+        {
+          "codec": "spu",
+          "bank": 3229,
+          "slot": 18
+        },
+        {
+          "codec": "spu",
+          "bank": 3229,
+          "slot": 19
+        },
+        {
+          "codec": "spu",
+          "bank": 3229,
+          "slot": 20
+        },
+        {
+          "codec": "spu",
+          "bank": 3229,
+          "slot": 21
+        },
+        {
+          "codec": "spu",
+          "bank": 3229,
+          "slot": 22
+        },
+        {
+          "codec": "spu",
+          "bank": 3229,
+          "slot": 23
+        },
+        {
+          "codec": "spu",
+          "bank": 3229,
+          "slot": 24
+        },
+        {
+          "codec": "spu",
+          "bank": 3229,
+          "slot": 25
+        }
+      ],
+      "note": "GT Super Vegeta uses Vegeta (End) Super Saiyan; complete physical attack-exertion used for a meteor scene, not a literal taunt translation"
+    },
+    {
+      "file": "BATTLE/FINISH.STR",
+      "channel": 5,
+      "character_id": 5,
+      "category": "meteor-attack",
+      "sources": [
+        {
+          "codec": "spu",
+          "bank": 3198,
+          "slot": 16
+        },
+        {
+          "codec": "spu",
+          "bank": 3198,
+          "slot": 17
+        },
+        {
+          "codec": "spu",
+          "bank": 3198,
+          "slot": 18
+        },
+        {
+          "codec": "spu",
+          "bank": 3198,
+          "slot": 19
+        },
+        {
+          "codec": "spu",
+          "bank": 3198,
+          "slot": 20
+        },
+        {
+          "codec": "spu",
+          "bank": 3198,
+          "slot": 21
+        },
+        {
+          "codec": "spu",
+          "bank": 3198,
+          "slot": 22
+        },
+        {
+          "codec": "spu",
+          "bank": 3198,
+          "slot": 23
+        },
+        {
+          "codec": "spu",
+          "bank": 3198,
+          "slot": 24
+        },
+        {
+          "codec": "spu",
+          "bank": 3198,
+          "slot": 25
+        }
+      ],
+      "note": "Matching character/form; complete physical attack-exertion used for a meteor scene, not a literal taunt translation"
+    },
+    {
+      "file": "BATTLE/FINISH.STR",
+      "channel": 6,
+      "character_id": 6,
+      "category": "meteor-attack",
+      "sources": [
+        {
+          "codec": "spu",
+          "bank": 3211,
+          "slot": 16
+        },
+        {
+          "codec": "spu",
+          "bank": 3211,
+          "slot": 17
+        },
+        {
+          "codec": "spu",
+          "bank": 3211,
+          "slot": 18
+        },
+        {
+          "codec": "spu",
+          "bank": 3211,
+          "slot": 19
+        },
+        {
+          "codec": "spu",
+          "bank": 3211,
+          "slot": 20
+        },
+        {
+          "codec": "spu",
+          "bank": 3211,
+          "slot": 21
+        },
+        {
+          "codec": "spu",
+          "bank": 3211,
+          "slot": 22
+        },
+        {
+          "codec": "spu",
+          "bank": 3211,
+          "slot": 23
+        },
+        {
+          "codec": "spu",
+          "bank": 3211,
+          "slot": 24
+        },
+        {
+          "codec": "spu",
+          "bank": 3211,
+          "slot": 25
+        }
+      ],
+      "note": "Matching character/form; complete physical attack-exertion used for a meteor scene, not a literal taunt translation"
+    },
+    {
+      "file": "BATTLE/FINISH.STR",
+      "channel": 7,
+      "character_id": 7,
+      "category": "meteor-attack",
+      "sources": [
+        {
+          "codec": "spu",
+          "bank": 3301,
+          "slot": 16
+        },
+        {
+          "codec": "spu",
+          "bank": 3301,
+          "slot": 17
+        },
+        {
+          "codec": "spu",
+          "bank": 3301,
+          "slot": 18
+        },
+        {
+          "codec": "spu",
+          "bank": 3301,
+          "slot": 19
+        },
+        {
+          "codec": "spu",
+          "bank": 3301,
+          "slot": 20
+        },
+        {
+          "codec": "spu",
+          "bank": 3301,
+          "slot": 21
+        },
+        {
+          "codec": "spu",
+          "bank": 3301,
+          "slot": 22
+        },
+        {
+          "codec": "spu",
+          "bank": 3301,
+          "slot": 23
+        },
+        {
+          "codec": "spu",
+          "bank": 3301,
+          "slot": 24
+        },
+        {
+          "codec": "spu",
+          "bank": 3301,
+          "slot": 25
+        }
+      ],
+      "note": "Matching character/form; complete physical attack-exertion used for a meteor scene, not a literal taunt translation"
+    },
+    {
+      "file": "BATTLE/FINISH.STR",
+      "channel": 8,
+      "character_id": 8,
+      "category": "meteor-attack",
+      "sources": [
+        {
+          "codec": "spu",
+          "bank": 3311,
+          "slot": 16
+        },
+        {
+          "codec": "spu",
+          "bank": 3311,
+          "slot": 17
+        },
+        {
+          "codec": "spu",
+          "bank": 3311,
+          "slot": 18
+        },
+        {
+          "codec": "spu",
+          "bank": 3311,
+          "slot": 19
+        },
+        {
+          "codec": "spu",
+          "bank": 3311,
+          "slot": 20
+        },
+        {
+          "codec": "spu",
+          "bank": 3311,
+          "slot": 21
+        },
+        {
+          "codec": "spu",
+          "bank": 3311,
+          "slot": 22
+        },
+        {
+          "codec": "spu",
+          "bank": 3311,
+          "slot": 23
+        },
+        {
+          "codec": "spu",
+          "bank": 3311,
+          "slot": 24
+        },
+        {
+          "codec": "spu",
+          "bank": 3311,
+          "slot": 25
+        }
+      ],
+      "note": "Matching character/form; complete physical attack-exertion used for a meteor scene, not a literal taunt translation"
+    },
+    {
+      "file": "BATTLE/FINISH.STR",
+      "channel": 9,
+      "character_id": 9,
+      "category": "meteor-attack",
+      "sources": [
+        {
+          "codec": "spu",
+          "bank": 3288,
+          "slot": 16
+        },
+        {
+          "codec": "spu",
+          "bank": 3288,
+          "slot": 17
+        },
+        {
+          "codec": "spu",
+          "bank": 3288,
+          "slot": 18
+        },
+        {
+          "codec": "spu",
+          "bank": 3288,
+          "slot": 19
+        },
+        {
+          "codec": "spu",
+          "bank": 3288,
+          "slot": 20
+        },
+        {
+          "codec": "spu",
+          "bank": 3288,
+          "slot": 21
+        },
+        {
+          "codec": "spu",
+          "bank": 3288,
+          "slot": 22
+        },
+        {
+          "codec": "spu",
+          "bank": 3288,
+          "slot": 23
+        },
+        {
+          "codec": "spu",
+          "bank": 3288,
+          "slot": 24
+        },
+        {
+          "codec": "spu",
+          "bank": 3288,
+          "slot": 25
+        }
+      ],
+      "note": "Matching character/form; complete physical attack-exertion used for a meteor scene, not a literal taunt translation"
+    },
+    {
+      "file": "BATTLE/FINISH.STR",
+      "channel": 10,
+      "character_id": 10,
+      "category": "meteor-attack",
+      "sources": [
+        {
+          "codec": "spu",
+          "bank": 3217,
+          "slot": 16
+        },
+        {
+          "codec": "spu",
+          "bank": 3217,
+          "slot": 17
+        },
+        {
+          "codec": "spu",
+          "bank": 3217,
+          "slot": 18
+        },
+        {
+          "codec": "spu",
+          "bank": 3217,
+          "slot": 19
+        },
+        {
+          "codec": "spu",
+          "bank": 3217,
+          "slot": 20
+        },
+        {
+          "codec": "spu",
+          "bank": 3217,
+          "slot": 21
+        },
+        {
+          "codec": "spu",
+          "bank": 3217,
+          "slot": 22
+        },
+        {
+          "codec": "spu",
+          "bank": 3217,
+          "slot": 23
+        },
+        {
+          "codec": "spu",
+          "bank": 3217,
+          "slot": 24
+        },
+        {
+          "codec": "spu",
+          "bank": 3217,
+          "slot": 25
+        }
+      ],
+      "note": "Matching character/form; complete physical attack-exertion used for a meteor scene, not a literal taunt translation"
+    },
+    {
+      "file": "BATTLE/FINISH.STR",
+      "channel": 11,
+      "character_id": 11,
+      "category": "meteor-attack",
+      "sources": [
+        {
+          "codec": "spu",
+          "bank": 3198,
+          "slot": 16
+        },
+        {
+          "codec": "spu",
+          "bank": 3198,
+          "slot": 17
+        },
+        {
+          "codec": "spu",
+          "bank": 3198,
+          "slot": 18
+        },
+        {
+          "codec": "spu",
+          "bank": 3198,
+          "slot": 19
+        },
+        {
+          "codec": "spu",
+          "bank": 3198,
+          "slot": 20
+        },
+        {
+          "codec": "spu",
+          "bank": 3198,
+          "slot": 21
+        },
+        {
+          "codec": "spu",
+          "bank": 3198,
+          "slot": 22
+        },
+        {
+          "codec": "spu",
+          "bank": 3198,
+          "slot": 23
+        },
+        {
+          "codec": "spu",
+          "bank": 3198,
+          "slot": 24
+        },
+        {
+          "codec": "spu",
+          "bank": 3198,
+          "slot": 25
+        }
+      ],
+      "note": "Matching character/form; complete physical attack-exertion used for a meteor scene, not a literal taunt translation"
+    },
+    {
+      "file": "BATTLE/FINISH.STR",
+      "channel": 12,
+      "character_id": 12,
+      "category": "meteor-attack",
+      "sources": [
+        {
+          "codec": "spu",
+          "bank": 3236,
+          "slot": 16
+        },
+        {
+          "codec": "spu",
+          "bank": 3236,
+          "slot": 17
+        },
+        {
+          "codec": "spu",
+          "bank": 3236,
+          "slot": 18
+        },
+        {
+          "codec": "spu",
+          "bank": 3236,
+          "slot": 19
+        },
+        {
+          "codec": "spu",
+          "bank": 3236,
+          "slot": 20
+        },
+        {
+          "codec": "spu",
+          "bank": 3236,
+          "slot": 21
+        },
+        {
+          "codec": "spu",
+          "bank": 3236,
+          "slot": 22
+        },
+        {
+          "codec": "spu",
+          "bank": 3236,
+          "slot": 23
+        },
+        {
+          "codec": "spu",
+          "bank": 3236,
+          "slot": 24
+        },
+        {
+          "codec": "spu",
+          "bank": 3236,
+          "slot": 25
+        }
+      ],
+      "note": "Matching character/form; complete physical attack-exertion used for a meteor scene, not a literal taunt translation"
+    },
+    {
+      "file": "BATTLE/FINISH.STR",
+      "channel": 13,
+      "character_id": 13,
+      "category": "meteor-attack",
+      "sources": [
+        {
+          "codec": "spu",
+          "bank": 3246,
+          "slot": 16
+        },
+        {
+          "codec": "spu",
+          "bank": 3246,
+          "slot": 17
+        },
+        {
+          "codec": "spu",
+          "bank": 3246,
+          "slot": 18
+        },
+        {
+          "codec": "spu",
+          "bank": 3246,
+          "slot": 19
+        },
+        {
+          "codec": "spu",
+          "bank": 3246,
+          "slot": 20
+        },
+        {
+          "codec": "spu",
+          "bank": 3246,
+          "slot": 21
+        },
+        {
+          "codec": "spu",
+          "bank": 3246,
+          "slot": 22
+        },
+        {
+          "codec": "spu",
+          "bank": 3246,
+          "slot": 23
+        },
+        {
+          "codec": "spu",
+          "bank": 3246,
+          "slot": 24
+        },
+        {
+          "codec": "spu",
+          "bank": 3246,
+          "slot": 25
+        }
+      ],
+      "note": "Matching character/form; complete physical attack-exertion used for a meteor scene, not a literal taunt translation"
+    },
+    {
+      "file": "BATTLE/FINISH.STR",
+      "channel": 14,
+      "character_id": 14,
+      "category": "meteor-attack",
+      "sources": [
+        {
+          "codec": "spu",
+          "bank": 3204,
+          "slot": 16
+        },
+        {
+          "codec": "spu",
+          "bank": 3204,
+          "slot": 17
+        },
+        {
+          "codec": "spu",
+          "bank": 3204,
+          "slot": 18
+        },
+        {
+          "codec": "spu",
+          "bank": 3204,
+          "slot": 19
+        },
+        {
+          "codec": "spu",
+          "bank": 3204,
+          "slot": 20
+        },
+        {
+          "codec": "spu",
+          "bank": 3204,
+          "slot": 21
+        },
+        {
+          "codec": "spu",
+          "bank": 3204,
+          "slot": 22
+        },
+        {
+          "codec": "spu",
+          "bank": 3204,
+          "slot": 23
+        },
+        {
+          "codec": "spu",
+          "bank": 3204,
+          "slot": 24
+        },
+        {
+          "codec": "spu",
+          "bank": 3204,
+          "slot": 25
+        }
+      ],
+      "note": "Matching character/form; complete physical attack-exertion used for a meteor scene, not a literal taunt translation"
+    },
+    {
+      "file": "BATTLE/FINISH.STR",
+      "channel": 15,
+      "character_id": 15,
+      "category": "meteor-attack",
+      "sources": [
+        {
+          "codec": "spu",
+          "bank": 3201,
+          "slot": 16
+        },
+        {
+          "codec": "spu",
+          "bank": 3201,
+          "slot": 17
+        },
+        {
+          "codec": "spu",
+          "bank": 3201,
+          "slot": 18
+        },
+        {
+          "codec": "spu",
+          "bank": 3201,
+          "slot": 19
+        },
+        {
+          "codec": "spu",
+          "bank": 3201,
+          "slot": 20
+        },
+        {
+          "codec": "spu",
+          "bank": 3201,
+          "slot": 21
+        },
+        {
+          "codec": "spu",
+          "bank": 3201,
+          "slot": 22
+        },
+        {
+          "codec": "spu",
+          "bank": 3201,
+          "slot": 23
+        },
+        {
+          "codec": "spu",
+          "bank": 3201,
+          "slot": 24
+        },
+        {
+          "codec": "spu",
+          "bank": 3201,
+          "slot": 25
+        }
+      ],
+      "note": "GT Super Saiyan child Goku uses GT base child Goku short bank; complete physical attack-exertion used for a meteor scene, not a literal taunt translation"
+    },
+    {
+      "file": "BATTLE/FINISH.STR",
+      "channel": 16,
+      "character_id": 16,
+      "category": "meteor-attack",
+      "sources": [
+        {
+          "codec": "spu",
+          "bank": 3237,
+          "slot": 16
+        },
+        {
+          "codec": "spu",
+          "bank": 3237,
+          "slot": 17
+        },
+        {
+          "codec": "spu",
+          "bank": 3237,
+          "slot": 18
+        },
+        {
+          "codec": "spu",
+          "bank": 3237,
+          "slot": 19
+        },
+        {
+          "codec": "spu",
+          "bank": 3237,
+          "slot": 20
+        },
+        {
+          "codec": "spu",
+          "bank": 3237,
+          "slot": 21
+        },
+        {
+          "codec": "spu",
+          "bank": 3237,
+          "slot": 22
+        },
+        {
+          "codec": "spu",
+          "bank": 3237,
+          "slot": 23
+        },
+        {
+          "codec": "spu",
+          "bank": 3237,
+          "slot": 24
+        },
+        {
+          "codec": "spu",
+          "bank": 3237,
+          "slot": 25
+        }
+      ],
+      "note": "Matching character/form; complete physical attack-exertion used for a meteor scene, not a literal taunt translation"
+    }
+  ]
+}

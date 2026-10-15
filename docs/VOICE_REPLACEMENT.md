@@ -1,9 +1,14 @@
 # Recorded dialogue replacement
 
-This is a deferred design contract, not an extraction or replacement result.
-Original dialogue extraction is the penultimate phase (`beads-bqsp`).
-Recorded-clip replacement is the final phase (`beads-vbfi`), after the baseline,
-resolution, loading, widescreen and netplay work is validated.
+This is the design contract for FuniDub. The owner resumed audio-replacement
+investigation on 2026-10-14 after the visible widescreen review. Original cue
+inventory (`beads-bqsp`) precedes curated donor mapping and recorded-clip
+replacement (`beads-vbfi`). Loading enhancements remain parked. The first local
+extraction/decode results and their limits are in [the investigation](AUDIO_INVESTIGATION.md);
+the original investigation is retained as historical evidence. The native
+builder now produces a verified local pack from a source-only recipe. Launcher
+integration works locally; see [FuniDub](FUNIDUB.md) for current coverage and
+remaining listening/compatibility limits.
 
 The requested direction is a Funimation-cast performance assembled from existing
 recordings, for example Sean Schemmel and Chris Sabat. No voice cloning,
@@ -53,6 +58,11 @@ invent missing words or performances with generated voices. Artistic liberties
 should be visible in the mapping and reviewed by the owner. Where no suitable
 clip exists, keep the original cue and mark the gap.
 
+The owner permits suitable generic BT3 introductions and combat grunts rather
+than requiring literal 1:1 wording for every cue. Record these as substitutions
+with their target context and semantic fit. The expected small voice inventory
+is a lead to confirm during extraction, not a coverage claim.
+
 ## Delivery and checks
 
 Use an optional reversible resource pack with original-audio fallback; do not
@@ -76,7 +86,7 @@ Owner direction, 2026-10-13: the optional feature is named **FuniDub**. Once
 the base game is set up, the user chooses their supported Budokai Tenkaichi 3
 ISO and the launcher performs extraction, conversion and mapping locally.
 The owner reaffirmed core gameplay validation before audio implementation.
-This section specifies future behavior; no launcher feature exists yet.
+The native implementation follows this flow; UI/game validation remains open.
 
 1. Select **FuniDub** and choose the BT3 ISO. Validate supported release and
    content fingerprints before starting; a filename or serial alone is
@@ -151,4 +161,5 @@ triggers. If comparing a redub patch later, keep original and patched copies
 separate and record exact hashes and patch provenance. Do not contact authors,
 import databases, apply patches, or start audio extraction as part of this
 initial setup. The later metadata-only BT3 audit is recorded separately in
-[FUNIDUB_RESEARCH.md](FUNIDUB_RESEARCH.md); no audio extraction has begun.
+[FUNIDUB_RESEARCH.md](FUNIDUB_RESEARCH.md). Subsequent authorized local example
+extraction is recorded in [AUDIO_INVESTIGATION.md](AUDIO_INVESTIGATION.md).

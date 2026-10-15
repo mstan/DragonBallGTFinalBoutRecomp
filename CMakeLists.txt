@@ -18,6 +18,8 @@ endif()
 
 set(PSX_NETPLAY ON CACHE BOOL "Enable two-player recomp-net" FORCE)
 set(PSX_SETUP_WIZARD ON CACHE BOOL "Enable legal-disc setup and rebuild wizard" FORCE)
+set(PSX_LAUNCHER_MOD_COMMIT_WORKER_SAFE ON CACHE BOOL
+    "Prepare verified FuniDub resources on the owned launcher worker" FORCE)
 include("${PSXRECOMP_ROOT}/runtime/runtime.cmake")
 
 # Generated game C and the legally supplied disc stay local. The same sources
@@ -37,7 +39,15 @@ psxrecomp_add_game_runtime(psx-runtime
     CODEGEN_SETUP_SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/codegen_setup.c"
 )
 
-target_sources(psx-runtime PRIVATE src/mods/final_bout_widescreen.c)
+foreach(_FINAL_BOUT_RUNTIME psx-runtime psx-runtime-pgxp)
+    if(TARGET ${_FINAL_BOUT_RUNTIME})
+        target_sources(${_FINAL_BOUT_RUNTIME} PRIVATE
+            src/mods/final_bout_widescreen.c
+            src/mods/final_bout_funidub_prepare.cpp
+            src/audio/funidub_builder.cpp
+            src/audio/funidub_codecs.cpp)
+    endif()
+endforeach()
 
 foreach(_PSX_RUNTIME_CONFIG game.toml game_options.toml)
     add_custom_command(TARGET psx-runtime POST_BUILD

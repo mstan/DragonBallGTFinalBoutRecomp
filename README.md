@@ -1,107 +1,86 @@
 # Dragon Ball GT: Final Bout Recompiled
 
-Initial native recompilation project for **Dragon Ball GT - Final Bout (USA)**,
-serial **SLUS-00493**, using pinned PSXRecomp and recomp-ui dependencies.
+Play **Dragon Ball GT: Final Bout** on PC with higher internal resolution,
+adaptive widescreen, online multiplayer, and an optional English voice mod
+using recordings from **Dragon Ball Z: Budokai Tenkaichi 3**.
 
-This repository is at initial bring-up. A project scaffold, renderer setting,
-or compiled netplay integration does not establish playable-game compatibility.
-The Windows build, opening movie, menus and selection work. With the native
-overlay toolchain staged, cold and warm runs now render combat at 5x internal
-resolution. The Goku-versus-Piccolo corruption is fixed by preserving requested
-CD bytes across pending sector notifications. Native combat movement, a projectile,
-pause/resume, save-state restoration, defeat and the continue countdown have
-passed. Local two-player combat and a light loopback netplay match/save-load
-smoke also pass. Broader roster coverage, memory-card saves and audible audio
-remain unvalidated; this is not yet a qualified playable port.
-See [validation/README.md](validation/README.md) for the actual validation result.
-The [repository](https://github.com/mstan/DragonBallGTFinalBoutRecomp) is private.
-No release has been created. See the [paused checkpoint and follow-ups](docs/CHECKPOINT.md).
+**[Download v1.0.0 for Windows x64](https://github.com/mstan/DragonBallGTFinalBoutRecomp/releases/tag/v1.0.0)**
 
-The requested scope is higher internal resolution, faster loading through HLE
-and precaching, adaptive widescreen, and two-player recomp-net. Original dialogue
-extraction is the penultimate phase; an optional Funimation-cast voice pack
-assembled from existing recordings is the final phase. No generated or cloned
-voices are part of the plan.
+![Ultrawide combat with the HUD positioned at the edges of the screen](docs/screenshots/combat-ultrawide.png)
 
-## Configuration and tracked work
+## Features
 
-The initial renderer target is OpenGL at the shared `1080p` internal-resolution
-preset. The default framing remains 4:3. A default-disabled
-[widescreen preview](docs/WIDESCREEN.md) adds adaptive combat framing; broader
-culling and scene validation is still pending. Two-player netplay and the setup UI are enabled for bring-up.
-These settings do not certify graphics, multiplayer, or performance results.
+- **Adaptive widescreen:** combat framing follows your window from 4:3 through
+  21:9, with repositioned HUD elements and expanded stage backgrounds.
+- **FuniDub:** English character voices drawn from your own USA Budokai
+  Tenkaichi 3 ISO, covering introductions, combat grunts, attack calls and
+  victory lines. Import once; subsequent launches reuse the local cache.
+- **Netplay powered by recomp-net:** two-player online lobbies and LAN / direct
+  IP play, plus local versus with separate controller ports.
+- **Higher internal resolution**, controller configuration and save states,
+  all accessible from the launcher.
 
-Requirements and acceptance checks are in
-[docs/PROJECT_REQUIREMENTS.md](docs/PROJECT_REQUIREMENTS.md).
-[docs/VOICE_REPLACEMENT.md](docs/VOICE_REPLACEMENT.md) records the deferred audio
-workflow and provenance rules. The central Beads epic is **beads-6058**; the
-initial setup issue is **beads-jsz8**. No per-repository Beads database is used.
-The owner's Brazilian redub and NovaPowers Ghidra/profile references are recorded
-with review findings in [docs/REFERENCE_NOTES.md](docs/REFERENCE_NOTES.md).
+## Getting started
 
-## Local source
+1. Download the Windows x64 ZIP from the release page and extract it completely.
+2. Run **DragonBallGTFinalBout_Recompiled.exe**.
+3. Select your own **USA Final Bout disc image (SLUS-00493)** when prompted.
+   Use a CUE + BIN image and keep its files together.
+4. Choose your controller in the launcher and press **PLAY**.
 
-The owner-supplied source is:
+The release includes OpenBIOS and the tools needed for local setup. You do not
+need to install a compiler, Python or a retail PlayStation BIOS. The first run
+may take longer while game overlays are compiled and cached.
 
-```text
-\\SERVER\Games\PSX\Dragon Ball GT - Final Bout (USA)\Dragon Ball GT - Final Bout (USA).cue
-```
+No Final Bout disc data or Budokai Tenkaichi 3 recordings are included.
 
-The disc is a single MODE2/2352 data track, 158,811,744 bytes. Independent source
-verification found MD5 `2f869f926514278b72ffbd671e69b9f7` and SHA-1
-`8a2373f133788256cba64a1a0ba9fbb4b4667f71`. The boot executable is
-`SLUS_004.93`, load address `0x80010000`, entry `0x80010B98`, and text size
-`0x0002E000`. The probe records this supplied image's identity; it is not an
-external dump-database certification.
+## Widescreen
 
-Disc data and the extracted boot executable remain local under ignored `disc/`.
-No dialogue or other game audio has been extracted. The owner supplied a BT3
-USA PS2 ISO and research ZIP for the eventual **FuniDub** feature. Its intended
-launcher flow is to choose the donor ISO and prepare a local mapped voice pack
-automatically. The [research audit](docs/FUNIDUB_RESEARCH.md) records verified
-metadata and mapping leads; audio implementation still follows core validation.
+Open **Mods → Display → Widescreen**, enable it, and set **Aspect ratio** to
+**Adaptive**. Resize the window to change the combat view, or choose fixed
+**16:9**. Original 4:3 framing is the default; menus and movies retain their
+original presentation.
 
-## Development
+![Goku and Frieza fighting with 16:9 framing](docs/screenshots/combat-16-9.png)
 
-Use the pinned framework's [setup guide](psxrecomp/docs/GAME_PROJECT_SETUP.md)
-and [local codegen contract](psxrecomp/docs/LOCAL_CODEGEN_SDK.md). Initialize
-committed dependencies with:
+## FuniDub voices
 
-```powershell
-& 'C:\Program Files\Git\cmd\git.exe' submodule update --init --recursive
-```
+Open **Mods → Audio → FuniDub**, enable it, and select your own **USA PS2
+Budokai Tenkaichi 3 ISO (SLUS-21678)**. The launcher extracts and prepares the
+replacement pack locally, with progress and cancellation available. Keep the
+source selection saved so future launches can reuse the prepared pack.
 
-Generate and build from the repository root using native Python and the installed
-RetComM toolchain:
+FuniDub uses existing recordings, including suitable generic lines and grunts;
+it is not a word-for-word translation, and mouth animation may not match every
+line's length. Some cues keep their original voices. Music and movies remain
+original. Disable the mod to return to the original audio.
 
-```powershell
-$env:RETCOMM_TOOLCHAIN_DIR = 'C:\Users\Matthew\AppData\Local\RetComM\toolchains\cmake-clang-v1\1.0.14'
-$env:PSXRECOMP_TOOLCHAIN_DIR = $env:RETCOMM_TOOLCHAIN_DIR
-$env:CMAKE_BUILD_PARALLEL_LEVEL = '2'
-& 'C:\Users\Matthew\AppData\Local\Programs\Python\Python312\python.exe' psxrecomp/psxrecomp_cli.py generate --config game.toml --project-root . --disc "disc/Dragon Ball GT - Final Bout (USA).cue"
-& 'C:\Users\Matthew\AppData\Local\Programs\Python\Python312\python.exe' psxrecomp/psxrecomp_cli.py rebuild --config game.toml --project-root . --build-dir build-release --no-pgo --cmake-extra=-DPSX_DEBUG_TOOLS=ON
-```
+FuniDub uses separate save-state slots; memory cards remain shared. See the
+[FuniDub guide](docs/FUNIDUB.md) for coverage and cache details.
 
-On this machine, PATH contains MSYS shims. Prefer the native Python executable
-at `C:\Users\Matthew\AppData\Local\Programs\Python\Python312\python.exe`
-and native Git at `C:\Program Files\Git\cmd\git.exe`. `RETCOMM_TOOLCHAIN_DIR`
-takes precedence over `PSXRECOMP_TOOLCHAIN_DIR`, so set both as shown to avoid
-an inherited toolchain override. Adjust these machine-local paths on other PCs.
-A build failure or unvalidated runtime is
-recorded explicitly in the validation notes.
-Use the CLI rebuild route above to stage the native overlay toolchain beside
-the executable; a manual CMake build alone does not prepare that runtime path.
+## Netplay
 
-## Repository layout
+Choose **NETPLAY** in the launcher, then **Online Netplay** for lobbies or
+**LAN / Direct IP** for a direct connection. The host creates a lobby, the other
+player joins, and the host presses **PLAY** once both players are ready. Online
+service access may ask you to sign in with Discord; direct IP needs no account.
 
-- `game.toml`, `catalog_identity.json`, `disc_probe.json`: title and disc identity.
-- `seeds/`, `symbols.toml`, `psx_symbols.h`: initial discovery and symbol map.
-- `psxrecomp/`, `recomp-ui/`: pinned root submodules; recomp-net is nested.
-- `src/mods/`, `mods/preloaded/`: title plugins and elective enhancement packages.
-- `docs/`, `validation/`: requirements, deferred audio design, and evidence.
-- `disc/`, `generated/`, `build*/`, `analysis/`, `local-media/`: local ignored data.
+Both players should use the same release and supported disc image. If you use
+FuniDub, each player prepares it locally from their own donor ISO and uses the
+same voice selection. The lobby checks compatible game and mod content; it
+does not transfer game data or voice recordings.
 
-No game dumps, generated game code, retail BIOS, Ghidra databases, or original
-and third-party recordings belong in source commits. Version recipes and
-annotation exports instead. Dependency gitlinks are authoritative; pin changes
-must be deliberate and validated.
+## Help and development
+
+This first release has had focused gameplay, widescreen, audio and two-player
+checks. Some scenes, effects and progression routes remain untested; occasional
+visual or stall issues may still occur. Report problems with your settings and
+reproduction steps in [Issues](https://github.com/mstan/DragonBallGTFinalBoutRecomp/issues).
+
+For source builds, see [Building](docs/BUILDING.md). Detailed
+[validation notes](validation/README.md) and [widescreen notes](docs/WIDESCREEN.md)
+are available for contributors.
+
+Built with [PSXRecomp](https://github.com/RetroPortingToolKit/psxrecomp),
+[recomp-ui](https://github.com/RetroPortingToolKit/recomp-ui), and recomp-net.
+This is an unofficial fan project, unaffiliated with the original rights holders.

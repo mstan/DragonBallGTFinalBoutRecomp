@@ -393,3 +393,634 @@ See [implementation and limits](../docs/WIDESCREEN.md).
 The owner requested a checkpoint and pause. The private repository and linked
 follow-up issues are recorded in [CHECKPOINT.md](../docs/CHECKPOINT.md). No audio
 extraction or replacement has begun. No runtime test process was left running.
+
+## Resumed widescreen investigation (2026-10-14)
+
+The owner authorized resumption and Sol 6.1 workers with adversarial review.
+The checkout, submodule pin and executable hash matched the documented
+checkpoint. Upstream CD PR #657 remains open and unmerged. Central Beads push
+completed successfully in 47 seconds with the supported wrapper.
+
+The inconclusive 21:9 white frame is now explained by the stage flash: composed
+mod-off 4:3 and adaptive 21:9 sequences both show white, gray fade, and recovery
+with fighters/HUD preserved. Independent visual review agreed. Evidence and
+scope are in [WIDESCREEN.md](../docs/WIDESCREEN.md#resumed-investigation-2026-10-14).
+This covers the restored Goku/Frieza scene only; it does not qualify camera
+extremes, other stages, dynamic effects, transitions, or full culling.
+
+Two earlier mod-off sequence attempts remain failed/inconclusive:
+`build-release/widescreen-sequence-20261014` and
+`build-release/widescreen-sequence-retry-20261014`. Both hit the starvation
+watchdog around capture/restoration activity, with no unsupported instructions.
+The earlier automatic slow-frame stack is not a stack of the eventual abort;
+neither a guest corruption nor a native compiler cause is established. The
+successful diagnostic sequence used a longer watchdog, disabled live debug
+video toggles and fixed resolution. It cannot erase those failures or serve
+as default-runtime stability evidence. Shared observation `beads-eio.3.347`
+remains open.
+
+The culling audit rejected changing apparent horizontal checks that also mutate
+gameplay state. No guest culling change was made. Audio extraction and FuniDub
+implementation remain deferred behind the open core requirements.
+
+The subsequent rebuilt native smoke (`build-release/core-resume-20261014`)
+boots through the movie/title and menus into Goku/Goku demo combat at effective
+5x, accepts pause, and completes a state save receipt. Review of the visible
+`DEMO ON` indicator corrected the initial controlled-combat/attack claim:
+this run establishes scene rendering, not player-controlled combat. It uses
+real host audio output, the default watchdog and disabled live debug video
+toggles. It exits normally via TCP at frame 10,334, zero unsupported
+instructions, after 172.25 seconds. Host audio is active with nonzero samples
+and zero reported underruns; the owner heard this run and said it sounded okay.
+That accepts the sampled audio, without claiming every cue was checked.
+
+The short smoke found an actual stage-specific widescreen gap: the green
+Goku/Goku stage's tiled cloud sky stops at the authored horizontal edges.
+The stage uses a different backdrop packet layout from the previously tested
+rocky stage. This is a targeted follow-up under `beads-q6ao`, not grounds for
+an exhaustive QA campaign. The owner explicitly requested quick human visual
+and audio review after rudimentary checks.
+
+Smoke executable SHA-256:
+`bdccd714c70cfa489ca63407c81d28a162343b3dbfcb5c7be9dd61a74b7d55c9`.
+
+## Cloud-backdrop fix and human acceptance (2026-10-14)
+
+The framework extension accepts explicitly tagged opaque variable textured
+rectangles through the existing guarded background service. Three targeted
+native tests passed: `gpu_textured_dot_nw_shift_exec_test`,
+`gpu_render_pass_provenance_test`, and `ws_hud_anchor_test`. Independent Sol 6.1
+review and parent review found no blocker in the final engine/title changes.
+Review rejected an earlier fixed-player-side HUD proposal because it would
+expose hidden fields at X=512; the final code retains signed-X anchoring.
+
+The README CLI rebuild completed with two jobs and staged the native overlay
+toolchain. `build-release/sky-fix-20261014` restores the paused green-stage demo
+with a completion receipt, captures composed 16:9/21:9/4:3 presentations, then
+resumes briefly at 21:9. Clouds now cover the former flat side strips, the HUD
+remains edge anchored, and 4:3 returns to identity. Normal `tcp_quit` at frame
+1,530, exit code zero, 25.05 seconds, no unsupported instructions or forced
+termination. This uses real host audio, fixed effective 5x, default watchdog,
+and `PSX_DEBUG_TOGGLES=0` / `PSX_DYNRES=0`.
+
+Final background statistics: 5,443 tag calls, 15,638 hits, zero rejected tags
+or content mismatches, and 1,025 stale lookups rejected by the existing
+freshness guard. These counts are not a claim of zero stale lookups. No visible
+backdrop gap was found in the paused or moving captures.
+
+`build-release/human-review-20261014` then opens the same scene in a visible
+window. The owner answered "Looks okay" to the quick clouds/HUD/motion review.
+Together with the earlier audible-audio acceptance, this meets the owner's
+requested lightweight review for these changes. It does not establish memory
+cards, wins/progression, full roster/stage coverage or widened guest culling.
+No broad netplay retest was performed. HLE/precaching and audio replacement
+investigation are parked by the owner.
+The visible session exited normally through TCP after 112.39 seconds, with no
+forced termination. Its launcher restored the temporary mod selection.
+
+Tested executable SHA-256:
+`c959bd543b7ebd2f803256c18404da8fcd323018036032ec55ab48d8807b0713`.
+
+## Upstream CD adoption and PR #663 rebase (2026-10-14)
+
+Verified CD PR #657 merged at `2fca087a1bb65fa2aabf88891a2f0777467893b2`
+on 2026-10-14. The owner assigned its four-title regression work to another
+session. PR #663 is now based on master `d3db61b199e07e757526a2fa1881fd15c95b3659`,
+with rebased head `a36754b7eeda86768393eb6bb55af44540ea0aa5`. Its diff remains
+three files: the opaque-sprite acceptance condition, API documentation and
+targeted tests. All three renderer tests listed above passed again on this
+base. The README CLI rebuild succeeded at two jobs and staged overlay_toolchain.
+
+`build-release/widescreen-upstream-adoption-20261014` restores the paused demo
+with a successful receipt and verifies composed 16:9/21:9 sky coverage and
+4:3 identity. Normal TCP quit, exit zero, frame 1,166, 21.72 seconds, zero
+unsupported instructions. Its short Start injection did not demonstrate
+resume. A bounded follow-up (`widescreen-upstream-motion-20261014`) confirmed
+the pause flag remained set; missing PAUSE text alone is not resume evidence.
+
+`build-release/widescreen-upstream-input-20261014` uses persistent digital
+input with explicit neutral/release. Start changes the guest pause flag at
+`0x800A868C` from 1 to 0; composed captures show continued demo motion and
+effects. Normal TCP quit, exit zero, frame 1,563, 26.23 seconds, zero unsupported
+instructions or forced termination. This validates restoration and resume of
+the existing demo state, not controlled combat or a new CD-transition route.
+The earlier short-input result does not establish an engine input defect.
+
+All runs use fixed effective 5x, real host audio, default watchdog, and
+`PSX_DEBUG_TOGGLES=0` / `PSX_DYNRES=0`. Temporary mod selections were restored.
+The owner reaffirmed that general working behavior is sufficient and requested
+no further validation campaign. Earlier human acceptance remains recorded;
+HLE/precaching and audio replacement remain parked.
+
+Updated executable SHA-256:
+`05fa9b95a6a830c3ae9f462f0a9cc20c28182099bab19178cbf7f352a885794e`.
+
+PR #663 merged on 2026-10-14 at
+`f9c287f523428aea816fb91cd4ec7d499dcdea8a`. A full Git tree comparison against
+the tested `a36754b7` head is identical. The project adopts the landed commit
+in its submodule and framework_pins.txt; no additional QA campaign is needed
+for a commit identity change with the same source tree.
+
+## Controller mode restriction (2026-10-14)
+
+The owner's visible physical-controller boot reported "Controller 1 port is
+not connected properly." Its local settings selected Analog for the DualSense,
+overriding the title's Digital default. The existing engine/UI contract supports
+`[controller] lock_mode = true`: this build now declares that restriction beside
+`default_mode = "digital"`. The device picker stays available; the incompatible
+mode selector is hidden, and the runtime clamps stale preferences even for a
+direct boot. No engine or recomp-ui change, regeneration or rebuild is required
+for this runtime configuration change. The launcher is reopened for the owner's
+controller and widescreen checks. This records the observed warning and the
+configuration correction; successful physical gameplay remains a human check.
+
+## Moving-camera cloud flicker repair (2026-10-14)
+
+The owner's Trunks/Goku screenshots demonstrate a real intermittent backdrop
+defect after the earlier visual acceptance. The targeted moving Goku/Goku replay
+in `build-release/sky-camera-before-20261014` reproduces narrow clouds in five
+of twelve composed captures. Thirty-six object/packet snapshots establish that
+odd horizontal source scroll introduces a 40-byte, one-pixel FT4 strip at each
+row start. The sprite-only guard rejected these valid mixed composites.
+
+The Sol 6.1 worker updated the title hook to validate FT4 edges, sprites, the
+exact map/atlas sequence, geometry and links as one bounded composite. Independent
+review identified PsyQ's queued DMA callback: current object source scroll can
+differ from submitted packets. The final implementation derives bounded origin
+candidates from packet UVs and requires the complete four-row/gradient proof
+before tagging. Guest data, GTE, culling and the shared renderer are unchanged.
+
+A bounded offline packet audit accepts all 36 snapshots and both banks, plus
+the earlier shifted-pool capture. Nine malformed packet/map/link cases reject;
+aligned crop zero and crop 31 with an FT4-only first edge pass. Recognition is
+unchanged when live source scroll is varied independently. The independent
+review and parent review found no remaining blocker in the final implementation.
+
+The README CLI rebuild succeeded with two jobs and staged overlay_toolchain.
+`build-release/sky-camera-final-20261014` restores the same demo with a completion
+receipt, resumes through persistent digital input, samples moving-camera/effect
+activity, and returns from 21:9 to 4:3. All twelve composed captures show covered
+clouds; return mode is zero with zero reveal. Normal TCP quit at frame 2,663,
+exit zero, 43.91 seconds, zero unsupported instructions, no forced termination.
+The run uses fixed effective 5x, real host audio, default watchdog and
+`PSX_DEBUG_TOGGLES=0` / `PSX_DYNRES=0`. Owner mod selection is restored byte-for-byte.
+
+This is a focused green-stage demo rendering regression, not complete-game or
+controlled-combat acceptance. Recomp-ui is reopened for a brief owner check.
+Intermediate `sky-camera-after-20261014` captures are retained; the final run
+includes the queue-independent refinement and the 4:3 return check.
+
+Updated priorities are background repair now, original voice extraction/inventory
+next, recorded replacement later. Loading HLE/precaching is deferred and no
+longer blocks extraction. No audio was extracted during this task.
+
+Final executable SHA-256:
+`eb820d17e4a2d70d498f7d178f37033cec30f843c4a402061e9abdc4e6bc4490`.
+
+## Additional stage backdrop layouts (2026-10-14)
+
+The owner reported the blue-city backdrop still occupying the authored width.
+The prior green-stage guard covered only four rows; this stage has eleven.
+The independent asset inventory certifies eleven stage IDs and eight map sizes
+from the actual HAIKEI resources and the stage descriptor table at `800545CC`.
+The title hook now matches each exact layout/atlas, stage-specific G4 counts
+and stage 3's alternate OT. Submitted packet Y replaces live camera Y in the
+composite proof. The largest existing panorama is 4,928 bytes / 198 primitives;
+even three G4s fit within the existing 0x3000-byte packet bank. No guest packet
+admission, culling, RAM/GTE or shared engine change.
+
+`build-release/stage-background-offline-20261014` retains the decoder/audit and
+independent Sol 6.1 review. Eighty-eight source-derived cases cover eleven
+assets, both banks and crops 0/2/1/31 at map wraparound. Exact bank-end cases
+accept; one-word crossings and seventeen packet/map/object mutations reject.
+Queued source-X/object-Y/camera-Y changes preserve recognition. The independent
+review executes the actual captured MIPS initializer and producer in Unicorn;
+its serialized packet words agree for all 88 cases. Stage 5's enabled synthetic
+cases are explicitly counterfactual: the actual initializer disables its
+panorama, which the hook continues to reject. This is offline serialization
+coverage, not native C-hook or eleven-stage runtime acceptance.
+
+The README native CLI rebuild passed with two jobs and staged overlay_toolchain.
+`build-release/stage-background-before-20261014` revealed that legacy city slots
+1/2 actually restore to title/selection with leftover city packets, display320
+and no combat tags. They are source-only evidence, not city visual acceptance.
+Its slot 3 is an actual stage 4 fight with an eleven-row, gradient-free panorama;
+the old guard leaves that backdrop narrow.
+
+`build-release/stage-background-final-20261014` reaches a fresh stage 1 fight,
+display512, effective5x and native-wide margin170. Its composed capture shows
+covered mountain background with 3,264 sky tag calls and 8,704 background hits,
+zero rejected/mismatched/stale background tags at that sample. An attract-mode
+city search was stopped through normal runtime quit; it did not capture city6.
+Runtime exit zero in 192.67 seconds, no forced termination. The finder helper's
+connection error follows that deliberate quit and is not a game failure.
+
+`build-release/stage-background-city-final-20261014` attempts an isolated city
+selection-table override, but the route subsequently reaches stage 5. The
+`city-motion-*` filenames therefore denote stage 5, as their metadata records;
+they do not prove city6. No such override is in the product. The final targeted
+sequence restores known slots with completion receipts and captures three
+moving samples each of stage 4 (tall panorama/no G4), stage 2 (green clouds)
+and stage 5 (disabled panorama/gradients) at 21:9, then returns to 4:3 mode0,
+margin0. The backgrounds cover the displayed width. Final counters report
+102,032 background hits, zero rejected/mismatched tags and 264 stale lookups
+rejected by the existing freshness guard. Stage 4's terrain has an abrupt edge
+in the reveal; world admission/culling fidelity is not accepted by this check.
+Normal TCP exit zero at frame12,600, 209.70 seconds, no forced termination or
+reported unsupported instructions. All these native runs use real host audio,
+fixed effective5x, the default watchdog, debug toggles0 and dynamic resolution0.
+Temporary mod state is restored byte-for-byte; isolated saves stay ignored.
+
+The owner launcher is reopened in `build-release/owner-stage-background-20261014`
+with the current personal mod/device settings, without injected input or a
+test-state load. All eleven source layouts were checked, but live checks cover
+stages1/2/4/5 only; city6 and other live stage visits remain unaccepted. No audio
+extraction/replacement or loading enhancement work was performed.
+
+Executable SHA-256:
+`3b1b54820dff3f33c1b3815981e6ea4258294a4a1b3aa61a1d72cb3c301ea8fb`.
+
+## Retained native-wide composites during resolution changes (2026-10-14)
+
+The owner reports occasional green-stage background overlap/flicker and permits
+closing the game for work. Read-only `owner-stage-background-20261014/watch-*`
+captures landed in the opening movie; they do not reproduce a combat defect.
+That visible session exits normally at frame44,729 after 811.33 seconds. Its
+closing diagnostics report dynamic resolution disabled, zero automatic up/down
+steps and zero native-wide reallocations. It therefore does not establish the
+cause of the owner's intermittent symptom.
+
+Independent review found a separate GL scale-step correctness bug: `dyn_apply`
+uses a margins-only condition that omits the full-background-composite latch,
+although presentation correctly forbids canonical centre copying in that mode.
+The cleared new FBO loses its centre until redraw. Framework branch
+`work/native-wide-dynres-composite`, commit `28e12c737252036ac406263f230b7934f2fe9afa`,
+reuses `wide_center_is_canonical()` for rescale column selection. Shared Beads
+ownership is `beads-h696`; [PR #665](https://github.com/RetroPortingToolKit/psxrecomp/pull/665)
+merged upstream on 2026-10-14 as `6e177accccef7460a9cb9f5c1e40bc0144452d1c`.
+The merge tree exactly matches the tested commit, which is retained in upstream
+history. The local game already pins this landed commit;
+CD and sprite correctness fixes remain included and enabled.
+
+The bounded `run_gl_scale_invariance.py --steps-only` check runs on the native
+Windows Clang22/SDL3/NVIDIA GL3.3 toolchain. Existing canonical scale/mask checks
+pass49/49; the added two-bank retained-composite checks pass25/25. The new test
+compares every pixel at 3x -> 5x -> 3x before redraw and verifies native VRAM
+unchanged. A negative control changing only the production condition back to
+the original leaves canonical checks passing but fails the new regression with
+4,096,000 centre pixel mismatches per bank. Fixed source bytes are restored.
+Standalone test adapters were updated for current renderer APIs; independent
+review verified types and guards for the six embedding fixtures. The first
+attempt's missing-symbol link failure is retained separately, not counted as
+a passing run. No broad title or renderer matrix was run.
+
+Evidence remains ignored under
+`F:/Projects/psxrecomp/worktrees/native-wide-dynres-composite/build/`:
+`dynres-composite-fixed/scale-4nrgv68c/receipt.json` and
+`dynres-composite-original/scale-g5c964xn/receipt.json`.
+
+The README native rebuild passes at two jobs. The isolated
+`build-release/wide-dynres-smoke-20261014` run restores the green demo with a
+completion receipt, checks explicit 3x/5x/3x steps inside one handler, then
+captures 21:9 and returns to 4:3. Every scale step succeeds with unchanged
+guest-visible VRAM hash `d4d0224ff7c4ee4c`; restored scale5, mismatches0. Composed
+captures show covered background; final mode0/margin0. Normal TCP exit zero at
+frame1,149 after18.80 seconds, no forced termination or reported unsupported
+instructions. Default watchdog, real host audio, dynamic resolution enabled
+for this targeted step check, debug toggles0. Mod state restored byte-for-byte.
+
+Recomp-ui is reopened without injected inputs or a test-state load in
+`build-release/owner-wide-dynres-20261014`. The rare owner-reported overlap
+remains unresolved; this separate scale-step fix is not claimed as its cure.
+
+Updated executable SHA-256:
+`5fc0ccea337b762fb16ecde5faddc3e112e67aed8041cf2acabbb85731769a2b`.
+
+## First audio-replacement investigation (2026-10-14)
+
+The owner resumed audio investigation and accepted a short BT3 source reel with
+"those are all good," after asking for VLC playback/replay controls. The reel is
+three ADX dialogue candidates and one short Sony-bank sample, not an installed
+voice pack. Original victory examples still have unverified playback pitch.
+
+`tools/audio/probe_sources.py` rechecks the exact original track SHA-1, the
+donor PVD/AFS-table identities and pinned AFL metadata, then writes local
+inventories. Eight synthetic malformed-container/alias/extra-record tests pass.
+Nine local FFmpeg examples decode with exact expected sample counts/rates and
+nonzero PCM. The untrimmed ADX negative control produces 59,008 frames where
+the header declares 58,994; the probe's header-based trim yields 58,994.
+
+Direct source inspection finds 54 nonlooping victory candidates, 54 battle XA
+groups and six other XA groups; these are not an established dialogue count.
+Four inspected donor voice packs each contain 57 bounded Sony-wave candidates;
+one of those short samples decodes at its actual 16 kHz header rate. Full original
+cue inventory, actor/event matching and reinjection remain open. No runtime,
+launcher, netplay or game-configuration changes were made. Evidence/media remain
+ignored under `analysis/audio-investigation-20261014/`; the source procedure,
+hashes and limitations are described in [the audio report](../docs/AUDIO_INVESTIGATION.md).
+
+## FuniDub native preparation and first game integration (2026-10-15)
+
+Framework `fd6b89cc` and recomp-ui `1fa1f24` are exact detached dependency pins.
+Their generic support is in ready upstream PRs
+[psxrecomp #667](https://github.com/RetroPortingToolKit/psxrecomp/pull/667) and
+[recomp-ui #100](https://github.com/RetroPortingToolKit/recomp-ui/pull/100).
+Native Windows Clang generation/rebuild passes through the README CLI, two jobs,
+including the full frontend and staged overlay toolchain. Executable SHA-256:
+`178e622f278d310520b85e8eecaf9e0a96e18f8c78b9f9cf2990f3a2e04a7b08`.
+
+Native codec bounds/timing/reproducibility tests pass; four real ADX outputs match
+FFmpeg 7.1 at their declared lengths. The first pack replaces 277 selected SPU
+candidates, is 14,563,328 bytes, and hashes to
+`ae0d041f62b6dee7f6f084a60b0d9566a9c34e7f71f67e2ee9087a99ac0d1715`.
+All 277 changed cues are nonzero; original flag bytes and every unmapped byte
+remain unchanged. No converted cue has PCM rail samples. Sol 6.1 independent
+checks cover all target extents, raw-body boundaries, donor identities and
+sample-fit bounds. Era/form substitutions and shared attack/charge aliases are
+explicit in the source-only recipe. This is not complete voice coverage.
+
+The actual media provider resolves three verified immutable overlays. Cancel at
+roughly 30% publishes no derived binding. A changed recipe identity rebuilds;
+malformed receipts and corrupted pack bytes repair to the same expected output
+hash. Unsupported recipe versions fail while preserving the previous pack.
+The final qualified receipt probe hits. The Windows deep-path failure found in
+the first provider attempt is fixed by hashing the complete cache identity into
+one directory component. Cached-file validation exceptions now cause repair.
+
+The real hidden launcher shows progress and Cancel, closes safely during cold
+preparation, then completes preparation and displays FuniDub with its ISO picker.
+`build-audio-review/launcher-first`, `launcher-prepared` and `game-smoke/mods.png`
+retain composed frontend evidence. Personal mod/settings files are restored
+byte-for-byte by each harness; all media and captures remain ignored.
+
+Two default-watchdog attempts abort: FuniDub-on at frame 13,445 during combat
+loading, and FuniDub-off at frame 4,651 during the title/demo route. Both report
+zero unsupported instructions. Independent reinspection confirms all 277 sample
+writes stay inside uncompressed SPU resources, with no compressed/XA overlap.
+These observations extend the existing qualified stall report (`beads-eio.3.347`,
+GitHub #7); no compiler cause or FuniDub regression is established.
+
+The subsequent `build-audio-review/game-qualified` run uses
+`PSX_STARVATION_TIMEOUT_US=30000000` diagnostically, with `PSX_HOST_MUTE=1` and
+`SDL_AUDIODRIVER=dummy`. It cold-boots through the launcher, menus and selection
+to Goku/Boo combat. A live SPU-RAM capture matches 512 replacement bytes for each
+of Goku's nine and Boo's eight mapped combat waves. Save slot 1 reports generation
+1 / last_ok 1; its load reports generation 2 / last_ok 1, and subsequent frames
+and composed captures advance. Normal exit is zero. The extended watchdog is
+not a production fix or default-performance acceptance. The capture is live;
+legacy TCP pause/continue commands are removed and did not pause this run.
+
+XA attack audio, unclassified sounds and 46 spoken-fit gaps remain original.
+The earlier donor reel approval does not establish acceptance of every new edit,
+menu/victory trigger, mixed output or actor/transcript. A 19.38-second original
+XA reel is available for brief human classification, with hashes/timecodes.
+No new game-compatibility, full-roster or exhaustive netplay claim is made.
+
+### Source verification fallback and content admission
+
+The later native build pins framework `f3236362` and recomp-ui `1fa1f24`, with
+executable SHA-256
+`67fd282d0acb8b73401407c1d78a350f09b76af8f1dec90fc36c42a131349167`.
+The README rebuild route passes with two jobs and stages the native overlay
+toolchain. The initial resource-overlay change in PR #667 has landed; the
+subsequent content-identity fixes and Windows fallback are additional changes.
+
+Rapid rewrite probes found Windows file-ID/size/timestamps can remain identical
+after a same-size rewrite with restored mtime. The framework therefore declines
+cheap Windows file identity and takes its existing full-verification path;
+[PR #669](https://github.com/RetroPortingToolKit/psxrecomp/pull/669) tracks that
+correctness fix. Both worker-enabled and legacy `mod_runtime_test` pass,
+including cold-offer/direct-commit fingerprint agreement and rejection of
+same-path source changes. POSIX identities are unchanged.
+
+The updated title provider verifies every selected source payload and the fixed
+pack hash before reusing encoded bytes without qualified stamps. Its native
+checks pass: cold preparation 15,007 ms, receipt repair 3,420 ms, pack repair
+2,970 ms, unsupported-recipe rejection 393 ms, declined cheap probe 17 ms, and
+source-verified pack reuse 662 ms. All successful paths retain the expected pack
+hash. These are local preparation timings, not faster game loading. They
+supersede the earlier Windows qualified-receipt-probe observation above.
+
+The bounded muted two-peer gate in `build-audio-review/net-content` passes:
+matching FuniDub selections reach ticks 128/133 with no reported desync;
+FuniDub-on/off remains at tick zero with `content_mismatch` on both peers,
+unchanged after another second. All four processes exit zero. This checks
+content admission only, without repeating the accepted match/save-load smoke.
+Earlier harness attempts omitted the executable's bundled BIOS companion and
+spent their time budget copying the toolchain; those are not passing evidence.
+
+### Enforced save-slot isolation
+
+Adversarial review found `save_compatibility = "isolated"` was previously parsed
+without a runtime consumer. Framework `c91331ff67c8797a5c0a74332e019f143bdb0270`
+now derives normal slot filenames and all sidecars from the installed verified
+plan whenever a resolved package declares isolation. It retains the historical
+paths for ordinary plans and leaves memory cards unchanged. Changing scope
+cancels pending operations; invalid scope and truncated paths fail closed.
+This is filename isolation, not state-header rejection of manually copied files
+or explicit developer path/blob loads. Trusted title-profile construction does
+not currently add settings packages to the ordinary resolved package list;
+Final Bout has no such profile and uses the verified resource plan.
+
+Both full worker/legacy mod-runtime suites and the assert-enabled save-state
+policy fixture pass. The final README native rebuild passes with two jobs and
+stages 357 overlay-toolchain files. Executable SHA-256:
+`9ae81b2a2a772049cd690dcefa2c671120e924d23e5684bac1de80bef8296911`.
+
+`build-audio-review/state-scope` performs two short cold runs with muted output
+and the diagnostic 30-second watchdog allowance. FuniDub-on save/load reports
+generations 1/2, both `last_ok = 1`, using a filename containing the full plan
+hash. FuniDub-off cannot find an ordinary slot 1 (`last_ok = 0`), then saves it
+successfully alongside the isolated slot (`last_ok = 1`). Both exit zero, and
+personal settings/mod selections are restored byte-for-byte. These are early
+game save-path checks, not another combat or default-performance campaign.
+
+A 23.31-second converted-pack reel with ten combat/menu/victory examples is
+open paused in VLC. Exact cue order, clock ratios, pack offsets and hashes are
+retained under ignored `build-audio-review/final-reel`. It applies no extra
+edits beyond the recipe. Owner review of this reel remains pending; prior donor
+sample approval is not recorded as acceptance of the converted pack.
+
+### Thirteen additional intact mappings
+
+Bounded donor follow-up found shorter alternate-form recordings for eight
+unmapped slots and complete Kid Boo exertions for five more. The current recipe
+therefore covers 290/323 selected SPU candidates (159 combat, 89 menu, 42 victory),
+with 33 selected menu/victory gaps. XA and unclassified audio remain original.
+Vegeta's era, Trunks' sword variant, Frieza's full-power form and Boo's
+cross-context substitutions are explicit; no new transcript or actor acceptance
+is claimed.
+
+Independent Sol 6.1 review rereads donor PVD/AFS tables and all thirteen payloads,
+checks source hashes, nonrepeating terminal flags and exact-rational fit against
+the original tables. All eight ADX additions retain their full declared PCM;
+Boo trims only near-zero margins, with no excerpts. Existing 277 recipe records
+and encoded cue bytes are unchanged. The final recipe SHA-256 is
+`feb6c51c068f8b111d12f76599b88b33dd6731868adf173d2094265d5cef84d5`.
+
+The native builder produces 14,563,328 bytes, SHA-256
+`20af0a00107eec23d870da7848f7553826c61f364ca85a3f163aa2075942b428`.
+Full-pack verification finds all 290 changed cues nonzero, unchanged original
+flags and unmapped bytes, maximum decoded peak 26,898 and zero rail samples.
+The eight Python parser checks still pass. The actual native provider prepares
+and verifies all three updated overlays; evidence is
+`analysis/audio-investigation-20261014/{build-pack-v2.log,pack-verification-v2.json,provider-v2-prepare.log}`.
+Only catalog data/curation changed; the compiled executable remains `9ae81b2a`.
+The updated catalog is staged beside it. The ten earlier audition examples
+remain byte-identical; their 23-second reel still represents those current edits.
+No additional game/netplay campaign was repeated for these bounded data edits.
+
+## Extended FuniDub voice coverage (2026-10-15)
+
+The current source-only recipe replaces 386/389 selected candidates: 159 ordinary
+combat, 108 introductions, 54 battle wins, 17 tournament wins, two additional SPU
+attack calls and 46 script-associated XA channels. Two tiny Kid Buu menu slots
+retain originals; FINISH17 also retains its original because state 171 switches
+to DEMOXA53 after 11 normal interpreter ticks. The nominal 22 VBlanks/~0.367 s
+interval does not establish usable PCM time across asynchronous CD commands.
+Seven unreferenced XA channels, shared/looping effects and unclassified audio
+remain original. Explicit generic/form/context substitutions are in the recipe.
+
+Independent Sol 6.1 discovery/review checked caller/pitch/table identities, all
+source extents, intact added performances and age/form/context notes. The tracked
+XA inventory reproduces 18 script tables, 54 stream identities and 29 DEMOXA event
+associations directly from the disc. Offline local ASR supplies ignored research
+hypotheses only, never shipped transcripts or synthesized speech.
+
+Native codec tests and a real XA pilot pass. The pilot preserves 4,945 other
+sectors and 143 selected-sector controls/reserved tails, agrees byte-for-byte
+with FFmpeg and rejects wrong coding, oversized window, invalid insertion and
+duplicate-channel recipes. Four complete original XA streams at both rates
+match FFmpeg PCM. The updated builder reproduces the prior 290-cue pack exactly.
+The final 386-cue pack is 72,184,832 bytes, SHA-256
+`56be7a893f913efb193d4de694fec76af11c28df36bbd736418d3fa1a23eaa76`;
+recipe SHA-256 is
+`3d4f3a3a6018fe00a3bbc414281d2cb7b57e58001914fa981cd19ddd9c855acf`.
+Full-pack verification finds every replacement changed/nonzero, unchanged
+unmapped bytes and SPU flags, preserved XA controls/reserved bytes/EDC convention,
+maximum decoded peak 26,898 and zero PCM rail samples. The native provider resolves
+all eight overlays: cold preparation 10,281 ms; source-verified reuse 1,578 ms. These are
+preparation measurements, not game loading improvements.
+
+The README CLI two-job Windows release rebuild and 357-file native toolchain
+stage pass; executable SHA-256 is
+`6a97f23fcf0c27992c773936739199b8e32342ef35849a332f9f5ff4c054f1bf`.
+The first bounded drive did not reach an attack cue before its deadline; it
+closed without claiming XA coverage. The corrected muted natural-demo run
+reaches a changed DEMOXA01 sector at LBA 23,890/channel 9/frame 6,622 and verifies all
+2,048 inspected user bytes against the actual prepared pack, differing from the
+stock disc (prefix SHA-256
+`5cfc8c5692c25c377d1b208957f4c2cf5d7833044a1a5940c5989f5c002c4a4e`).
+Native XA delivery events occur concurrently (file 1/channel 5), and the CD input
+audio tap is active. This proves the raw-overlay read/delivery path, not an
+audible semantic judgment or that the inspected interleaved channel was the
+selected decoder channel. Save/load generations 1/2 complete with `last_ok=1` in
+scope `77811b58ffba9ea7a8bb112a60d7855831c87f0f5c9640e231cc500ee2d67b0f`;
+frames resume through 6,734 and the native report exits normally via TCP at 6,755,
+with zero unsupported instructions, zero segment misses and no degraded compile.
+The run uses the existing 30-second diagnostic watchdog allowance and generates
+an automatic freeze diagnostic at frame 4,824; it does not close the separately
+tracked stall issue or qualify default-watchdog performance. Demo GAME OVER
+screens are not manual win/progression evidence.
+
+Local evidence is under ignored `build-audio-review/extended/`. The 23-second
+original/replacement comparison reel is open paused in VLC; owner listening is
+pending. XA window classification, subtle synchronization and complete-game
+coverage are not established by these byte checks. No broad netplay campaign or
+HLE/loading work was repeated. Game processes exit; owner settings/mod selection
+are restored, and the preexisting game.toml preference remains unstaged. No media,
+transcripts, packs, saves or generated code are included in Git.
+
+The final bounded shared-bank audit regenerates three tables and verifies 22
+finite local WAV/ASR records. No confirmed omitted spoken announcer/menu cue
+emerges; common combat waves 13/14 remain ambiguous vocal/effect candidates and
+are preserved. The resident instrument bank's loops, varying pitches and music
+callers support preserving it. Negative ASR does not prove speech absence;
+menu instrument 3's reference decode does not establish native pitch. Receipt:
+`build-audio-review/local-asr/shared-audit/scope-audit.json`, SHA-256
+`c554f7d69578192e2dee0ff925d2afe561b160a7626b6340c13edacb843cf70f`.
+
+### Owner feedback refinements, 2026-10-15
+
+The owner accepts the in-game combat grunts/effects. Sound-test 000/001 and
+002/003 repeated because distinct CHARSEL slots reused the same donors, not
+because the original selector aliases them. The updated recipe changes only
+five intros: Goku variants 0/1 use US2 49180/49187; Pan variant 0 uses 55174 while
+variant 1 retains 55175; Piccolo variants 1/6 use 51187/51183. Piccolo variant 1
+now has 2.249 seconds of speech against the original 2.313, replacing 1.155.
+Variant 6 improves to 3.159 against 5.509; its remaining mouth-animation gap is
+explicit. All are intact performances, without word cuts or time stretching.
+New donor wording is an offline-ASR hypothesis awaiting listening/context review.
+
+Native preparation and full verification pass for the 72,184,832-byte pack,
+SHA-256 `1cc22741f158c096bac7173bbbc4cfeae9dafee829de8044d4879143473330f1`.
+All 381 other cue records and all pack bytes outside the five intro extents
+remain identical. SPU flags, three retained-original gaps and XA data are
+unchanged; no PCM rail samples occur. Independent Sol 6.1 review verifies the
+source hashes, exact integer fits and form/context qualifications. Evidence:
+`build-audio-review/menu-refine/` and the local source-discovery reports.
+The actual launcher media provider also prepares/verifies all eight overlays
+for the new recipe, fingerprint
+`5b68cbfb8d2bb4ede09ae5ee3b96a844dfe23092fecf9ce1265852f6b33efe19`.
+
+The red-sky/teal-floor KO/result rectangle is a separate title-side widescreen
+bug: stage 5 disables its panorama and the old fixed-address gradient recognizer
+misses the pair after pause/result packets shift it in the buffer. The existing
+archived `city-21-9` GAME OVER capture reproduces the report. No shared engine
+change or dependency bump is needed. Exact submitted-pair recognition passes an
+independent native fixture against eleven archived RAM images/thirty pairs,
+including malformed and stale-list rejection and 4:3 identity.
+
+Native Windows CLI rebuild and overlay-toolchain staging pass with two jobs.
+The final 9.25-second muted hidden-presenter replay loads the affected result save
+with completion receipts and captures 16:9/21:9/4:3. Sky/floor fill the wide frame;
+4:3 returns to mode zero. At 21:9 there are 344 background hits, zero rejected,
+stale or mismatched background tags. Normal TCP exit is frame 556, zero
+unsupported instructions or degraded compilation. Executable SHA-256:
+`8ae9ac2740782413ab153d11f4fcc179797c80579b5ae1510f757ce585b1cef4`.
+Evidence: `build-audio-review/effects-stage5/`. The rendering replay disables
+FuniDub to use the ordinary original-audio save and restores owner settings/mod
+selection byte-for-byte. It is result-rendering evidence, not manual progression
+or revised-intro listening acceptance. Broader rendering qualification and the
+earlier rare overlap remain open. Loading work stays parked.
+
+### FuniDub startup-cache correction, 2026-10-15
+
+The owner reported long repeated audio preparation. The pack was already cached,
+but Windows' deliberately unqualified file identities forced a miss in the fast
+probe, and the warm provider revalidated all source payloads on every commit.
+That repeatedly read the owner's BT3 ISO over SMB. The provider now identifies
+the cache using only local recipe/manifest data, verifies its receipt plus exact
+pack size/SHA-256, and reuses it without opening/resolving source images. Missing,
+corrupt or outdated packs retain the original fully verified build/repair path.
+Changing an ISO selection does not claim to validate that new source when the
+existing fixed pack is reused. No audio bytes, recipes, overlays, content
+fingerprints, framework/UI pins or Windows identity guarantees change.
+
+The actual pinned package-manager/provider helper measures 6.093 seconds before
+and 1.109 seconds afterward for warm preparation plus eight-overlay resolution;
+the new cache probe plus resolution takes 0.688 seconds. All yield the unchanged
+FuniDub fingerprint
+`5b68cbfb8d2bb4ede09ae5ee3b96a844dfe23092fecf9ce1265852f6b33efe19`.
+This is a local sample, not a general end-to-end launch-time guarantee.
+
+The native provider regression covers initial preparation, warm probe/preparation
+with both sources removed and no builder/disc-resolver call, same-size corruption
+with restored write time, failed offline repair, successful repair and recipe
+invalidation. The portable `check_audio` target passes it and the existing codec
+checks. Independent Sol 6.1 review finds no blocker. The two-job CLI release
+rebuild and toolchain staging also pass.
+
+A muted hidden-presenter startup temporarily points the persisted BT3 selection
+at an absent local ISO. It still reaches frame 302, with the actual provider
+reporting 210,568 microseconds, then exits normally via TCP at frame 303 with
+zero unsupported instructions/degraded compilation. Owner settings and source
+selection are restored byte-for-byte. Executable SHA-256:
+`c72851e25d0a13574ff07fac610aaa41b3bda987bc295777812161a8b1ea0bc7`.
+Evidence is under ignored `build-audio-review/cache-startup/`. This is startup
+cache validation, not another combat/audio audition or a loading-HLE campaign.
+
+The pinned Windows framework still cannot issue metadata-only readiness tickets,
+so normal disc/resource/overlay verification can queue a brief preparation panel
+on automatic preparation, Play and runtime handoff. This fix removes repeated
+source-media verification; it does not claim to eliminate that panel entirely.

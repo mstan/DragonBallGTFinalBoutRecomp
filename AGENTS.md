@@ -12,6 +12,25 @@ Work solo unless the owner authorizes subagents for the current task. For the
 initial setup, the owner explicitly requested GPT-6.1 Sol workers with
 adversarial review. This does not authorize delegation on future tasks.
 
+For the resumed 2026-10-14 task, the owner freshly authorized Sol 6.1 workers
+with adversarial review. Keep QA proportionate: short automated smoke and
+targeted regression checks, followed by the owner's quick high-level visual
+and audio review. Do not run exhaustive roster/stage/rendering campaigns when
+a quick human check is sufficient; expand only for concrete defects.
+
+The owner's latest goal authorizes completing FuniDub from the supplied BT3 ISO,
+including the local pack and launcher workflow after original cue discovery and
+curated donor matching. Fresh Sol 6.1 subagents are authorized for bounded
+parallel discovery, with adversarial review. The owner accepted the initial donor
+reel in VLC. Original SPU tables/pitch and donor event categories are now traced;
+386 selected voice candidates have a reproducible replacement recipe spanning
+ordinary SPU, tournament wins and 46 XA attack channels. Three timing/fit gaps
+retain originals. Native preparation/launcher and representative combat/save-load
+checks pass; owner listening and unclassified audio remain open. Read `docs/FUNIDUB.md` and the
+original/donor table reports; `docs/AUDIO_INVESTIGATION.md` is historical.
+Loading work stays parked. Defer high-level listening to a short owner review
+when available; sample approval is not full replacement coverage approval.
+
 ## Source and dependency rules
 
 - Target the supplied USA disc, `SLUS-00493`. Identity is in

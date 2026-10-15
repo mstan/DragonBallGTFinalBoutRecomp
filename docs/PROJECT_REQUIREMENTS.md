@@ -4,6 +4,12 @@ This is the acceptance contract for Final Bout's requested features. Progress
 and dependencies belong in central Beads under `beads-6058`; this document is
 not a second issue tracker.
 
+Owner clarification, 2026-10-14: use rudimentary automated checks and targeted
+regressions, then defer high-level visual/audio acceptance to a quick human
+check. The requirements below describe the intended behavior, not a demand
+for an exhaustive automated QA campaign. Investigate demonstrated defects;
+record untested scope without repeatedly retesting accepted shared systems.
+
 | Work | Owning issue | Required evidence |
 | --- | --- | --- |
 | Initial project | `beads-jsz8` | Real disc identity, pinned dependencies, safe asset ignores, reproducible setup and honest validation record |
@@ -15,12 +21,18 @@ not a second issue tracker.
 | Original dialogue extraction | `beads-bqsp` | Complete cue inventory, reproducible local extraction, trigger and speaker mapping |
 | Recorded-clip replacement | `beads-vbfi` | Owner-reviewed matching, source/edit provenance, reversible pack, audio and netplay validation |
 
-The last two phases are ordered after all core features: extraction first,
-replacement last. The owner supplied a BT3 USA PS2 ISO on 2026-10-13 and
-reaffirmed core validation first. The optional final feature is **FuniDub**:
+Current owner scope (2026-10-15): complete FuniDub after the visible widescreen
+review, using existing BT3 recordings and documented generic substitutions.
+Original tables/pitch and donor categories now support a first partial pack;
+see [FuniDub](FUNIDUB.md) for coverage and validation limits.
+Loading HLE/precaching is deferred because
+loading is acceptable; completing that enhancement does not gate audio work.
+The owner supplied a BT3 USA PS2 ISO on 2026-10-13. The optional final feature is **FuniDub**:
 the launcher prepares a local replacement pack automatically from that ISO
 using a reviewed mapping. See [the launcher contract](VOICE_REPLACEMENT.md#funidub-launcher-contract)
-and [metadata/source audit](FUNIDUB_RESEARCH.md). Audio extraction remains deferred.
+and [metadata/source audit](FUNIDUB_RESEARCH.md). The initial decode evidence is
+retained in [the investigation](AUDIO_INVESTIGATION.md). Generic suitable introductions/grunts may
+be approved substitutions; preserve cue identity, source/edit provenance and gaps.
 
 ## Resolution and adaptive view
 

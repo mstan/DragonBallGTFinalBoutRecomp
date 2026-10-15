@@ -5,12 +5,17 @@ authorized Sol 6.1 subagents with adversarial review for this task. The record
 below describes the original checkpoint. Current evidence is appended to
 `validation/README.md` and `docs/WIDESCREEN.md`; the port remains incomplete.
 
-Latest owner scope: audio-replacement investigation has begun. The first pass
-verifies original and BT3 source formats and decodes nine local examples, including
-the donor's separate short Sony-bank path. Cue/speaker/trigger mapping, original
-SPU pitch, curated edits and reinjection remain open. Read
-`docs/AUDIO_INVESTIGATION.md` and run `tools/audio/probe_sources.py` for the recorded
-source/decode evidence. No replacement pack or launcher change was installed.
+Latest owner scope: complete FuniDub from the BT3 USA source. Source tables,
+original SPU pitch and donor categories now support 277 selected SPU replacements,
+with explicit original-audio gaps. The native pack builder and launcher workflow
+work locally; a qualified muted combat/save-load run verifies samples in SPU RAM.
+Default-watchdog stalls also reproduce with FuniDub off and remain under issue
+#7. Matching-pack startup and differing-selection rejection pass a brief two-peer
+gate. Listening and broader cue coverage remain open. Read
+`docs/FUNIDUB.md` and the original/donor table reports for current evidence.
+Current pins are framework `c91331ff` and recomp-ui `1fa1f24`; the final native
+build passes, including separate FuniDub save slots and ordinary-slot return
+when disabled. The converted 23-second review reel is open paused in VLC.
 Loading work remains parked. Earlier scope updates below are chronological.
 
 Current owner scope (2026-10-14): park audio replacement investigation and

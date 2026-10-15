@@ -24,9 +24,11 @@ extraction is the penultimate phase; an optional Funimation-cast voice pack
 assembled from existing recordings is the final phase. No generated or cloned
 voices are part of the plan.
 
-Current owner scope (2026-10-14): investigate audio replacement, starting with
-original cue inventory and BT3 donor formats. Nine local examples now decode;
-no replacement pack or launcher workflow is implemented. HLE/precaching stays
+Current owner scope (2026-10-15): complete the optional FuniDub workflow from
+the supplied BT3 ISO. The first local recipe replaces 277 selected combat,
+introduction and victory cues; some spoken and cinematic attack cues retain
+original audio. Local preparation and a representative combat/save-load route
+pass; listening review and broader cue coverage remain open. HLE/precaching stays
 parked because loading is acceptable. The remaining rare background overlap is
 tracked separately. See [audio investigation](docs/AUDIO_INVESTIGATION.md).
 

@@ -18,22 +18,16 @@ targeted regression checks, followed by the owner's quick high-level visual
 and audio review. Do not run exhaustive roster/stage/rendering campaigns when
 a quick human check is sufficient; expand only for concrete defects.
 
-The owner then parked audio replacement investigation and HLE/precaching.
-Do not resume either without a new request. The active work is the demonstrated
-widescreen backdrop defect, a targeted smoke and quick human visual review.
-The latest owner priority is: fix moving-camera background flicker now, original
-audio extraction/inventory next, recorded voice replacement later. Loading work
-stays deferred. Update this order without starting voice work during the
-background fix. Suitable generic BT3 introductions and combat grunts may be
-mapped later with explicit substitution provenance rather than literal matches.
-
-The owner's latest request resumes audio-replacement investigation. Investigate
-the original cue inventory and donor formats first; the recorded-clip pack and
-launcher implementation remain later. Nine local research examples now decode;
-speaker/event mapping and original SPU pitch remain unqualified. Read
-`docs/AUDIO_INVESTIGATION.md` before continuing. Loading work stays parked.
-Work solo for this audio task; the earlier worker authorization was for the
-background work. Defer high-level listening to a short owner review when available.
+The owner's latest goal authorizes completing FuniDub from the supplied BT3 ISO,
+including the local pack and launcher workflow after original cue discovery and
+curated donor matching. Fresh Sol 6.1 subagents are authorized for bounded
+parallel discovery, with adversarial review. The owner accepted the initial donor
+reel in VLC. Original SPU tables/pitch and donor event categories are now traced;
+277 selected SPU candidates have a reproducible local replacement recipe. In-game
+audition and launcher qualification remain open. Read `docs/FUNIDUB.md` and the
+original/donor table reports; `docs/AUDIO_INVESTIGATION.md` is historical.
+Loading work stays parked. Defer high-level listening to a short owner review
+when available; sample approval is not full replacement coverage approval.
 
 ## Source and dependency rules
 

@@ -718,3 +718,125 @@ cue inventory, actor/event matching and reinjection remain open. No runtime,
 launcher, netplay or game-configuration changes were made. Evidence/media remain
 ignored under `analysis/audio-investigation-20261014/`; the source procedure,
 hashes and limitations are described in [the audio report](../docs/AUDIO_INVESTIGATION.md).
+
+## FuniDub native preparation and first game integration (2026-10-15)
+
+Framework `fd6b89cc` and recomp-ui `1fa1f24` are exact detached dependency pins.
+Their generic support is in ready upstream PRs
+[psxrecomp #667](https://github.com/RetroPortingToolKit/psxrecomp/pull/667) and
+[recomp-ui #100](https://github.com/RetroPortingToolKit/recomp-ui/pull/100).
+Native Windows Clang generation/rebuild passes through the README CLI, two jobs,
+including the full frontend and staged overlay toolchain. Executable SHA-256:
+`178e622f278d310520b85e8eecaf9e0a96e18f8c78b9f9cf2990f3a2e04a7b08`.
+
+Native codec bounds/timing/reproducibility tests pass; four real ADX outputs match
+FFmpeg 7.1 at their declared lengths. The first pack replaces 277 selected SPU
+candidates, is 14,563,328 bytes, and hashes to
+`ae0d041f62b6dee7f6f084a60b0d9566a9c34e7f71f67e2ee9087a99ac0d1715`.
+All 277 changed cues are nonzero; original flag bytes and every unmapped byte
+remain unchanged. No converted cue has PCM rail samples. Sol 6.1 independent
+checks cover all target extents, raw-body boundaries, donor identities and
+sample-fit bounds. Era/form substitutions and shared attack/charge aliases are
+explicit in the source-only recipe. This is not complete voice coverage.
+
+The actual media provider resolves three verified immutable overlays. Cancel at
+roughly 30% publishes no derived binding. A changed recipe identity rebuilds;
+malformed receipts and corrupted pack bytes repair to the same expected output
+hash. Unsupported recipe versions fail while preserving the previous pack.
+The final qualified receipt probe hits. The Windows deep-path failure found in
+the first provider attempt is fixed by hashing the complete cache identity into
+one directory component. Cached-file validation exceptions now cause repair.
+
+The real hidden launcher shows progress and Cancel, closes safely during cold
+preparation, then completes preparation and displays FuniDub with its ISO picker.
+`build-audio-review/launcher-first`, `launcher-prepared` and `game-smoke/mods.png`
+retain composed frontend evidence. Personal mod/settings files are restored
+byte-for-byte by each harness; all media and captures remain ignored.
+
+Two default-watchdog attempts abort: FuniDub-on at frame 13,445 during combat
+loading, and FuniDub-off at frame 4,651 during the title/demo route. Both report
+zero unsupported instructions. Independent reinspection confirms all 277 sample
+writes stay inside uncompressed SPU resources, with no compressed/XA overlap.
+These observations extend the existing qualified stall report (`beads-eio.3.347`,
+GitHub #7); no compiler cause or FuniDub regression is established.
+
+The subsequent `build-audio-review/game-qualified` run uses
+`PSX_STARVATION_TIMEOUT_US=30000000` diagnostically, with `PSX_HOST_MUTE=1` and
+`SDL_AUDIODRIVER=dummy`. It cold-boots through the launcher, menus and selection
+to Goku/Boo combat. A live SPU-RAM capture matches 512 replacement bytes for each
+of Goku's nine and Boo's eight mapped combat waves. Save slot 1 reports generation
+1 / last_ok 1; its load reports generation 2 / last_ok 1, and subsequent frames
+and composed captures advance. Normal exit is zero. The extended watchdog is
+not a production fix or default-performance acceptance. The capture is live;
+legacy TCP pause/continue commands are removed and did not pause this run.
+
+XA attack audio, unclassified sounds and 46 spoken-fit gaps remain original.
+The earlier donor reel approval does not establish acceptance of every new edit,
+menu/victory trigger, mixed output or actor/transcript. A 19.38-second original
+XA reel is available for brief human classification, with hashes/timecodes.
+No new game-compatibility, full-roster or exhaustive netplay claim is made.
+
+### Source verification fallback and content admission
+
+The later native build pins framework `f3236362` and recomp-ui `1fa1f24`, with
+executable SHA-256
+`67fd282d0acb8b73401407c1d78a350f09b76af8f1dec90fc36c42a131349167`.
+The README rebuild route passes with two jobs and stages the native overlay
+toolchain. The initial resource-overlay change in PR #667 has landed; the
+subsequent content-identity fixes and Windows fallback are additional changes.
+
+Rapid rewrite probes found Windows file-ID/size/timestamps can remain identical
+after a same-size rewrite with restored mtime. The framework therefore declines
+cheap Windows file identity and takes its existing full-verification path;
+[PR #669](https://github.com/RetroPortingToolKit/psxrecomp/pull/669) tracks that
+correctness fix. Both worker-enabled and legacy `mod_runtime_test` pass,
+including cold-offer/direct-commit fingerprint agreement and rejection of
+same-path source changes. POSIX identities are unchanged.
+
+The updated title provider verifies every selected source payload and the fixed
+pack hash before reusing encoded bytes without qualified stamps. Its native
+checks pass: cold preparation 15,007 ms, receipt repair 3,420 ms, pack repair
+2,970 ms, unsupported-recipe rejection 393 ms, declined cheap probe 17 ms, and
+source-verified pack reuse 662 ms. All successful paths retain the expected pack
+hash. These are local preparation timings, not faster game loading. They
+supersede the earlier Windows qualified-receipt-probe observation above.
+
+The bounded muted two-peer gate in `build-audio-review/net-content` passes:
+matching FuniDub selections reach ticks 128/133 with no reported desync;
+FuniDub-on/off remains at tick zero with `content_mismatch` on both peers,
+unchanged after another second. All four processes exit zero. This checks
+content admission only, without repeating the accepted match/save-load smoke.
+Earlier harness attempts omitted the executable's bundled BIOS companion and
+spent their time budget copying the toolchain; those are not passing evidence.
+
+### Enforced save-slot isolation
+
+Adversarial review found `save_compatibility = "isolated"` was previously parsed
+without a runtime consumer. Framework `c91331ff67c8797a5c0a74332e019f143bdb0270`
+now derives normal slot filenames and all sidecars from the installed verified
+plan whenever a resolved package declares isolation. It retains the historical
+paths for ordinary plans and leaves memory cards unchanged. Changing scope
+cancels pending operations; invalid scope and truncated paths fail closed.
+This is filename isolation, not state-header rejection of manually copied files
+or explicit developer path/blob loads. Trusted title-profile construction does
+not currently add settings packages to the ordinary resolved package list;
+Final Bout has no such profile and uses the verified resource plan.
+
+Both full worker/legacy mod-runtime suites and the assert-enabled save-state
+policy fixture pass. The final README native rebuild passes with two jobs and
+stages 357 overlay-toolchain files. Executable SHA-256:
+`9ae81b2a2a772049cd690dcefa2c671120e924d23e5684bac1de80bef8296911`.
+
+`build-audio-review/state-scope` performs two short cold runs with muted output
+and the diagnostic 30-second watchdog allowance. FuniDub-on save/load reports
+generations 1/2, both `last_ok = 1`, using a filename containing the full plan
+hash. FuniDub-off cannot find an ordinary slot 1 (`last_ok = 0`), then saves it
+successfully alongside the isolated slot (`last_ok = 1`). Both exit zero, and
+personal settings/mod selections are restored byte-for-byte. These are early
+game save-path checks, not another combat or default-performance campaign.
+
+A 23.31-second converted-pack reel with ten combat/menu/victory examples is
+open paused in VLC. Exact cue order, clock ratios, pack offsets and hashes are
+retained under ignored `build-audio-review/final-reel`. It applies no extra
+edits beyond the recipe. Owner review of this reel remains pending; prior donor
+sample approval is not recorded as acceptance of the converted pack.

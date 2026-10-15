@@ -1,0 +1,72 @@
+format_version = 10
+id = "finalbout.audio.funidub"
+version = "0.1.0"
+name = "FuniDub"
+author = "mstan"
+description = "Prepare English BT3 voice recordings locally from your own USA ISO."
+resolver = "declarative"
+prepare = "finalbout.funidub.prepare"
+save_compatibility = "isolated"
+
+[[target]]
+game_id = "SLUS-00493"
+disc_sha256 = "2f9d475fa089bed3f77a3344ea23af0663b30ffe9a2bc0b803bcae389480a15b"
+
+[[feature]]
+id = "funidub"
+name = "FuniDub"
+description = "Replace 277 combat, intro and victory cues with BT3 English recordings. Unmapped cues retain original audio. Uses separate save states; disabling restores original audio."
+group = "Audio"
+channel = "experimental"
+default_enabled = false
+
+[[resource]]
+feature = "funidub"
+id = "bt3"
+label = "BT3 USA ISO"
+description = "Choose your USA Budokai Tenkaichi 3 ISO. Preparation happens locally; your ISO is left unchanged."
+file_patterns = "*.iso"
+file_description = "PlayStation 2 ISO"
+input_only = true
+shared_source = "finalbout.funidub.bt3"
+required = true
+
+[[resource]]
+feature = "funidub"
+id = "pack"
+label = "Prepared voice pack"
+format = "file"
+hidden = true
+required = true
+size = 14563328
+sha256 = "ae0d041f62b6dee7f6f084a60b0d9566a9c34e7f71f67e2ee9087a99ac0d1715"
+
+[[overlay]]
+feature = "funidub"
+target = "disc_user"
+offset = 37713920
+resource = "pack"
+resource_offset = 0
+size = 9142272
+sha256 = "6d9374e09d3a78488e37d0fe661c7cc8d6623badfdbf375c5235650593523f85"
+expected_sha256 = "7b254f3c843674556ac97170fa64cf3773592ae014f4d68adc5811d848471599"
+
+[[overlay]]
+feature = "funidub"
+target = "disc_user"
+offset = 30679040
+resource = "pack"
+resource_offset = 9142272
+size = 3469312
+sha256 = "bc673b23c0e1b61d7a62403fb8b13e1d6092fc0765c8981552a985bf1f6024f2"
+expected_sha256 = "265f1b4e1a3d7694b38e089d3d9d77b8ccfe9c0c5e900d63ba348a06b6a4172d"
+
+[[overlay]]
+feature = "funidub"
+target = "disc_user"
+offset = 46858240
+resource = "pack"
+resource_offset = 12611584
+size = 1951744
+sha256 = "6890028becd180ba309a453a24fc17bfa0ccea05defd1b324ed93019d37a68f8"
+expected_sha256 = "aa33756a1220f65f5dda89705244e84cce968bb6c753b36fc1df41c02d7ffa0a"

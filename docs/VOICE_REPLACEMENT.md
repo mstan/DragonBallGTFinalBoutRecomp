@@ -5,7 +5,9 @@ investigation on 2026-10-14 after the visible widescreen review. Original cue
 inventory (`beads-bqsp`) precedes curated donor mapping and recorded-clip
 replacement (`beads-vbfi`). Loading enhancements remain parked. The first local
 extraction/decode results and their limits are in [the investigation](AUDIO_INVESTIGATION.md);
-no replacement pack or launcher implementation exists yet.
+the original investigation is retained as historical evidence. The native
+builder now produces a verified local pack from a source-only recipe. Launcher
+integration is being qualified; see [FuniDub](FUNIDUB.md) for current coverage.
 
 The requested direction is a Funimation-cast performance assembled from existing
 recordings, for example Sean Schemmel and Chris Sabat. No voice cloning,
@@ -83,7 +85,7 @@ Owner direction, 2026-10-13: the optional feature is named **FuniDub**. Once
 the base game is set up, the user chooses their supported Budokai Tenkaichi 3
 ISO and the launcher performs extraction, conversion and mapping locally.
 The owner reaffirmed core gameplay validation before audio implementation.
-This section specifies future behavior; no launcher feature exists yet.
+The native implementation follows this flow; UI/game validation remains open.
 
 1. Select **FuniDub** and choose the BT3 ISO. Validate supported release and
    content fingerprints before starting; a filename or serial alone is

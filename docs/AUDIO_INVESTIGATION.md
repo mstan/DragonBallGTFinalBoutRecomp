@@ -1,5 +1,9 @@
 # FuniDub source investigation — 2026-10-14
 
+This report preserves the first investigation. The subsequent verified tables
+are [original cues](VOICE_ORIGINAL_TABLES.md) and [BT3 donor events](VOICE_DONOR_TABLES.md).
+The current implementation and its coverage limits are in [FuniDub](FUNIDUB.md).
+
 The owner resumed audio-replacement investigation after the visible widescreen
 review. This first pass verifies storage formats, local extraction and available
 engine primitives. It does not install replacements or implement the launcher.

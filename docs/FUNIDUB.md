@@ -13,6 +13,13 @@ original recordings. It uses separate save slots because samples enter guest
 SPU memory. Disabling it returns to ordinary slots; memory cards remain shared.
 There is no automatic save-state import between these slots.
 
+The ISO is needed for the initial import or a rebuild after a recipe update or
+cache failure. Once prepared, launches verify the local pack and reuse it even
+when the saved ISO path is offline. Keep that source selection saved; clearing
+it still requires selecting an ISO again. Ordinary game/content verification
+may briefly show preparation progress on Windows; it does not extract the voices
+again.
+
 ## Coverage
 
 The recipe replaces **386 of 389 selected voice candidates**:
@@ -109,19 +116,24 @@ pack, native XA deliveries occur, and save/load followed by resumed frames
 succeeds. It exits normally with zero unsupported instructions or segment
 misses. The diagnostic watchdog allowance and a generated freeze diagnostic
 remain qualification limits; this is not a stall fix. Detailed evidence is in
-`validation/README.md`. These runtime checks precede the five menu refinements;
-the current pack has not yet had a runtime check. Owner acceptance of the
-combat audio does not establish acceptance of every mapping.
+`validation/README.md`. Those combat checks precede the five menu refinements;
+the revised pack also passes a short startup check with its ISO path unavailable.
+Owner acceptance of the combat audio does not establish acceptance of every mapping.
 
 The framework installs eight immutable resource-backed overlays after checking
 the exact disc identity and stock ranges. Prepared bytes participate in the
 normal content fingerprint. No runtime voice hook, host-only playback or donor
 path enters gameplay. Online use requires verified content-plan negotiation.
 
-Windows timestamp-only identities are deliberately unqualified after rapid
-rewrite collisions were reproduced. Cached preparation verifies the pack and
-all selected source payloads there. This is preparation caching, not faster
-game CD loading; HLE/precaching remains parked.
+Windows timestamp-only identities remain unqualified after rapid rewrite
+collisions were reproduced. Warm imports instead verify the receipt's builder,
+recipe and expected-pack identity, then the local pack's full size and SHA-256.
+They do not reopen either source image. Cold builds and cache repairs retain
+all source-hash checks; normal resource/overlay/content verification is unchanged.
+The measured package preparation/resolution check falls from 6.093 to 1.109
+seconds on this host, with the same content fingerprint. A native offline-ISO
+startup spends 0.211 seconds in the FuniDub provider. These are import/startup
+measurements; game CD HLE/precaching remains parked.
 
 ## Reproduction
 

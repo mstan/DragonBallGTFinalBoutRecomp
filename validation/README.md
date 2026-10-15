@@ -983,3 +983,44 @@ FuniDub to use the ordinary original-audio save and restores owner settings/mod
 selection byte-for-byte. It is result-rendering evidence, not manual progression
 or revised-intro listening acceptance. Broader rendering qualification and the
 earlier rare overlap remain open. Loading work stays parked.
+
+### FuniDub startup-cache correction, 2026-10-15
+
+The owner reported long repeated audio preparation. The pack was already cached,
+but Windows' deliberately unqualified file identities forced a miss in the fast
+probe, and the warm provider revalidated all source payloads on every commit.
+That repeatedly read the owner's BT3 ISO over SMB. The provider now identifies
+the cache using only local recipe/manifest data, verifies its receipt plus exact
+pack size/SHA-256, and reuses it without opening/resolving source images. Missing,
+corrupt or outdated packs retain the original fully verified build/repair path.
+Changing an ISO selection does not claim to validate that new source when the
+existing fixed pack is reused. No audio bytes, recipes, overlays, content
+fingerprints, framework/UI pins or Windows identity guarantees change.
+
+The actual pinned package-manager/provider helper measures 6.093 seconds before
+and 1.109 seconds afterward for warm preparation plus eight-overlay resolution;
+the new cache probe plus resolution takes 0.688 seconds. All yield the unchanged
+FuniDub fingerprint
+`5b68cbfb8d2bb4ede09ae5ee3b96a844dfe23092fecf9ce1265852f6b33efe19`.
+This is a local sample, not a general end-to-end launch-time guarantee.
+
+The native provider regression covers initial preparation, warm probe/preparation
+with both sources removed and no builder/disc-resolver call, same-size corruption
+with restored write time, failed offline repair, successful repair and recipe
+invalidation. The portable `check_audio` target passes it and the existing codec
+checks. Independent Sol 6.1 review finds no blocker. The two-job CLI release
+rebuild and toolchain staging also pass.
+
+A muted hidden-presenter startup temporarily points the persisted BT3 selection
+at an absent local ISO. It still reaches frame 302, with the actual provider
+reporting 210,568 microseconds, then exits normally via TCP at frame 303 with
+zero unsupported instructions/degraded compilation. Owner settings and source
+selection are restored byte-for-byte. Executable SHA-256:
+`c72851e25d0a13574ff07fac610aaa41b3bda987bc295777812161a8b1ea0bc7`.
+Evidence is under ignored `build-audio-review/cache-startup/`. This is startup
+cache validation, not another combat/audio audition or a loading-HLE campaign.
+
+The pinned Windows framework still cannot issue metadata-only readiness tickets,
+so normal disc/resource/overlay verification can queue a brief preparation panel
+on automatic preparation, Play and runtime handoff. This fix removes repeated
+source-media verification; it does not claim to eliminate that panel entirely.

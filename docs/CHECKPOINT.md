@@ -12,6 +12,11 @@ with guarded standalone-gradient recognition and a short composed-capture replay
 Read the latest entries in `docs/FUNIDUB.md`, `docs/WIDESCREEN.md` and validation.
 Loading work remains parked.
 
+The later startup-cache feedback is repaired: warm FuniDub imports verify/reuse
+the local pack without reopening the BT3 ISO. A short muted native startup with
+the remembered ISO path unavailable passes. Normal game/content checks remain;
+see `docs/FUNIDUB.md` for measured preparation times and cache behavior.
+
 Latest owner scope: complete FuniDub from the BT3 USA source. Source tables,
 original pitch and donor categories now support 386 selected SPU/XA replacements,
 including tournament wins. Three selected timing/fit gaps retain originals.

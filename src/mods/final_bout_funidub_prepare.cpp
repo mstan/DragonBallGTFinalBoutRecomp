@@ -47,10 +47,6 @@ struct Inputs {
 Inputs inputs(const ModPrepareContext& ctx) {
     Inputs result;
     if(ctx.feature_id!="funidub")throw std::runtime_error("Unsupported FuniDub selection");
-    const auto selected=ctx.inputs.find("bt3");
-    if(selected==ctx.inputs.end() || selected->second.empty())throw std::runtime_error("Select your BT3 USA ISO to prepare FuniDub");
-    result.donor=selected->second;
-    result.target=resolve_disc_path(ctx.disc_path).data;
     result.recipe=ctx.package.root/"recipe.toml";
     result.recipe_hash=hash_file(result.recipe);
     const auto resource=std::find_if(ctx.package.resources.begin(),ctx.package.resources.end(),[&](const auto& r){
@@ -65,25 +61,30 @@ Inputs inputs(const ModPrepareContext& ctx) {
     psx_sha256_ctx key;psx_sha256_init(&key);psx_sha256_update(&key,reinterpret_cast<const uint8_t*>(identity.data()),identity.size());
     const auto directory=ctx.cache_root/"finalbout-funidub"/finish_hash(key);
     result.pack=directory/"voices.pack";result.receipt=directory/"receipt.toml";
-    result.qualified_stamps=host_file_identity(result.target,result.target_stamp) &&
-                            host_file_identity(result.donor,result.donor_stamp);
     return result;
 }
-bool receipt_matches(const Inputs& in,bool stamps_required) {
+void source_inputs(const ModPrepareContext& ctx,Inputs& in) {
+    const auto selected=ctx.inputs.find("bt3");
+    if(selected==ctx.inputs.end() || selected->second.empty())
+        throw std::runtime_error("Select your BT3 USA ISO to prepare FuniDub");
+    in.donor=selected->second;
+    in.target=resolve_disc_path(ctx.disc_path).data;
+    in.qualified_stamps=host_file_identity(in.target,in.target_stamp) &&
+                        host_file_identity(in.donor,in.donor_stamp);
+}
+bool cache_matches(const Inputs& in) {
     try {
-    if(stamps_required && !in.qualified_stamps)return false;
     std::error_code error;
     if(fs::file_size(in.receipt,error)>32768 || error)return false;
     std::ifstream stream(in.receipt,std::ios::binary);if(!stream)return false;
     const auto receipt=toml::parse(stream,"FuniDub receipt");
-    std::string stamp;
     if(toml::find<std::string>(receipt,"builder")!=builder_version ||
        toml::find<std::string>(receipt,"recipe")!=in.recipe_hash ||
        toml::find<std::string>(receipt,"pack_sha256")!=in.pack_hash)return false;
-    if(!in.qualified_stamps)return !stamps_required;
-    return toml::find<std::string>(receipt,"target")==in.target_stamp &&
-           toml::find<std::string>(receipt,"donor")==in.donor_stamp &&
-           host_file_identity(in.pack,stamp) && stamp==toml::find<std::string>(receipt,"pack");
+    // A prepared pack is self-contained. Its exact manifest hash, not the
+    // source ISO's location or timestamps, determines what will be installed.
+    // Verify the local bytes even on hosts without a qualified file identity.
+    return fs::file_size(in.pack)==in.pack_size && hash_file(in.pack)==in.pack_hash;
     }catch(const std::exception&){return false;}
 }
 void publish(const fs::path& temporary,const fs::path& destination) {
@@ -114,28 +115,20 @@ fs::path temporary_path(const fs::path& destination) {
 bool probe(const ModPrepareContext& ctx,std::map<std::string,fs::path>& output,std::string& reason) {
     try {
         const auto in=inputs(ctx);
-        if(!receipt_matches(in,true))return false;
+        if(!cache_matches(in))return false;
         output["pack"]=in.pack;return true;
     }catch(const std::exception& error){reason=error.what();return false;}
 }
 bool prepare(const ModPrepareContext& ctx,std::map<std::string,fs::path>& output,std::string& reason) {
     try {
-        report(ctx,0,"Checking FuniDub sources");const auto in=inputs(ctx);
-        bool cached=false;
-        if(receipt_matches(in,false)) {
-            try {cached=fs::file_size(in.pack)==in.pack_size && hash_file(in.pack)==in.pack_hash;}
-            catch(const std::exception&) {} // Stale/unreadable cache: rebuild from the verified sources.
+        report(ctx,0,"Checking prepared FuniDub");auto in=inputs(ctx);
+        if(cache_matches(in)) {
+            report(ctx,1,"Using cached FuniDub");output["pack"]=in.pack;return true;
         }
-        if(cached) {
-            if(!in.qualified_stamps) {
-                report(ctx,0.05f,"Verifying cached FuniDub sources");
-                const auto verified_recipe=finalbout::funidub::validate_sources(in.target,in.donor,in.recipe,
-                    [&](float fraction,const std::string& text){return !ctx.progress || ctx.progress(fraction*0.94f,text);});
-                if(verified_recipe!=in.recipe_hash || hash_file(in.recipe)!=in.recipe_hash)
-                    throw std::runtime_error("FuniDub recipe changed; reopen the launcher");
-            }
-            report(ctx,1,"FuniDub ready");output["pack"]=in.pack;return true;
-        }
+        // Source media is needed only for the first build or cache repair.
+        // Keep all original source hashes/guards on that path; a warm launch
+        // must work when the already-imported BT3 ISO is offline.
+        source_inputs(ctx,in);
         const auto built=finalbout::funidub::build(in.target,in.donor,in.recipe,
             [&](float fraction,const std::string& text){return !ctx.progress || ctx.progress(fraction*0.94f,text);});
         if(built.recipe_sha256!=in.recipe_hash || built.bytes.size()!=in.pack_size)

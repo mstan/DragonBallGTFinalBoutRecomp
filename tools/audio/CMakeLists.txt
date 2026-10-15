@@ -18,7 +18,14 @@ if(BUILD_TESTING)
     add_executable(test_codecs test_codecs.cpp)
     target_link_libraries(test_codecs PRIVATE funidub_codecs)
     add_test(NAME funidub_codecs COMMAND test_codecs)
+    add_executable(test_prepare_cache test_prepare_cache.cpp
+        "${PSXRECOMP_ROOT}/runtime/src/psx_sha256.c")
+    target_include_directories(test_prepare_cache PRIVATE
+        "${PSXRECOMP_ROOT}/runtime/include"
+        "${PSXRECOMP_ROOT}/recompiler/lib/toml11")
+    add_test(NAME funidub_prepare_cache COMMAND test_prepare_cache)
     # RetComM's compact SDK ships cmake/ninja without a standalone ctest.
     add_custom_target(check_audio COMMAND $<TARGET_FILE:test_codecs>
-        DEPENDS test_codecs VERBATIM)
+        COMMAND $<TARGET_FILE:test_prepare_cache>
+        DEPENDS test_codecs test_prepare_cache VERBATIM)
 endif()

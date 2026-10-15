@@ -6,7 +6,7 @@ below describes the original checkpoint. Current evidence is appended to
 `validation/README.md` and `docs/WIDESCREEN.md`; the port remains incomplete.
 
 Latest owner scope: complete FuniDub from the BT3 USA source. Source tables,
-original SPU pitch and donor categories now support 277 selected SPU replacements,
+original SPU pitch and donor categories now support 290 selected SPU replacements,
 with explicit original-audio gaps. The native pack builder and launcher workflow
 work locally; a qualified muted combat/save-load run verifies samples in SPU RAM.
 Default-watchdog stalls also reproduce with FuniDub off and remain under issue

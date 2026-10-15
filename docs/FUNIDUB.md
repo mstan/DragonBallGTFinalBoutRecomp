@@ -28,8 +28,8 @@ coverage remain open.
 
 ## Coverage and substitutions
 
-Recipe 0.1.0 replaces **277 of 323 selected SPU candidates**: 159 combat sounds,
-81 menu introductions and 37 victory cues. Another 29 menu and 17 victory slots
+Recipe 0.1.0 replaces **290 of 323 selected SPU candidates**: 159 combat sounds,
+89 menu introductions and 42 victory cues. Another 21 menu and 12 victory slots
 keep original audio because the current intact donor candidates do not fit their
 original playback capacity. This denominator excludes other unclassified sounds.
 
@@ -38,6 +38,12 @@ Their long container durations mostly comprise trailing silence. Character 0's
 additional instrument 13, Piccolo's differently pitched instrument 7, looping
 and shared effects, movie/tournament audio and unclassified sounds remain
 original. This is partial coverage, not a complete English redub.
+
+Thirteen additions use intact shorter recordings: earlier-era Super Saiyan
+Vegeta, sword-variant Super Saiyan Trunks, full-power Frieza and five complete
+Kid Boo exertions used in menu/victory scenes. Those form/context substitutions
+are explicit candidates for listening review. The first 277 cue edits are
+unchanged.
 
 The owner permits suitable generic introductions, victory lines and grunts.
 Mappings therefore describe generic context substitutions, not literal dialogue
@@ -61,9 +67,9 @@ SPU pitch, applies recorded gain/trims/fades and preserves each original ADPCM
 flag byte and encoded extent. It pads unused playback capacity with silence.
 Intact spoken phrases never get cut to force a fit.
 
-The first output is 14,563,328 bytes, SHA-256
-`ae0d041f62b6dee7f6f084a60b0d9566a9c34e7f71f67e2ee9087a99ac0d1715`.
-Local verification found 277 nonzero changed cues, unchanged unmapped bytes,
+The current output is 14,563,328 bytes, SHA-256
+`20af0a00107eec23d870da7848f7553826c61f364ca85a3f163aa2075942b428`.
+Local verification found 290 nonzero changed cues, unchanged unmapped bytes,
 unchanged ADPCM flags and no PCM rail samples after conversion. Four real ADX
 decodes match FFmpeg 7.1 at their declared sample counts. The end-user builder
 does not require Python or FFmpeg.

@@ -27,6 +27,31 @@ FORM_NOTES = {
     15:'GT Super Saiyan ordinary short bank is silent; short cues reuse GT base Goku recordings; spoken cues may also use GT base',
 }
 
+# Bounded second pass: these 13 slots had no fitting preferred-bank candidate.
+# Alternate ADX entries retain the verified generic intro/victory event slot.
+# Kid Boo's five entries use complete same-form exertions, never speech excerpts.
+INTACT_GAP_DONORS = {
+    'charsel/c04/variant0': ('adx',3226,0),
+    'charsel/c04/variant1': ('adx',3226,0),
+    'btwinv/c04/condition0': ('adx',3226,4),
+    'charsel/c12/variant3': ('adx',3234,1),
+    'charsel/c12/variant4': ('adx',3234,1),
+    'charsel/c12/variant5': ('adx',3234,1),
+    'btwinv/c09/condition0': ('adx',3289,4),
+    'btwinv/c09/condition1': ('adx',3289,4),
+    'charsel/c08/variant0': ('spu',3311,18),
+    'charsel/c08/variant1': ('spu',3311,16),
+    'charsel/c08/variant3': ('spu',3311,17),
+    'btwinv/c08/condition0': ('spu',3311,21),
+    'btwinv/c08/condition2': ('spu',3311,16),
+}
+INTACT_FORM_NOTES = {
+    4:'GT Super Vegeta uses BT3 earlier-era Super Saiyan Vegeta; era substitution',
+    12:'Super Saiyan Trunks uses BT3 Super Saiyan Trunks (Sword); model-variant substitution',
+    9:'Final-form Frieza uses BT3 Full Power Frieza; adjacent-form substitution',
+    8:'Matching BT3 Kid Buu form; complete attack-exertion sound reused for an intro/victory scene',
+}
+
 def spu(data):
     out=[];h1=h2=0
     a=(0,60,115,98,122);b=(0,0,-52,-55,-60)
@@ -109,7 +134,7 @@ def main():
     cues=[];gaps=[];files=list(target['files']);file_data={}
     for name,info in target['files'].items():
         file_data[name]=b''.join(raw[i*2352+24:i*2352+2072] for i in range(info['lba'],info['lba']+(info['size']+2047)//2048))[:info['size']]
-    def add(original,file_name,char,category,candidates,allow_excerpt=False):
+    def add(original,file_name,char,category,candidates,allow_excerpt=False,notes=None):
         rate_num=44100*original['spu_pitch'];den=4096;capacity=original['first_pass_samples']
         choices=[]
         for source,pcm,trim in candidates:
@@ -145,6 +170,9 @@ def main():
             record['native_event_categories']=[CATEGORIES[i] for i in original['native_event_ids']]
             if len(set(record['native_event_categories']))>1:
                 record['semantic_fit']='shared nonverbal exertion; native sample aliases attack and charge; audition both uses'
+        if notes is not None:
+            require(not excerpt,'Intact gap substitution must not excerpt a performance')
+            record.update(notes)
         cues.append(record)
     for bank in target['banks']:
         char=bank['character_id'];source_bank=DONORS[char]
@@ -168,7 +196,20 @@ def main():
             candidates=[spoken(bank,i) for i in lines]
             if char==15:candidates += [spoken(3201,i) for i in lines]
             if char==13:require(bank==3246,'Super Vegetto form')
-            add(original,file_name,char,category,candidates)
+            cue_category=category;notes=None
+            if original['id'] in INTACT_GAP_DONORS:
+                codec,alternate_bank,slot=INTACT_GAP_DONORS[original['id']]
+                candidates=[short(alternate_bank,slot) if codec=='spu' else spoken(alternate_bank,slot)]
+                notes=dict(source_form_note=INTACT_FORM_NOTES[char],
+                           edit_policy='intact performance; silence trim only; no excerpt')
+                if codec=='spu':
+                    cue_category='nonverbal-intro' if category=='generic-intro' else 'nonverbal-victory'
+                    notes.update(source_context_note='Complete BT3 Kid Buu attack-exertion sound substituted for an intro/victory scene; target content review pending',
+                                 semantic_fit='same-form complete nonverbal exertion; cross-context substitution; audition pending',
+                                 transcript_status='nonverbal exertion candidate; no spoken phrase assigned')
+                else:
+                    notes['source_context_note']='Intact alternate-form BT3 '+category+' event; words remain untranscribed'
+            add(original,file_name,char,cue_category,candidates,notes=notes)
     output=['format_version = 1','codec = "fb-integer-audio-1"',
             'mapping_status = "generic context candidates; in-game audition pending"',
             'source_release = "BT3 USA SLUS-21678 English"',

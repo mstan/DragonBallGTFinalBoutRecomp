@@ -15,7 +15,7 @@ disc_sha256 = "2f9d475fa089bed3f77a3344ea23af0663b30ffe9a2bc0b803bcae389480a15b"
 [[feature]]
 id = "funidub"
 name = "FuniDub"
-description = "Replace 277 combat, intro and victory cues with BT3 English recordings. Unmapped cues retain original audio. Uses separate save states; disabling restores original audio."
+description = "Replace 290 combat, intro and victory cues with BT3 English recordings. Unmapped cues retain original audio. Uses separate save states; disabling restores original audio."
 group = "Audio"
 channel = "experimental"
 default_enabled = false
@@ -39,7 +39,7 @@ format = "file"
 hidden = true
 required = true
 size = 14563328
-sha256 = "ae0d041f62b6dee7f6f084a60b0d9566a9c34e7f71f67e2ee9087a99ac0d1715"
+sha256 = "20af0a00107eec23d870da7848f7553826c61f364ca85a3f163aa2075942b428"
 
 [[overlay]]
 feature = "funidub"
@@ -58,7 +58,7 @@ offset = 30679040
 resource = "pack"
 resource_offset = 9142272
 size = 3469312
-sha256 = "bc673b23c0e1b61d7a62403fb8b13e1d6092fc0765c8981552a985bf1f6024f2"
+sha256 = "1f134e5222fde0bb5deb93b87749232597aa3a7ad7de29804ee6230325748058"
 expected_sha256 = "265f1b4e1a3d7694b38e089d3d9d77b8ccfe9c0c5e900d63ba348a06b6a4172d"
 
 [[overlay]]
@@ -68,5 +68,5 @@ offset = 46858240
 resource = "pack"
 resource_offset = 12611584
 size = 1951744
-sha256 = "6890028becd180ba309a453a24fc17bfa0ccea05defd1b324ed93019d37a68f8"
+sha256 = "8e0dc2311322d8de06d9ec512ee3cb847fc4130635734dc7be611a64670bcd96"
 expected_sha256 = "aa33756a1220f65f5dda89705244e84cce968bb6c753b36fc1df41c02d7ffa0a"

@@ -25,7 +25,7 @@ assembled from existing recordings is the final phase. No generated or cloned
 voices are part of the plan.
 
 Current owner scope (2026-10-15): complete the optional FuniDub workflow from
-the supplied BT3 ISO. The first local recipe replaces 277 selected combat,
+the supplied BT3 ISO. The current local recipe replaces 290 selected combat,
 introduction and victory cues; some spoken and cinematic attack cues retain
 original audio. Local preparation and a representative combat/save-load route
 pass; listening review and broader cue coverage remain open. HLE/precaching stays

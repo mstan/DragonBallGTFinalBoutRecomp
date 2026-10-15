@@ -5951,6 +5951,68 @@ source_line = 1
 source_label = "English character 41, line 1"
 
 [[cue]]
+id = "charsel/c04/variant0"
+target_file = "TITLE/CHARSEL.BIN"
+target_character = "Super Vegeta"
+target_offset = 710656
+target_size = 17840
+target_sha256 = "0b02c9c28c9bff3c69a688a15878ebf1bd09b9039900b54977605a7d2cae7806"
+target_samples = 31192
+target_spu_pitch = 1485
+target_rate_numerator = 65488500
+target_rate_denominator = 4096
+category = "generic-intro"
+first_sample = 0
+end_sample = 37499
+gain_q16 = 51119
+fade_ms = 5
+semantic_fit = "generic-context substitution"
+excerpt = false
+transcript_status = "not transcribed; donor event category verified"
+review_status = "candidate for owner in-game audition"
+source_form_note = "GT Super Vegeta uses BT3 earlier-era Super Saiyan Vegeta; era substitution"
+archive = 2
+entry = 52074
+entry_sha256 = "e638fdf309d2c252a8686fe3b1cba72409ce8d74eacca030afd4d2ba390a6841"
+source_codec = "adx"
+source_rate = 24000
+source_line = 0
+source_label = "English character 32, line 0"
+edit_policy = "intact performance; silence trim only; no excerpt"
+source_context_note = "Intact alternate-form BT3 generic-intro event; words remain untranscribed"
+
+[[cue]]
+id = "charsel/c04/variant1"
+target_file = "TITLE/CHARSEL.BIN"
+target_character = "Super Vegeta"
+target_offset = 729088
+target_size = 15248
+target_sha256 = "3cf895f7c72cc6e59e7070c4f496f4db2a8837979e6b487c39bc710f14e64ba3"
+target_samples = 26656
+target_spu_pitch = 1485
+target_rate_numerator = 65488500
+target_rate_denominator = 4096
+category = "generic-intro"
+first_sample = 0
+end_sample = 37499
+gain_q16 = 50393
+fade_ms = 5
+semantic_fit = "generic-context substitution"
+excerpt = false
+transcript_status = "not transcribed; donor event category verified"
+review_status = "candidate for owner in-game audition"
+source_form_note = "GT Super Vegeta uses BT3 earlier-era Super Saiyan Vegeta; era substitution"
+archive = 2
+entry = 52074
+entry_sha256 = "e638fdf309d2c252a8686fe3b1cba72409ce8d74eacca030afd4d2ba390a6841"
+source_codec = "adx"
+source_rate = 24000
+source_line = 0
+source_label = "English character 32, line 0"
+edit_policy = "intact performance; silence trim only; no excerpt"
+source_context_note = "Intact alternate-form BT3 generic-intro event; words remain untranscribed"
+
+[[cue]]
 id = "charsel/c04/variant2"
 target_file = "TITLE/CHARSEL.BIN"
 target_character = "Super Vegeta"
@@ -6560,6 +6622,108 @@ source_line = 1
 source_label = "English character 107, line 1"
 
 [[cue]]
+id = "charsel/c08/variant0"
+target_file = "TITLE/CHARSEL.BIN"
+target_character = "Majin Boo"
+target_offset = 1640448
+target_size = 2960
+target_sha256 = "a98df266caa56d925e37542a7fdd7d24a7021e95683be5a4b876731a895a8ac7"
+target_samples = 5152
+target_spu_pitch = 1485
+target_rate_numerator = 65488500
+target_rate_denominator = 4096
+category = "nonverbal-intro"
+first_sample = 367
+end_sample = 4228
+gain_q16 = 50184
+fade_ms = 5
+semantic_fit = "same-form complete nonverbal exertion; cross-context substitution; audition pending"
+excerpt = false
+transcript_status = "nonverbal exertion candidate; no spoken phrase assigned"
+review_status = "candidate for owner in-game audition"
+source_form_note = "Matching BT3 Kid Buu form; complete attack-exertion sound reused for an intro/victory scene"
+archive = 1
+entry = 3311
+entry_sha256 = "166452c21532b0ac613b86555835bebbbd65c07de43dc8f894ba73f560c9fa39"
+source_codec = "spu"
+source_offset = 109936
+source_size = 2432
+source_sha256 = "e20fdffbd6e911b5629562e1ff049bdaf18ded3b9ed224c09552d8a0990aaa6a"
+source_rate = 16000
+source_wave = 18
+source_label = "Buu_3_Voice_US.pak"
+edit_policy = "intact performance; silence trim only; no excerpt"
+source_context_note = "Complete BT3 Kid Buu attack-exertion sound substituted for an intro/victory scene; target content review pending"
+
+[[cue]]
+id = "charsel/c08/variant1"
+target_file = "TITLE/CHARSEL.BIN"
+target_character = "Majin Boo"
+target_offset = 1644544
+target_size = 8208
+target_sha256 = "616c5b1c1bddf5279d750641c97e788f7005cba38d8a9dc90c0a90187274aab2"
+target_samples = 14336
+target_spu_pitch = 1485
+target_rate_numerator = 65488500
+target_rate_denominator = 4096
+category = "nonverbal-intro"
+first_sample = 0
+end_sample = 10892
+gain_q16 = 52876
+fade_ms = 5
+semantic_fit = "same-form complete nonverbal exertion; cross-context substitution; audition pending"
+excerpt = false
+transcript_status = "nonverbal exertion candidate; no spoken phrase assigned"
+review_status = "candidate for owner in-game audition"
+source_form_note = "Matching BT3 Kid Buu form; complete attack-exertion sound reused for an intro/victory scene"
+archive = 1
+entry = 3311
+entry_sha256 = "166452c21532b0ac613b86555835bebbbd65c07de43dc8f894ba73f560c9fa39"
+source_codec = "spu"
+source_offset = 98512
+source_size = 6240
+source_sha256 = "ebe4f6a0062a82cc12cc0ffc7a7465f8107cc4a919f512e6ebaf95674673e206"
+source_rate = 16000
+source_wave = 16
+source_label = "Buu_3_Voice_US.pak"
+edit_policy = "intact performance; silence trim only; no excerpt"
+source_context_note = "Complete BT3 Kid Buu attack-exertion sound substituted for an intro/victory scene; target content review pending"
+
+[[cue]]
+id = "charsel/c08/variant3"
+target_file = "TITLE/CHARSEL.BIN"
+target_character = "Majin Boo"
+target_offset = 1656832
+target_size = 6912
+target_sha256 = "e93d9f048e3ee31439f364da8c0435e7f09e1672e282982e1c625377d2bab69a"
+target_samples = 12068
+target_spu_pitch = 1485
+target_rate_numerator = 65488500
+target_rate_denominator = 4096
+category = "nonverbal-intro"
+first_sample = 0
+end_sample = 9044
+gain_q16 = 54368
+fade_ms = 5
+semantic_fit = "same-form complete nonverbal exertion; cross-context substitution; audition pending"
+excerpt = false
+transcript_status = "nonverbal exertion candidate; no spoken phrase assigned"
+review_status = "candidate for owner in-game audition"
+source_form_note = "Matching BT3 Kid Buu form; complete attack-exertion sound reused for an intro/victory scene"
+archive = 1
+entry = 3311
+entry_sha256 = "166452c21532b0ac613b86555835bebbbd65c07de43dc8f894ba73f560c9fa39"
+source_codec = "spu"
+source_offset = 104752
+source_size = 5184
+source_sha256 = "87aba664ccc8d6d0fedf51a5603e118f76f285b31cbc019e9c4e295b4ab8c569"
+source_rate = 16000
+source_wave = 17
+source_label = "Buu_3_Voice_US.pak"
+edit_policy = "intact performance; silence trim only; no excerpt"
+source_context_note = "Complete BT3 Kid Buu attack-exertion sound substituted for an intro/victory scene; target content review pending"
+
+[[cue]]
 id = "charsel/c09/variant1"
 target_file = "TITLE/CHARSEL.BIN"
 target_character = "Frieza"
@@ -7167,6 +7331,99 @@ source_codec = "adx"
 source_rate = 24000
 source_line = 0
 source_label = "English character 42, line 0"
+
+[[cue]]
+id = "charsel/c12/variant3"
+target_file = "TITLE/CHARSEL.BIN"
+target_character = "Super Saiyan Trunks"
+target_offset = 2492416
+target_size = 15808
+target_sha256 = "10ba1a630723a3384e7203083846e3549c8afd08783043bb90aa02adadfdaee1"
+target_samples = 27636
+target_spu_pitch = 1485
+target_rate_numerator = 65488500
+target_rate_denominator = 4096
+category = "generic-intro"
+first_sample = 0
+end_sample = 23283
+gain_q16 = 52414
+fade_ms = 5
+semantic_fit = "generic-context substitution"
+excerpt = false
+transcript_status = "not transcribed; donor event category verified"
+review_status = "candidate for owner in-game audition"
+source_form_note = "Super Saiyan Trunks uses BT3 Super Saiyan Trunks (Sword); model-variant substitution"
+archive = 2
+entry = 52875
+entry_sha256 = "1e368618ec87bdcbd9bd73974976ed086af8232a8369be2cd00b0f7b0b20bcba"
+source_codec = "adx"
+source_rate = 24000
+source_line = 1
+source_label = "English character 40, line 1"
+edit_policy = "intact performance; silence trim only; no excerpt"
+source_context_note = "Intact alternate-form BT3 generic-intro event; words remain untranscribed"
+
+[[cue]]
+id = "charsel/c12/variant4"
+target_file = "TITLE/CHARSEL.BIN"
+target_character = "Super Saiyan Trunks"
+target_offset = 2508800
+target_size = 15216
+target_sha256 = "c390e74d4cf0c4b6c0b011f91c8c03e3f9838e7ec8ff5aef626a3b2f9a3a1e25"
+target_samples = 26600
+target_spu_pitch = 1485
+target_rate_numerator = 65488500
+target_rate_denominator = 4096
+category = "generic-intro"
+first_sample = 0
+end_sample = 23283
+gain_q16 = 52414
+fade_ms = 5
+semantic_fit = "generic-context substitution"
+excerpt = false
+transcript_status = "not transcribed; donor event category verified"
+review_status = "candidate for owner in-game audition"
+source_form_note = "Super Saiyan Trunks uses BT3 Super Saiyan Trunks (Sword); model-variant substitution"
+archive = 2
+entry = 52875
+entry_sha256 = "1e368618ec87bdcbd9bd73974976ed086af8232a8369be2cd00b0f7b0b20bcba"
+source_codec = "adx"
+source_rate = 24000
+source_line = 1
+source_label = "English character 40, line 1"
+edit_policy = "intact performance; silence trim only; no excerpt"
+source_context_note = "Intact alternate-form BT3 generic-intro event; words remain untranscribed"
+
+[[cue]]
+id = "charsel/c12/variant5"
+target_file = "TITLE/CHARSEL.BIN"
+target_character = "Super Saiyan Trunks"
+target_offset = 2525184
+target_size = 12656
+target_sha256 = "25999c1130bd37a7e946e91fcc283b1a17c9ba635948bf2724c3ab0a70b37ada"
+target_samples = 22120
+target_spu_pitch = 1485
+target_rate_numerator = 65488500
+target_rate_denominator = 4096
+category = "generic-intro"
+first_sample = 0
+end_sample = 23283
+gain_q16 = 52414
+fade_ms = 5
+semantic_fit = "generic-context substitution"
+excerpt = false
+transcript_status = "not transcribed; donor event category verified"
+review_status = "candidate for owner in-game audition"
+source_form_note = "Super Saiyan Trunks uses BT3 Super Saiyan Trunks (Sword); model-variant substitution"
+archive = 2
+entry = 52875
+entry_sha256 = "1e368618ec87bdcbd9bd73974976ed086af8232a8369be2cd00b0f7b0b20bcba"
+source_codec = "adx"
+source_rate = 24000
+source_line = 1
+source_label = "English character 40, line 1"
+edit_policy = "intact performance; silence trim only; no excerpt"
+source_context_note = "Intact alternate-form BT3 generic-intro event; words remain untranscribed"
 
 [[cue]]
 id = "charsel/c13/variant1"
@@ -8039,6 +8296,37 @@ source_line = 4
 source_label = "English character 41, line 4"
 
 [[cue]]
+id = "btwinv/c04/condition0"
+target_file = "BATTLE/BTWINV.DAT"
+target_character = "Super Vegeta"
+target_offset = 378880
+target_size = 24480
+target_sha256 = "92c8351eb3059233f40fa5604ec7d2e453e246a260d71e40585213e89065dbb3"
+target_samples = 42812
+target_spu_pitch = 2048
+target_rate_numerator = 90316800
+target_rate_denominator = 4096
+category = "generic-victory"
+first_sample = 0
+end_sample = 30946
+gain_q16 = 32768
+fade_ms = 5
+semantic_fit = "generic-context substitution"
+excerpt = false
+transcript_status = "not transcribed; donor event category verified"
+review_status = "candidate for owner in-game audition"
+source_form_note = "GT Super Vegeta uses BT3 earlier-era Super Saiyan Vegeta; era substitution"
+archive = 2
+entry = 52078
+entry_sha256 = "ca93923f3987fb33cf2a40384f9f6ce045da24d4db8ecb4320a4846080e9f5c2"
+source_codec = "adx"
+source_rate = 24000
+source_line = 4
+source_label = "English character 32, line 4"
+edit_policy = "intact performance; silence trim only; no excerpt"
+source_context_note = "Intact alternate-form BT3 generic-victory event; words remain untranscribed"
+
+[[cue]]
 id = "btwinv/c04/condition1"
 target_file = "BATTLE/BTWINV.DAT"
 target_character = "Super Vegeta"
@@ -8269,6 +8557,136 @@ source_codec = "adx"
 source_rate = 24000
 source_line = 4
 source_label = "English character 107, line 4"
+
+[[cue]]
+id = "btwinv/c08/condition0"
+target_file = "BATTLE/BTWINV.DAT"
+target_character = "Majin Boo"
+target_offset = 835584
+target_size = 18112
+target_sha256 = "8db68ee97b48831a652e40a1f3f22d1dfb813c42917ee18e96cad75655ce8efa"
+target_samples = 31668
+target_spu_pitch = 2048
+target_rate_numerator = 90316800
+target_rate_denominator = 4096
+category = "nonverbal-victory"
+first_sample = 161
+end_sample = 9833
+gain_q16 = 43647
+fade_ms = 5
+semantic_fit = "same-form complete nonverbal exertion; cross-context substitution; audition pending"
+excerpt = false
+transcript_status = "nonverbal exertion candidate; no spoken phrase assigned"
+review_status = "candidate for owner in-game audition"
+source_form_note = "Matching BT3 Kid Buu form; complete attack-exertion sound reused for an intro/victory scene"
+archive = 1
+entry = 3311
+entry_sha256 = "166452c21532b0ac613b86555835bebbbd65c07de43dc8f894ba73f560c9fa39"
+source_codec = "spu"
+source_offset = 126736
+source_size = 6144
+source_sha256 = "8115c7b0ce7250a2d569093a591008faef659f701b9c211a086704cdf944f41a"
+source_rate = 16000
+source_wave = 21
+source_label = "Buu_3_Voice_US.pak"
+edit_policy = "intact performance; silence trim only; no excerpt"
+source_context_note = "Complete BT3 Kid Buu attack-exertion sound substituted for an intro/victory scene; target content review pending"
+
+[[cue]]
+id = "btwinv/c08/condition2"
+target_file = "BATTLE/BTWINV.DAT"
+target_character = "Majin Boo"
+target_offset = 858112
+target_size = 12208
+target_sha256 = "2cf1adc40464c09a605bdfabbd0393ca4d5e1ed1c46fbec834d938c0b04c3782"
+target_samples = 21336
+target_spu_pitch = 2048
+target_rate_numerator = 90316800
+target_rate_denominator = 4096
+category = "nonverbal-victory"
+first_sample = 0
+end_sample = 10892
+gain_q16 = 52876
+fade_ms = 5
+semantic_fit = "same-form complete nonverbal exertion; cross-context substitution; audition pending"
+excerpt = false
+transcript_status = "nonverbal exertion candidate; no spoken phrase assigned"
+review_status = "candidate for owner in-game audition"
+source_form_note = "Matching BT3 Kid Buu form; complete attack-exertion sound reused for an intro/victory scene"
+archive = 1
+entry = 3311
+entry_sha256 = "166452c21532b0ac613b86555835bebbbd65c07de43dc8f894ba73f560c9fa39"
+source_codec = "spu"
+source_offset = 98512
+source_size = 6240
+source_sha256 = "ebe4f6a0062a82cc12cc0ffc7a7465f8107cc4a919f512e6ebaf95674673e206"
+source_rate = 16000
+source_wave = 16
+source_label = "Buu_3_Voice_US.pak"
+edit_policy = "intact performance; silence trim only; no excerpt"
+source_context_note = "Complete BT3 Kid Buu attack-exertion sound substituted for an intro/victory scene; target content review pending"
+
+[[cue]]
+id = "btwinv/c09/condition0"
+target_file = "BATTLE/BTWINV.DAT"
+target_character = "Frieza"
+target_offset = 870400
+target_size = 43008
+target_sha256 = "36cbb43a6d2e34d5279c418a93a938290b25cfff3637de509bfb4b1e16b9a4fb"
+target_samples = 75236
+target_spu_pitch = 2048
+target_rate_numerator = 90316800
+target_rate_denominator = 4096
+category = "generic-victory"
+first_sample = 0
+end_sample = 67049
+gain_q16 = 40377
+fade_ms = 5
+semantic_fit = "generic-context substitution"
+excerpt = false
+transcript_status = "not transcribed; donor event category verified"
+review_status = "candidate for owner in-game audition"
+source_form_note = "Final-form Frieza uses BT3 Full Power Frieza; adjacent-form substitution"
+archive = 2
+entry = 58378
+entry_sha256 = "1f5a7b6a89387996c34e93c23fbad2e2dda2f4eb3ddc2282f1689097cbbc6737"
+source_codec = "adx"
+source_rate = 24000
+source_line = 4
+source_label = "English character 95, line 4"
+edit_policy = "intact performance; silence trim only; no excerpt"
+source_context_note = "Intact alternate-form BT3 generic-victory event; words remain untranscribed"
+
+[[cue]]
+id = "btwinv/c09/condition1"
+target_file = "BATTLE/BTWINV.DAT"
+target_character = "Frieza"
+target_offset = 913408
+target_size = 39840
+target_sha256 = "dbc6aed8222925b99af155bdbe3cf66a2e3c2ba93bbc71e4caf5bcff27ef835a"
+target_samples = 69692
+target_spu_pitch = 2048
+target_rate_numerator = 90316800
+target_rate_denominator = 4096
+category = "generic-victory"
+first_sample = 0
+end_sample = 67049
+gain_q16 = 52002
+fade_ms = 5
+semantic_fit = "generic-context substitution"
+excerpt = false
+transcript_status = "not transcribed; donor event category verified"
+review_status = "candidate for owner in-game audition"
+source_form_note = "Final-form Frieza uses BT3 Full Power Frieza; adjacent-form substitution"
+archive = 2
+entry = 58378
+entry_sha256 = "1f5a7b6a89387996c34e93c23fbad2e2dda2f4eb3ddc2282f1689097cbbc6737"
+source_codec = "adx"
+source_rate = 24000
+source_line = 4
+source_label = "English character 95, line 4"
+edit_policy = "intact performance; silence trim only; no excerpt"
+source_context_note = "Intact alternate-form BT3 generic-victory event; words remain untranscribed"
 
 [[cue]]
 id = "btwinv/c10/condition0"
@@ -8871,14 +9289,6 @@ id = "charsel/c02/variant5"
 reason = "No supported non-silent context candidate fits the original playback slot"
 
 [[gap]]
-id = "charsel/c04/variant0"
-reason = "No supported non-silent context candidate fits the original playback slot"
-
-[[gap]]
-id = "charsel/c04/variant1"
-reason = "No supported non-silent context candidate fits the original playback slot"
-
-[[gap]]
 id = "charsel/c04/variant3"
 reason = "No supported non-silent context candidate fits the original playback slot"
 
@@ -8903,19 +9313,7 @@ id = "charsel/c07/variant5"
 reason = "No supported non-silent context candidate fits the original playback slot"
 
 [[gap]]
-id = "charsel/c08/variant0"
-reason = "No supported non-silent context candidate fits the original playback slot"
-
-[[gap]]
-id = "charsel/c08/variant1"
-reason = "No supported non-silent context candidate fits the original playback slot"
-
-[[gap]]
 id = "charsel/c08/variant2"
-reason = "No supported non-silent context candidate fits the original playback slot"
-
-[[gap]]
-id = "charsel/c08/variant3"
 reason = "No supported non-silent context candidate fits the original playback slot"
 
 [[gap]]
@@ -8936,18 +9334,6 @@ reason = "No supported non-silent context candidate fits the original playback s
 
 [[gap]]
 id = "charsel/c11/variant4"
-reason = "No supported non-silent context candidate fits the original playback slot"
-
-[[gap]]
-id = "charsel/c12/variant3"
-reason = "No supported non-silent context candidate fits the original playback slot"
-
-[[gap]]
-id = "charsel/c12/variant4"
-reason = "No supported non-silent context candidate fits the original playback slot"
-
-[[gap]]
-id = "charsel/c12/variant5"
 reason = "No supported non-silent context candidate fits the original playback slot"
 
 [[gap]]
@@ -8979,10 +9365,6 @@ id = "btwinv/c02/condition1"
 reason = "No supported non-silent context candidate fits the original playback slot"
 
 [[gap]]
-id = "btwinv/c04/condition0"
-reason = "No supported non-silent context candidate fits the original playback slot"
-
-[[gap]]
 id = "btwinv/c05/condition0"
 reason = "No supported non-silent context candidate fits the original playback slot"
 
@@ -8995,23 +9377,7 @@ id = "btwinv/c06/condition2"
 reason = "No supported non-silent context candidate fits the original playback slot"
 
 [[gap]]
-id = "btwinv/c08/condition0"
-reason = "No supported non-silent context candidate fits the original playback slot"
-
-[[gap]]
 id = "btwinv/c08/condition1"
-reason = "No supported non-silent context candidate fits the original playback slot"
-
-[[gap]]
-id = "btwinv/c08/condition2"
-reason = "No supported non-silent context candidate fits the original playback slot"
-
-[[gap]]
-id = "btwinv/c09/condition0"
-reason = "No supported non-silent context candidate fits the original playback slot"
-
-[[gap]]
-id = "btwinv/c09/condition1"
 reason = "No supported non-silent context candidate fits the original playback slot"
 
 [[gap]]

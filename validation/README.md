@@ -840,3 +840,32 @@ open paused in VLC. Exact cue order, clock ratios, pack offsets and hashes are
 retained under ignored `build-audio-review/final-reel`. It applies no extra
 edits beyond the recipe. Owner review of this reel remains pending; prior donor
 sample approval is not recorded as acceptance of the converted pack.
+
+### Thirteen additional intact mappings
+
+Bounded donor follow-up found shorter alternate-form recordings for eight
+unmapped slots and complete Kid Boo exertions for five more. The current recipe
+therefore covers 290/323 selected SPU candidates (159 combat, 89 menu, 42 victory),
+with 33 selected menu/victory gaps. XA and unclassified audio remain original.
+Vegeta's era, Trunks' sword variant, Frieza's full-power form and Boo's
+cross-context substitutions are explicit; no new transcript or actor acceptance
+is claimed.
+
+Independent Sol 6.1 review rereads donor PVD/AFS tables and all thirteen payloads,
+checks source hashes, nonrepeating terminal flags and exact-rational fit against
+the original tables. All eight ADX additions retain their full declared PCM;
+Boo trims only near-zero margins, with no excerpts. Existing 277 recipe records
+and encoded cue bytes are unchanged. The final recipe SHA-256 is
+`feb6c51c068f8b111d12f76599b88b33dd6731868adf173d2094265d5cef84d5`.
+
+The native builder produces 14,563,328 bytes, SHA-256
+`20af0a00107eec23d870da7848f7553826c61f364ca85a3f163aa2075942b428`.
+Full-pack verification finds all 290 changed cues nonzero, unchanged original
+flags and unmapped bytes, maximum decoded peak 26,898 and zero rail samples.
+The eight Python parser checks still pass. The actual native provider prepares
+and verifies all three updated overlays; evidence is
+`analysis/audio-investigation-20261014/{build-pack-v2.log,pack-verification-v2.json,provider-v2-prepare.log}`.
+Only catalog data/curation changed; the compiled executable remains `9ae81b2a`.
+The updated catalog is staged beside it. The ten earlier audition examples
+remain byte-identical; their 23-second reel still represents those current edits.
+No additional game/netplay campaign was repeated for these bounded data edits.

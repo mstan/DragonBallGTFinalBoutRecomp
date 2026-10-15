@@ -21,16 +21,15 @@ record untested scope without repeatedly retesting accepted shared systems.
 | Original dialogue extraction | `beads-bqsp` | Complete cue inventory, reproducible local extraction, trigger and speaker mapping |
 | Recorded-clip replacement | `beads-vbfi` | Owner-reviewed matching, source/edit provenance, reversible pack, audio and netplay validation |
 
-Current owner order (2026-10-14): fix the demonstrated moving-camera background
-flicker now, original audio extraction/inventory next, recorded replacement
-later. Loading HLE/precaching is deferred because loading is acceptable to the
-owner; completing that enhancement does not gate extraction. Voice work is
-not part of the current background-fix task. The owner supplied a BT3 USA PS2
-ISO on 2026-10-13. The optional final feature is **FuniDub**:
+Current owner scope (2026-10-14): investigate audio replacement after the visible
+widescreen review. Original cue inventory and actual donor formats precede
+curated matching and reinjection. Loading HLE/precaching is deferred because
+loading is acceptable; completing that enhancement does not gate audio work.
+The owner supplied a BT3 USA PS2 ISO on 2026-10-13. The optional final feature is **FuniDub**:
 the launcher prepares a local replacement pack automatically from that ISO
 using a reviewed mapping. See [the launcher contract](VOICE_REPLACEMENT.md#funidub-launcher-contract)
-and [metadata/source audit](FUNIDUB_RESEARCH.md). Extraction is next in the
-backlog, with no audio extracted yet. Generic suitable introductions/grunts may
+and [metadata/source audit](FUNIDUB_RESEARCH.md). Initial local examples now decode;
+see [the investigation](AUDIO_INVESTIGATION.md). Generic suitable introductions/grunts may
 be approved substitutions; preserve cue identity, source/edit provenance and gaps.
 
 ## Resolution and adaptive view

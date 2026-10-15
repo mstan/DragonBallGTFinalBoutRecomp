@@ -24,11 +24,11 @@ extraction is the penultimate phase; an optional Funimation-cast voice pack
 assembled from existing recordings is the final phase. No generated or cloned
 voices are part of the plan.
 
-Current owner priorities (2026-10-14): fix the moving-camera cloud-background
-flicker, original audio extraction/inventory next, recorded voice replacement
-later. HLE/precaching stays deferred because loading is acceptable. No audio has
-been extracted. The earlier paused/brief widescreen smoke did not establish
-stable background coverage through the camera movement now reported by the owner.
+Current owner scope (2026-10-14): investigate audio replacement, starting with
+original cue inventory and BT3 donor formats. Nine local examples now decode;
+no replacement pack or launcher workflow is implemented. HLE/precaching stays
+parked because loading is acceptable. The remaining rare background overlap is
+tracked separately. See [audio investigation](docs/AUDIO_INVESTIGATION.md).
 
 ## Configuration and tracked work
 
@@ -45,7 +45,7 @@ feature in the Mods page.
 
 Requirements and acceptance checks are in
 [docs/PROJECT_REQUIREMENTS.md](docs/PROJECT_REQUIREMENTS.md).
-[docs/VOICE_REPLACEMENT.md](docs/VOICE_REPLACEMENT.md) records the deferred audio
+[docs/VOICE_REPLACEMENT.md](docs/VOICE_REPLACEMENT.md) records the audio
 workflow and provenance rules. The central Beads epic is **beads-6058**; the
 initial setup issue is **beads-jsz8**. No per-repository Beads database is used.
 The owner's Brazilian redub and NovaPowers Ghidra/profile references are recorded
@@ -67,11 +67,12 @@ verification found MD5 `2f869f926514278b72ffbd671e69b9f7` and SHA-1
 external dump-database certification.
 
 Disc data and the extracted boot executable remain local under ignored `disc/`.
-No dialogue or other game audio has been extracted. The owner supplied a BT3
-USA PS2 ISO and research ZIP for the eventual **FuniDub** feature. Its intended
+Original and donor research examples have been extracted locally. The owner
+supplied a BT3 USA PS2 ISO and research ZIP for the eventual **FuniDub** feature. Its intended
 launcher flow is to choose the donor ISO and prepare a local mapped voice pack
 automatically. The [research audit](docs/FUNIDUB_RESEARCH.md) records verified
-metadata and mapping leads; audio implementation still follows core validation.
+metadata and mapping leads; [the investigation](docs/AUDIO_INVESTIGATION.md)
+records the first decode evidence and remaining cue-mapping work.
 
 ## Development
 

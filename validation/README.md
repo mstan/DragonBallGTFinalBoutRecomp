@@ -695,3 +695,26 @@ remains unresolved; this separate scale-step fix is not claimed as its cure.
 
 Updated executable SHA-256:
 `5fc0ccea337b762fb16ecde5faddc3e112e67aed8041cf2acabbb85731769a2b`.
+
+## First audio-replacement investigation (2026-10-14)
+
+The owner resumed audio investigation and accepted a short BT3 source reel with
+"those are all good," after asking for VLC playback/replay controls. The reel is
+three ADX dialogue candidates and one short Sony-bank sample, not an installed
+voice pack. Original victory examples still have unverified playback pitch.
+
+`tools/audio/probe_sources.py` rechecks the exact original track SHA-1, the
+donor PVD/AFS-table identities and pinned AFL metadata, then writes local
+inventories. Eight synthetic malformed-container/alias/extra-record tests pass.
+Nine local FFmpeg examples decode with exact expected sample counts/rates and
+nonzero PCM. The untrimmed ADX negative control produces 59,008 frames where
+the header declares 58,994; the probe's header-based trim yields 58,994.
+
+Direct source inspection finds 54 nonlooping victory candidates, 54 battle XA
+groups and six other XA groups; these are not an established dialogue count.
+Four inspected donor voice packs each contain 57 bounded Sony-wave candidates;
+one of those short samples decodes at its actual 16 kHz header rate. Full original
+cue inventory, actor/event matching and reinjection remain open. No runtime,
+launcher, netplay or game-configuration changes were made. Evidence/media remain
+ignored under `analysis/audio-investigation-20261014/`; the source procedure,
+hashes and limitations are described in [the audio report](../docs/AUDIO_INVESTIGATION.md).

@@ -5,6 +5,14 @@ authorized Sol 6.1 subagents with adversarial review for this task. The record
 below describes the original checkpoint. Current evidence is appended to
 `validation/README.md` and `docs/WIDESCREEN.md`; the port remains incomplete.
 
+Latest owner scope: audio-replacement investigation has begun. The first pass
+verifies original and BT3 source formats and decodes nine local examples, including
+the donor's separate short Sony-bank path. Cue/speaker/trigger mapping, original
+SPU pitch, curated edits and reinjection remain open. Read
+`docs/AUDIO_INVESTIGATION.md` and run `tools/audio/probe_sources.py` for the recorded
+source/decode evidence. No replacement pack or launcher change was installed.
+Loading work remains parked. Earlier scope updates below are chronological.
+
 Current owner scope (2026-10-14): park audio replacement investigation and
 HLE/precaching. Finish the demonstrated widescreen backdrop gap, run a short
 targeted smoke, then use quick human visual/audio review. The owner heard the

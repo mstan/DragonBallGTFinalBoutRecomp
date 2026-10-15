@@ -1,10 +1,11 @@
 # Recorded dialogue replacement
 
-This is a deferred design contract, not an extraction or replacement result.
-Current owner priorities (2026-10-14): fix the moving-camera background defect
-now, original audio extraction/inventory next (`beads-bqsp`), recorded-clip
-replacement later (`beads-vbfi`). Loading enhancements remain deferred and no
-longer gate the audio phase. Do not perform voice work during the background fix.
+This is the design contract for FuniDub. The owner resumed audio-replacement
+investigation on 2026-10-14 after the visible widescreen review. Original cue
+inventory (`beads-bqsp`) precedes curated donor mapping and recorded-clip
+replacement (`beads-vbfi`). Loading enhancements remain parked. The first local
+extraction/decode results and their limits are in [the investigation](AUDIO_INVESTIGATION.md);
+no replacement pack or launcher implementation exists yet.
 
 The requested direction is a Funimation-cast performance assembled from existing
 recordings, for example Sean Schemmel and Chris Sabat. No voice cloning,
@@ -157,4 +158,5 @@ triggers. If comparing a redub patch later, keep original and patched copies
 separate and record exact hashes and patch provenance. Do not contact authors,
 import databases, apply patches, or start audio extraction as part of this
 initial setup. The later metadata-only BT3 audit is recorded separately in
-[FUNIDUB_RESEARCH.md](FUNIDUB_RESEARCH.md); no audio extraction has begun.
+[FUNIDUB_RESEARCH.md](FUNIDUB_RESEARCH.md). Subsequent authorized local example
+extraction is recorded in [AUDIO_INVESTIGATION.md](AUDIO_INVESTIGATION.md).

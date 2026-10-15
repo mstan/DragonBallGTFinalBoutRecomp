@@ -1,5 +1,11 @@
 # FuniDub research audit
 
+Current update, 2026-10-14: the owner resumed audio-replacement investigation.
+Original and donor examples have now been extracted and decoded locally; see
+[the source investigation](AUDIO_INVESTIGATION.md). The metadata-only audit below
+records the earlier state. Its no-extraction/background-task restrictions are
+historical, not restrictions on the newly authorized audio investigation.
+
 Audited 2026-10-13 under `beads-6058.1`. The owner reaffirmed core gameplay
 validation first, with audio research now. This is a metadata and source audit;
 no audio was extracted, decoded, auditioned, replaced, or injected.

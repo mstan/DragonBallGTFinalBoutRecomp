@@ -27,6 +27,14 @@ stays deferred. Update this order without starting voice work during the
 background fix. Suitable generic BT3 introductions and combat grunts may be
 mapped later with explicit substitution provenance rather than literal matches.
 
+The owner's latest request resumes audio-replacement investigation. Investigate
+the original cue inventory and donor formats first; the recorded-clip pack and
+launcher implementation remain later. Nine local research examples now decode;
+speaker/event mapping and original SPU pitch remain unqualified. Read
+`docs/AUDIO_INVESTIGATION.md` before continuing. Loading work stays parked.
+Work solo for this audio task; the earlier worker authorization was for the
+background work. Defer high-level listening to a short owner review when available.
+
 ## Source and dependency rules
 
 - Target the supplied USA disc, `SLUS-00493`. Identity is in

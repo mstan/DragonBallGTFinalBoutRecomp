@@ -7,7 +7,8 @@ replacement (`beads-vbfi`). Loading enhancements remain parked. The first local
 extraction/decode results and their limits are in [the investigation](AUDIO_INVESTIGATION.md);
 the original investigation is retained as historical evidence. The native
 builder now produces a verified local pack from a source-only recipe. Launcher
-integration is being qualified; see [FuniDub](FUNIDUB.md) for current coverage.
+integration works locally; see [FuniDub](FUNIDUB.md) for current coverage and
+remaining listening/compatibility limits.
 
 The requested direction is a Funimation-cast performance assembled from existing
 recordings, for example Sean Schemmel and Chris Sabat. No voice cloning,

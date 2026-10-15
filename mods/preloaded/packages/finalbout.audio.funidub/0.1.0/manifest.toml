@@ -15,7 +15,7 @@ disc_sha256 = "2f9d475fa089bed3f77a3344ea23af0663b30ffe9a2bc0b803bcae389480a15b"
 [[feature]]
 id = "funidub"
 name = "FuniDub"
-description = "Replace 290 combat, intro and victory cues with BT3 English recordings. Unmapped cues retain original audio. Uses separate save states; disabling restores original audio."
+description = "Replace 386 combat, intro, victory and attack voices with BT3 recordings. Three timing/fit gaps and unqualified audio retain originals. Uses separate save states."
 group = "Audio"
 channel = "experimental"
 default_enabled = false
@@ -38,8 +38,8 @@ label = "Prepared voice pack"
 format = "file"
 hidden = true
 required = true
-size = 14563328
-sha256 = "20af0a00107eec23d870da7848f7553826c61f364ca85a3f163aa2075942b428"
+size = 72184832
+sha256 = "56be7a893f913efb193d4de694fec76af11c28df36bbd736418d3fa1a23eaa76"
 
 [[overlay]]
 feature = "funidub"
@@ -48,7 +48,7 @@ offset = 37713920
 resource = "pack"
 resource_offset = 0
 size = 9142272
-sha256 = "6d9374e09d3a78488e37d0fe661c7cc8d6623badfdbf375c5235650593523f85"
+sha256 = "5eac38b08249447e0c5b9baaac0deebfb35e2d71dd3ae2b1ee9f4f243cf23827"
 expected_sha256 = "7b254f3c843674556ac97170fa64cf3773592ae014f4d68adc5811d848471599"
 
 [[overlay]]
@@ -58,7 +58,7 @@ offset = 30679040
 resource = "pack"
 resource_offset = 9142272
 size = 3469312
-sha256 = "1f134e5222fde0bb5deb93b87749232597aa3a7ad7de29804ee6230325748058"
+sha256 = "d32babed95e0219b0a325c36deabbd6b4ce8a039a0240242bdc94c10ef5aa7bf"
 expected_sha256 = "265f1b4e1a3d7694b38e089d3d9d77b8ccfe9c0c5e900d63ba348a06b6a4172d"
 
 [[overlay]]
@@ -68,5 +68,55 @@ offset = 46858240
 resource = "pack"
 resource_offset = 12611584
 size = 1951744
-sha256 = "8e0dc2311322d8de06d9ec512ee3cb847fc4130635734dc7be611a64670bcd96"
+sha256 = "a7fcc40bea4d93317b3763154d8587e42b9d7fabbf02e8e9bb283c3170d19727"
 expected_sha256 = "aa33756a1220f65f5dda89705244e84cce968bb6c753b36fc1df41c02d7ffa0a"
+
+[[overlay]]
+feature = "funidub"
+target = "disc_user"
+offset = 36009984
+resource = "pack"
+resource_offset = 14563328
+size = 872448
+sha256 = "d0bacf41b186c0302b5a9c3ee63368c248f14cde3f50c39e6e290165c5d3e894"
+expected_sha256 = "e11e441995854123da52353a3c6ff57b4fa4334a59d601a106f91c28aa9edcfa"
+
+[[overlay]]
+feature = "funidub"
+target = "disc_raw"
+offset = 56055216
+resource = "pack"
+resource_offset = 15435776
+size = 15090432
+sha256 = "3432727ed875cd7158f053242dd64461f407525f0c49d17488345c945b539b6d"
+expected_sha256 = "3639924d5dec206364b37d61ee6da70035fed60392ff32d8cf048bf9c271bb23"
+
+[[overlay]]
+feature = "funidub"
+target = "disc_raw"
+offset = 71145648
+resource = "pack"
+resource_offset = 30526208
+size = 15090432
+sha256 = "ad0d05de92da11ea232c6b08e24df179e6ff6c441e331b48999dc755aa1bb895"
+expected_sha256 = "83a623f74ae712b31eba29b4685aa8c6e5325a4170c152e91028d13e05209146"
+
+[[overlay]]
+feature = "funidub"
+target = "disc_raw"
+offset = 86236080
+resource = "pack"
+resource_offset = 45616640
+size = 14601216
+sha256 = "99d5d925ac43ddd5696a08ace932175c5f6e0e7a795fc7e55530808b090fe4d0"
+expected_sha256 = "860a082a02cfc80d6612bd066ccdc7554ee8e689309d9be68f6e59ffa3086c7d"
+
+[[overlay]]
+feature = "funidub"
+target = "disc_raw"
+offset = 100837296
+resource = "pack"
+resource_offset = 60217856
+size = 11966976
+sha256 = "a6bff3a79c8fd15038679244353e3c4b030520fed241b8a1b69720957771826a"
+expected_sha256 = "55da382c2b465dae1d2afd1449703ebba6b4f702075803ea96beee0dc11b0605"

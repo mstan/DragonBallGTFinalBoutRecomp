@@ -25,12 +25,12 @@ assembled from existing recordings is the final phase. No generated or cloned
 voices are part of the plan.
 
 Current owner scope (2026-10-15): complete the optional FuniDub workflow from
-the supplied BT3 ISO. The current local recipe replaces 290 selected combat,
-introduction and victory cues; some spoken and cinematic attack cues retain
-original audio. Local preparation and a representative combat/save-load route
-pass; listening review and broader cue coverage remain open. HLE/precaching stays
+the supplied BT3 ISO. The local recipe replaces 386 selected combat,
+introduction, victory, tournament and attack cues. Three timing/fit gaps and
+unclassified audio retain originals. Local preparation and a representative
+combat/save-load route pass; high-level listening remains open. HLE/precaching stays
 parked because loading is acceptable. The remaining rare background overlap is
-tracked separately. See [audio investigation](docs/AUDIO_INVESTIGATION.md).
+tracked separately. See [FuniDub](docs/FUNIDUB.md) for coverage and use.
 
 ## Configuration and tracked work
 

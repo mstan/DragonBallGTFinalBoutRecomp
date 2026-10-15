@@ -211,3 +211,20 @@ nonzero PCM; duration alone is not a silence classifier.
 These findings establish source locations and event-category candidates. Final
 recipes still need target cue identity, source/target semantic review, performer
 verification where claimed, recorded edits, and playback/timing validation.
+
+## Extended local curation (2026-10-15)
+
+The recipe now records 386 target substitutions, including tournament wins,
+additional SPU attack calls and 46 script-associated XA channels. Short donor
+attack performances fill some introduction/victory gaps with explicit changed
+context notes. Form/era substitutions are per-cue; adult recordings are not
+silently assigned to child Goku. Two tiny Kid Buu menu slots and Baby's short
+FINISH-to-DEMOXA switch retain originals.
+
+Bounded local CPU transcription covered 149 distinct non-silent ADX entries;
+all 201 requested source records were rehashed and decoded at declared counts,
+including 51 silent placeholders. Model text remains ignored research evidence,
+not shipped transcripts or automatic semantic acceptance. It helped distinguish
+complete generic threats and energy calls from opponent-specific/handoff lines.
+The shipped mapping contains source coordinates, event categories and edit
+provenance. See `FUNIDUB.md` for coverage and remaining listening limits.

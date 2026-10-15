@@ -6,12 +6,13 @@ below describes the original checkpoint. Current evidence is appended to
 `validation/README.md` and `docs/WIDESCREEN.md`; the port remains incomplete.
 
 Latest owner scope: complete FuniDub from the BT3 USA source. Source tables,
-original SPU pitch and donor categories now support 290 selected SPU replacements,
-with explicit original-audio gaps. The native pack builder and launcher workflow
+original pitch and donor categories now support 386 selected SPU/XA replacements,
+including tournament wins. Three selected timing/fit gaps retain originals.
+The native pack builder and launcher workflow
 work locally; a qualified muted combat/save-load run verifies samples in SPU RAM.
 Default-watchdog stalls also reproduce with FuniDub off and remain under issue
 #7. Matching-pack startup and differing-selection rejection pass a brief two-peer
-gate. Listening and broader cue coverage remain open. Read
+gate. High-level listening and unclassified audio remain open. Read
 `docs/FUNIDUB.md` and the original/donor table reports for current evidence.
 Current pins are framework `c91331ff` and recomp-ui `1fa1f24`; the final native
 build passes, including separate FuniDub save slots and ordinary-slot return

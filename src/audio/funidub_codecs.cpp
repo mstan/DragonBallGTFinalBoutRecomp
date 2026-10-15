@@ -53,6 +53,8 @@ Encoded encode_block(const int16_t* pcm, const History initial, unsigned filters
             const int64_t difference=int64_t(pcm[i])-reconstruct(q,shift,f,candidate.history);
             error+=uint64_t(difference*difference);
         }
+        // The first exact candidate also wins the existing stable tie rule.
+        if(error==0)return candidate;
         if (error<best_error) {best_error=error;best=candidate;}
     }
     return best;
@@ -71,6 +73,39 @@ Sound decode_spu(const Bytes& data, uint32_t rate) {
             out.pcm.push_back(int16_t(reconstruct(n,shift,filter,h)));
         }
     }
+    return out;
+}
+
+Sound decode_xa_mono(const std::array<uint8_t,2352>& sector, History& history) {
+    need(sector[15]==2 && (sector[18]&0x24)==0x24 &&
+         (sector[19]==0 || sector[19]==4) &&
+         std::equal(sector.begin()+16,sector.begin()+20,sector.begin()+20),
+         "Unsupported original XA sector");
+    // Validate the complete sector before advancing the caller's predictor.
+    for (unsigned group=0;group<18;++group) {
+        const auto* data=sector.data()+24+group*128;
+        need(std::equal(data,data+4,data+4) && std::equal(data+8,data+12,data+12),
+             "Inconsistent XA sound group headers");
+        for (unsigned block=0;block<8;++block)
+            need((data[4+block]>>4)<=3 && (data[4+block]&15)<=12,
+                 "Unsupported XA predictor/shift");
+    }
+    Sound out{sector[19]==4 ? 18900u : 37800u,{}};
+    out.pcm.reserve(4032); History decoded_history=history;
+    for (unsigned group=0;group<18;++group) {
+        const auto* data=sector.data()+24+group*128;
+        // Match the CD controller: each low-nibble block precedes its
+        // high-nibble block, with one continuous mono predictor history.
+        for (unsigned block=0;block<4;++block) for (unsigned half=0;half<2;++half) {
+            const uint8_t header=data[4+block*2+half];
+            for (unsigned i=0;i<28;++i) {
+                int n=(data[16+block+i*4]>>(half*4))&15;
+                if(n>=8)n-=16;
+                out.pcm.push_back(int16_t(reconstruct(n,header&15,header>>4,decoded_history)));
+            }
+        }
+    }
+    history=decoded_history;
     return out;
 }
 

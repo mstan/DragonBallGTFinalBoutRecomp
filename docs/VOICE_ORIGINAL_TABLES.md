@@ -176,6 +176,59 @@ The trigger at `0x8004FF78..0x8005001C` uses voice 23, SPU body `0x50900`,
 note `0x3C00`, base `0x4800`: pitch `0x0800`, exactly 22,050 Hz.
 Completion polling, cancellation and scene timing remain native game behavior.
 
+## Tournament result resource
+
+`TITLE/TENKAWIN.BIN`, LBA 17,583, is 872,448 bytes, SHA-256
+`e11e441995854123da52353a3c6ff57b4fa4334a59d601a106f91c28aa9edcfa`.
+Its 19 raw SPU regions have two independently matching 20-entry sector tables:
+STEP02 at `0x8004D16C` and STEP999 at `0x800411F8`. Both tables hash to
+`2e72f028a6397ff75598c79f0d6c1a6dd12e2182bb5dbcc8578132fa4722ffe2`.
+They cover the complete file, with sector boundaries
+`0,16,30,45,5C,6C,89,97,B9,C0,D5,EE,10B,12A,13D,159,165,184,197,1AA`
+(hexadecimal). Regions 0..16 are finite clips with flag-1 terminal, flag-7
+sentinel and zero allocation padding; regions 17/18 have flag-3 loop terminals.
+Preserve those last two looping sounds independently of any new voice mapping.
+
+The tracked [inventory tool](../tools/audio/inventory_original.py) now emits
+`tournament`: 19 records named `tenkawin/slot00..slot18`, using the same
+offset/size/hash/allocation/first-pass fields as menu and victory records.
+Records include exact rates, flags, finite-playback status and preservation
+markers. File identity and 29 exact producer instructions, both table hashes,
+and complete STEP02/STEP999 identities are checked from the disc; no capture,
+Capstone, playback or transcription is needed. Reproduce into ignored metadata:
+
+```powershell
+python tools/audio/inventory_original.py --target-bin 'disc/Dragon Ball GT - Final Bout (USA).bin' --out analysis/funidub-original-discovery/remaining-original-inventory.json
+```
+
+STEP02 `0x80043570..0x800435A4` obtains the selected player's numeric ID from
+the u16 selection array at `0x8003BCA4`, masks it with `0x7F`, and carries it in
+`s3`. At `0x80043BBC..0x80043C2C`, that ID indexes the TENKAWIN table, then the
+unaltered raw resource uploads to SPU `0x50900` through `0x80016AD4`.
+The result sequence's trigger at `0x800442C4..0x80044368` keys on voice **21**
+(mask `0x00200000`), note `0x3C00`, base `0x4800`: pitch `0x0800`, exactly
+22,050 Hz. This establishes slots 0..16 as numeric character result contexts;
+their words, performer and voice/effect composition remain unqualified.
+STEP02 separately loads the final two looping regions to SPU `0x64900` and
+`0x6E100`, keying voices 22/23 at `0x80044100/0x8004418C`. Their counts describe
+only the first pass, not finite playback durations.
+
+STEP999's sound-test selector at `0x8003FD64..0x8003FE84` accepts decimal cue
+IDs **164..180**, indexes `id - 164`, and reads these same finite slots. Its
+trigger at `0x8003FF04..0x8003FF74` uses voice **23**, SPU `0x50900`, and the
+same 22,050 Hz rate. IDs 181/182 do not access the two looping regions through
+this selector. Representative guards are `0x80043BC4=0x2610D16C`,
+`0x800442FC=0x24023C00`, `0x80044308=0x24024800`,
+`0x8003FE18=0x2631FF5C`, and `0x8003FE20=0x261011F8`.
+
+| Slots | Finite first-pass duration | Observation |
+| --- | --- | --- |
+| 0..16 | 1.0019..5.4286 seconds | 17 clips; 5/11 identical, 12/16 identical |
+| 17/18 | 2.9968 / 2.9956 seconds per first pass | Repeating sounds; preserve |
+
+These are concrete additional replacement **candidates**, not an assertion that
+all 17 are speech or that a generic victory line is the appropriate substitute.
+
 ## XA selection and limits
 
 STEP40 dispatch `0x800500A4..0x80050114` selects these original resources:
@@ -241,9 +294,13 @@ Events `3C/3D`, `46/47`, `4D/4E` and `51` have media but no such reference.
 Their speaker/usage remains unqualified. Character 7's second group uses an SPU
 event rather than XA. No script references the nonexistent channels `56..59`.
 
-`xa_discovery.py --decode` independently rereads every script word from BTCHARA,
-checks eight exact dispatcher/caller instructions, and decodes all 54 XA groups
-through FFmpeg 7.1 without playback. Its ignored `xa-discovery.json` records raw
+The tracked `tools/audio/inventory_xa.py` derives the bounded animation tables
+and command boundaries directly from BTCHARA, checks eight exact
+dispatcher/caller instructions and inventories all 54 XA groups. Optional
+`--codec-check` decodes channels through the portable native developer driver.
+The earlier ignored `xa_discovery.py --decode` independently cross-checked the
+same script events and decoded all channels with FFmpeg 7.1. Its ignored
+`xa-discovery.json` records raw
 sector hashes, PCM hashes, sample counts, exact zero tails and 100 ms amplitude
 windows. The long container durations are mostly padding: all DEMOXA channels
 have **35.0144..35.1059 seconds of exact PCM zero tail**, with last nonzero sample
@@ -252,10 +309,54 @@ tail**, with last nonzero sample at 0.2757..3.8652 seconds. FINISH channels 5/11
 are PCM-identical, as are 12/16. DEMOXA02 channels 6/13 and 7/14 are PCM-identical.
 The padding must not be mistaken for long musical content, or removed from disc
 allocations. Amplitude and caller evidence do not establish transcript, speech
-versus effect content, or whether a short cue contains music. **XA therefore
-remains unclassified attack audio; preserving it is safe, but describing all
-remaining XA as intentionally preserved music, or claiming complete voice
-replacement, is not supported by this evidence.**
+versus effect content, or whether a short cue contains music. Local offline
+transcription later supplied speech/technique-name hypotheses; these are
+research aids, not accepted transcripts or voice-only proof. FuniDub now
+curates 46 script-associated channels with explicit generic-context mappings.
+FINISH17 retains its original for the timing reason below; the seven
+unreferenced channels remain original. Describing every retained XA as music,
+or claiming all original audio has been replaced, is unsupported.
+
+### Character 17 FINISH timing qualification
+
+Character 17/state 171 switches FINISH channel 17 to DEMOXA03 channel 1
+(event `0x53`) after **11 normal interpreter advances**. BTCHARA at
+`0x88FB24` begins `01200001 00607830 0B2000A9 58607853`:
+animation 1, FINISH start, animation `0xA9` with delay 11, then DEMOXA start.
+The high byte is a relative countdown for the current command, not an absolute
+timestamp or a delay before its side effect. STEP40 `0x8004E65C..0x8004E670`
+loads it into `s4`; `0x8004EE18` immediately chains zero-delay commands;
+`0x8004EE60..0x8004EE94` clears the pending-command flag at countdown 1 and
+decrements it. Thus FINISH and the delay-11 animation execute in one invocation;
+DEMOXA starts 11 subsequent advances later. The `0x58` high byte on the DEMOXA
+command delays the following command, rather than postponing that XA start.
+
+The interpreter call at `0x80054B84` occurs once per player in the normal combat
+loop. Initialization stores 2 at `0x800A9CF4` (`0x800540BC/0x800540DC`);
+the loop ends through `0x80055654 -> 0x8003FB40`, which passes that byte to
+VSync `0x8001BBEC` at `0x8003FB68..0x8003FB70`. This gives a nominal interval
+of **22 VBlanks, about 0.367 seconds** at 60 VBlanks/second (6,930 samples at
+18,900 Hz). Pause/skipped updates or slow execution can extend the interval.
+This is **not a guaranteed usable PCM budget**: `0x80016DC8` queues seek/start
+operations and `0x800172EC` queues the file/channel filter; the script does not
+wait for audible start or confirm completion. Their queue-full failure returns
+are also ignored here. Static script timing therefore supplies no safe exact
+audio sample upper bound. Preserve FINISH channel 17 until usable playback
+timing is qualified; its 1.0835-second nonzero source window is not that budget.
+
+The shortest complete same-form donor attack grunt currently inventoried is
+BT3 US1 bank 3337, wave 18: 4,760 first-end samples at 16,000 Hz (0.2975 seconds),
+terminal flag 1, no loop. Even this does not prove a safe fit after native CD
+latency. The ignored receipt `analysis/funidub-original-discovery/xa-finish17-timing.json`
+records source hashes, exact words, instruction guards and the selected-gap
+reason.
+
+Separate BGM control is visible in the same script: opcode `0x62` after the
+DEMOXA command sets volume 30 on resident sequence handles `0x80034F98/9A`
+through `0x80013800` (`0x8004EB10..0x8004EB78`). Those handles originate from
+sequenced-music calls to `0x8001400C`, including `0x800542E4/0x8006A3EC`.
+This supports an inference that attack XA accompanies separately sequenced BGM;
+it does **not** prove that any XA PCM is voice-only or lacks embedded effects.
 
 ## Guards and remaining qualification
 

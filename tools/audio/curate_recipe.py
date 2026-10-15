@@ -52,6 +52,85 @@ INTACT_FORM_NOTES = {
     8:'Matching BT3 Kid Buu form; complete attack-exertion sound reused for an intro/victory scene',
 }
 
+# Third pass: retain the 290-cue baseline and add only these prior-gap slots.
+# Each note describes this exact donor, rather than inheriting a character's
+# earlier fallback form (for example Full Power versus second-form Frieza).
+INTACT_GAP_DONORS.update({
+    'charsel/c02/variant1': ('adx',3202,1),
+    'charsel/c02/variant4': ('adx',3202,1),
+    'charsel/c02/variant5': ('adx',3202,1),
+    'charsel/c05/variant4': ('adx',3197,1),
+    'charsel/c06/variant2': ('adx',3212,1),
+    'charsel/c06/variant4': ('adx',3212,1),
+    'charsel/c07/variant1': ('adx',3299,1),
+    'charsel/c11/variant4': ('adx',3197,1),
+    'charsel/c17/variant2': ('adx',3335,1),
+    'charsel/c17/variant3': ('adx',3336,0),
+    'btwinv/c05/condition0': ('adx',3197,3),
+    'btwinv/c05/condition2': ('adx',3197,3),
+    'btwinv/c09/condition2': ('adx',3286,3),
+    'btwinv/c11/condition0': ('adx',3197,3),
+    'btwinv/c11/condition2': ('adx',3197,3),
+    'btwinv/c17/condition2': ('adx',3336,3),
+    'charsel/c13/variant0': ('adx',3245,0),
+    'charsel/c14/variant0': ('adx',3197,1),
+    'btwinv/c06/condition2': ('adx',3353,3),
+    'btwinv/c08/condition1': ('spu',3311,18),
+})
+INTACT_CUE_FORM_NOTES = {
+    'charsel/c02/variant1':'GT child Goku uses BT3 GT child Super Saiyan Goku; same-age transformation substitution',
+    'charsel/c02/variant4':'GT child Goku uses BT3 GT child Super Saiyan Goku; same-age transformation substitution',
+    'charsel/c02/variant5':'GT child Goku uses BT3 GT child Super Saiyan Goku; same-age transformation substitution',
+    'charsel/c05/variant4':'Adult Super Saiyan Goku uses BT3 adult Goku (End) base form; transformation substitution',
+    'charsel/c06/variant2':'Adult Gohan uses BT3 adult Super Saiyan Gohan; same-age transformation substitution',
+    'charsel/c06/variant4':'Adult Gohan uses BT3 adult Super Saiyan Gohan; same-age transformation substitution',
+    'charsel/c07/variant1':'Perfect Cell uses BT3 first-form Cell; same-character form and delivery substitution',
+    'charsel/c11/variant4':'Alternate-costume adult Super Saiyan Goku uses BT3 adult Goku (End) base form; transformation substitution',
+    'charsel/c17/variant2':'Giant Baby uses BT3 Super Baby 1; same-character form and delivery substitution',
+    'charsel/c17/variant3':'Giant Baby uses BT3 Super Baby 2; same-character form and delivery substitution',
+    'btwinv/c05/condition0':'Adult Super Saiyan Goku uses BT3 adult Goku (End) base form; transformation substitution',
+    'btwinv/c05/condition2':'Adult Super Saiyan Goku uses BT3 adult Goku (End) base form; transformation substitution',
+    'btwinv/c09/condition2':'Final-form Frieza uses BT3 second-form Frieza; same-character form and delivery substitution',
+    'btwinv/c11/condition0':'Alternate-costume adult Super Saiyan Goku uses BT3 adult Goku (End) base form; transformation substitution',
+    'btwinv/c11/condition2':'Alternate-costume adult Super Saiyan Goku uses BT3 adult Goku (End) base form; transformation substitution',
+    'btwinv/c17/condition2':'Giant Baby uses BT3 Super Baby 2; same-character form and delivery substitution',
+    'charsel/c13/variant0':'Super Vegetto uses BT3 base Vegetto; same-fusion-character transformation substitution',
+    'charsel/c14/variant0':'Adult GT Super Saiyan 4 Goku uses BT3 adult Goku (End) base form; adult-to-adult era and transformation substitution',
+    'btwinv/c06/condition2':'Adult Gohan uses BT3 adult Future Gohan base form; future-timeline and character-design substitution',
+    'btwinv/c08/condition1':'Matching BT3 Kid Buu form; complete wave 18 attack-exertion reused for a victory scene',
+}
+
+# Fourth pass: complete same-character exertions fill eleven remaining slots.
+# Every selection fits even before quiet-margin trimming. The two tiny Kid Buu
+# intros remain gaps: no complete attack-exertion fits, and pain is not used.
+EXERTION_GAP_DONORS = {
+    'charsel/c01/variant2': ('spu',3257,18),
+    'charsel/c01/variant7': ('spu',3257,23),
+    'charsel/c04/variant3': ('spu',3229,19),
+    'charsel/c07/variant5': ('spu',3301,20),
+    'charsel/c09/variant0': ('spu',3288,21),
+    'charsel/c09/variant2': ('spu',3288,19),
+    'charsel/c09/variant5': ('spu',3288,22),
+    'btwinv/c01/condition0': ('spu',3257,21),
+    'btwinv/c01/condition1': ('spu',3257,22),
+    'btwinv/c02/condition1': ('spu',3201,22),
+    'btwinv/c15/condition1': ('spu',3201,25),
+}
+INTACT_GAP_DONORS.update(EXERTION_GAP_DONORS)
+INTACT_CUE_FORM_NOTES.update({
+    'charsel/c01/variant2':'Pan uses the matching BT3 Pan character/form',
+    'charsel/c01/variant7':'Pan uses the matching BT3 Pan character/form',
+    'charsel/c04/variant3':'GT Super Vegeta uses BT3 Vegeta (End) Super Saiyan; adult-to-adult era substitution',
+    'charsel/c07/variant5':'Perfect Cell uses the matching BT3 Perfect Cell form',
+    'charsel/c09/variant0':'Final-form Frieza uses the matching BT3 final form',
+    'charsel/c09/variant2':'Final-form Frieza uses the matching BT3 final form',
+    'charsel/c09/variant5':'Final-form Frieza uses the matching BT3 final form',
+    'btwinv/c01/condition0':'Pan uses the matching BT3 Pan character/form',
+    'btwinv/c01/condition1':'Pan uses the matching BT3 Pan character/form',
+    'btwinv/c02/condition1':'GT child Goku uses the matching BT3 GT child base form',
+    'btwinv/c15/condition1':'Super Saiyan GT child Goku uses BT3 GT child base Goku; same-age transformation substitution because the GT Super Saiyan ordinary short bank is silent',
+})
+
 def spu(data):
     out=[];h1=h2=0
     a=(0,60,115,98,122);b=(0,0,-52,-55,-60)
@@ -180,7 +259,7 @@ def main():
         by_wave={}
         for instrument in bank['instruments']:
             if instrument['index']>8:continue
-            if char==10 and instrument['index']==7:continue # Different pitch/shared-effect candidate.
+            if char==10 and instrument['index']==7:continue # Separate attack call handled by extend_recipe.py.
             by_wave.setdefault(instrument['wave'],[]).append(instrument)
         for wave,instruments in by_wave.items():
             instrument=instruments[0];event=instrument['index']
@@ -200,13 +279,23 @@ def main():
             if original['id'] in INTACT_GAP_DONORS:
                 codec,alternate_bank,slot=INTACT_GAP_DONORS[original['id']]
                 candidates=[short(alternate_bank,slot) if codec=='spu' else spoken(alternate_bank,slot)]
-                notes=dict(source_form_note=INTACT_FORM_NOTES[char],
+                notes=dict(source_form_note=INTACT_CUE_FORM_NOTES.get(original['id'],INTACT_FORM_NOTES.get(char)),
                            edit_policy='intact performance; silence trim only; no excerpt')
+                require(notes['source_form_note'] is not None,'Missing per-source substitution note')
                 if codec=='spu':
                     cue_category='nonverbal-intro' if category=='generic-intro' else 'nonverbal-victory'
-                    notes.update(source_context_note='Complete BT3 Kid Buu attack-exertion sound substituted for an intro/victory scene; target content review pending',
-                                 semantic_fit='same-form complete nonverbal exertion; cross-context substitution; audition pending',
-                                 transcript_status='nonverbal exertion candidate; no spoken phrase assigned')
+                    if original['id'] in EXERTION_GAP_DONORS:
+                        native_category=banks[alternate_bank]['waves'][slot]['candidate_category']
+                        require(native_category.startswith('attack-record-voice-'),'Expected physical attack-exertion source')
+                        scene='intro' if category=='generic-intro' else 'victory'
+                        notes.update(source_context_note=f'Complete BT3 physical attack-exertion from bank {alternate_bank} wave {slot} reused for a {scene} scene; delivery/content review pending',
+                                     source_native_event_category=native_category,
+                                     semantic_fit='complete same-character exertion; cross-context substitution; audition pending',
+                                     transcript_status='nonverbal exertion candidate; no spoken phrase assigned; event category alone does not prove absence of words')
+                    else:
+                        notes.update(source_context_note='Complete BT3 Kid Buu attack-exertion sound substituted for an intro/victory scene; target content review pending',
+                                     semantic_fit='same-form complete nonverbal exertion; cross-context substitution; audition pending',
+                                     transcript_status='nonverbal exertion candidate; no spoken phrase assigned')
                 else:
                     notes['source_context_note']='Intact alternate-form BT3 '+category+' event; words remain untranscribed'
             add(original,file_name,char,cue_category,candidates,notes=notes)

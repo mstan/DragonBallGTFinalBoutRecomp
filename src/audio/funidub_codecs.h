@@ -18,6 +18,10 @@ constexpr const char* codec_version = "fb-integer-audio-1";
 
 Sound decode_spu(const Bytes& adpcm, uint32_t rate);
 Sound decode_adx(const Bytes& adx);
+// Decode one original mono 4-bit XA sector at its native rate (4032 samples).
+// Caller retains one history per selected channel in original sector order.
+// Unsupported/malformed sectors are rejected without changing that history.
+Sound decode_xa_mono(const std::array<uint8_t,2352>& sector, History& history);
 // Source boundaries are in decoded samples. Output is padded with silence;
 // it is never time-stretched to occupy the complete original slot.
 Sound edit(const Sound& source, size_t first, size_t end, uint32_t rate,

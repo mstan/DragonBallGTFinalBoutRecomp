@@ -22,7 +22,7 @@
 namespace {
 namespace fs=std::filesystem;
 using namespace PSXRecompV4;
-constexpr const char* builder_version="fb-overlay-builder-2";
+constexpr const char* builder_version="fb-overlay-builder-3";
 std::string finish_hash(psx_sha256_ctx& ctx) {
     uint8_t bytes[32];psx_sha256_final(&ctx,bytes);static constexpr char hex[]="0123456789abcdef";
     std::string result(64,'0');for(unsigned i=0;i<32;++i){result[i*2]=hex[bytes[i]>>4];result[i*2+1]=hex[bytes[i]&15];}

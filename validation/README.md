@@ -869,3 +869,64 @@ Only catalog data/curation changed; the compiled executable remains `9ae81b2a`.
 The updated catalog is staged beside it. The ten earlier audition examples
 remain byte-identical; their 23-second reel still represents those current edits.
 No additional game/netplay campaign was repeated for these bounded data edits.
+
+## Extended FuniDub voice coverage (2026-10-15)
+
+The current source-only recipe replaces 386/389 selected candidates: 159 ordinary
+combat, 108 introductions, 54 battle wins, 17 tournament wins, two additional SPU
+attack calls and 46 script-associated XA channels. Two tiny Kid Buu menu slots
+retain originals; FINISH17 also retains its original because state 171 switches
+to DEMOXA53 after 11 normal interpreter ticks. The nominal 22 VBlanks/~0.367 s
+interval does not establish usable PCM time across asynchronous CD commands.
+Seven unreferenced XA channels, shared/looping effects and unclassified audio
+remain original. Explicit generic/form/context substitutions are in the recipe.
+
+Independent Sol 6.1 discovery/review checked caller/pitch/table identities, all
+source extents, intact added performances and age/form/context notes. The tracked
+XA inventory reproduces 18 script tables, 54 stream identities and 29 DEMOXA event
+associations directly from the disc. Offline local ASR supplies ignored research
+hypotheses only, never shipped transcripts or synthesized speech.
+
+Native codec tests and a real XA pilot pass. The pilot preserves 4,945 other
+sectors and 143 selected-sector controls/reserved tails, agrees byte-for-byte
+with FFmpeg and rejects wrong coding, oversized window, invalid insertion and
+duplicate-channel recipes. Four complete original XA streams at both rates
+match FFmpeg PCM. The updated builder reproduces the prior 290-cue pack exactly.
+The final 386-cue pack is 72,184,832 bytes, SHA-256
+`56be7a893f913efb193d4de694fec76af11c28df36bbd736418d3fa1a23eaa76`;
+recipe SHA-256 is
+`3d4f3a3a6018fe00a3bbc414281d2cb7b57e58001914fa981cd19ddd9c855acf`.
+Full-pack verification finds every replacement changed/nonzero, unchanged
+unmapped bytes and SPU flags, preserved XA controls/reserved bytes/EDC convention,
+maximum decoded peak 26,898 and zero PCM rail samples. The native provider resolves
+all eight overlays: cold preparation 10,281 ms; source-verified reuse 1,578 ms. These are
+preparation measurements, not game loading improvements.
+
+The README CLI two-job Windows release rebuild and 357-file native toolchain
+stage pass; executable SHA-256 is
+`6a97f23fcf0c27992c773936739199b8e32342ef35849a332f9f5ff4c054f1bf`.
+The first bounded drive did not reach an attack cue before its deadline; it
+closed without claiming XA coverage. The corrected muted natural-demo run
+reaches a changed DEMOXA01 sector at LBA 23,890/channel 9/frame 6,622 and verifies all
+2,048 inspected user bytes against the actual prepared pack, differing from the
+stock disc (prefix SHA-256
+`5cfc8c5692c25c377d1b208957f4c2cf5d7833044a1a5940c5989f5c002c4a4e`).
+Native XA delivery events occur concurrently (file 1/channel 5), and the CD input
+audio tap is active. This proves the raw-overlay read/delivery path, not an
+audible semantic judgment or that the inspected interleaved channel was the
+selected decoder channel. Save/load generations 1/2 complete with `last_ok=1` in
+scope `77811b58ffba9ea7a8bb112a60d7855831c87f0f5c9640e231cc500ee2d67b0f`;
+frames resume through 6,734 and the native report exits normally via TCP at 6,755,
+with zero unsupported instructions, zero segment misses and no degraded compile.
+The run uses the existing 30-second diagnostic watchdog allowance and generates
+an automatic freeze diagnostic at frame 4,824; it does not close the separately
+tracked stall issue or qualify default-watchdog performance. Demo GAME OVER
+screens are not manual win/progression evidence.
+
+Local evidence is under ignored `build-audio-review/extended/`. The 23-second
+original/replacement comparison reel is open paused in VLC; owner listening is
+pending. XA window classification, subtle synchronization and complete-game
+coverage are not established by these byte checks. No broad netplay campaign or
+HLE/loading work was repeated. Game processes exit; owner settings/mod selection
+are restored, and the preexisting game.toml preference remains unstaged. No media,
+transcripts, packs, saves or generated code are included in Git.

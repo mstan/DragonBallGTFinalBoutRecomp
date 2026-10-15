@@ -23,9 +23,10 @@ including the local pack and launcher workflow after original cue discovery and
 curated donor matching. Fresh Sol 6.1 subagents are authorized for bounded
 parallel discovery, with adversarial review. The owner accepted the initial donor
 reel in VLC. Original SPU tables/pitch and donor event categories are now traced;
-290 selected SPU candidates have a reproducible local replacement recipe. Native
-preparation/launcher and representative combat/save-load checks pass; owner
-listening and broader cue coverage remain open. Read `docs/FUNIDUB.md` and the
+386 selected voice candidates have a reproducible replacement recipe spanning
+ordinary SPU, tournament wins and 46 XA attack channels. Three timing/fit gaps
+retain originals. Native preparation/launcher and representative combat/save-load
+checks pass; owner listening and unclassified audio remain open. Read `docs/FUNIDUB.md` and the
 original/donor table reports; `docs/AUDIO_INVESTIGATION.md` is historical.
 Loading work stays parked. Defer high-level listening to a short owner review
 when available; sample approval is not full replacement coverage approval.

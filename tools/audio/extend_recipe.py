@@ -188,7 +188,7 @@ def main():
             for row in value:
                 lines+=['',f'[[{key}]]']+[f'{k} = {json.dumps(v,ensure_ascii=False)}' for k,v in row.items()]
         else:lines.append(f'{key} = {json.dumps(value,ensure_ascii=False)}')
-    args.out.parent.mkdir(parents=True,exist_ok=True);args.out.write_text('\n'.join(lines)+'\n',encoding='utf-8')
+    args.out.parent.mkdir(parents=True,exist_ok=True);args.out.write_bytes(('\n'.join(lines)+'\n').encode('utf-8'))
     print(json.dumps(dict(cues=len(recipe['cue']),gaps=len(recipe.get('gap',[])),files=len(recipe['file']),sha256=sha(args.out.read_bytes()))))
 
 

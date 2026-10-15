@@ -27,6 +27,20 @@ FORM_NOTES = {
     15:'GT Super Saiyan ordinary short bank is silent; short cues reuse GT base Goku recordings; spoken cues may also use GT base',
 }
 
+# Owner listening found adjacent sound-test intros reusing one performance and
+# Piccolo's short challenge finishing halfway through the stock mouth sequence.
+# Use complete alternatives for these exact slots; combat mappings are unchanged.
+# Lines beyond 0/1 are opponent-intro source events whose draft offline ASR has
+# generic wording. They remain candidates for listening/context review, not a
+# claim that the BT3 event itself is an unconditional intro.
+INTRO_FIT_DONORS = {
+    'charsel/c00/variant0': (3197, 6, 'Distinct adult Goku self-introduction'),
+    'charsel/c00/variant1': (3197, 13, 'Distinct adult Goku practice challenge'),
+    'charsel/c01/variant0': (3257, 0, 'Distinct verified generic Pan intro'),
+    'charsel/c10/variant1': (3217, 13, '2.249-second complete challenge for the 2.313-second stock slot'),
+    'charsel/c10/variant6': (3217, 9, '3.159-second complete challenge improves the 5.509-second stock slot; timing gap remains'),
+}
+
 # Bounded second pass: these 13 slots had no fitting preferred-bank candidate.
 # Alternate ADX entries retain the verified generic intro/victory event slot.
 # Kid Boo's five entries use complete same-form exertions, never speech excerpts.
@@ -298,6 +312,18 @@ def main():
                                      transcript_status='nonverbal exertion candidate; no spoken phrase assigned')
                 else:
                     notes['source_context_note']='Intact alternate-form BT3 '+category+' event; words remain untranscribed'
+            if original['id'] in INTRO_FIT_DONORS:
+                alternate_bank,slot,reason=INTRO_FIT_DONORS[original['id']]
+                require(category=='generic-intro','Intro override used outside CHARSEL')
+                candidates=[spoken(alternate_bank,slot)]
+                notes=dict(source_form_note=FORM_NOTES.get(char,'Matching donor character/form'),
+                           source_context_note=('BT3 generic intro event' if slot in (0,1) else
+                                                'BT3 opponent-intro source event; draft wording has no named opponent or relationship claim'),
+                           source_native_event_category=('generic-intro' if slot in (0,1) else 'opponent-intro'),
+                           selection_note=reason,
+                           edit_policy='intact performance; silence trim only; no excerpt or time stretch',
+                           transcript_status='offline ASR hypothesis reviewed for generic wording; listening/context review pending',
+                           review_status='menu duration/variety refinement; candidate for owner audition')
             add(original,file_name,char,cue_category,candidates,notes=notes)
     output=['format_version = 1','codec = "fb-integer-audio-1"',
             'mapping_status = "generic context candidates; in-game audition pending"',
@@ -311,7 +337,7 @@ def main():
     for name in files:table('file',dict(id=name,**target['files'][name]))
     for row in cues:table('cue',row)
     for row in gaps:table('gap',row)
-    args.out.parent.mkdir(parents=True,exist_ok=True);args.out.write_text('\n'.join(output),encoding='utf-8')
+    args.out.parent.mkdir(parents=True,exist_ok=True);args.out.write_bytes('\n'.join(output).encode('utf-8'))
     print(json.dumps(dict(replaced=len(cues),gaps=len(gaps),categories={c:sum(r['category']==c for r in cues) for c in sorted({r['category'] for r in cues})})))
 
 if __name__=='__main__':main()

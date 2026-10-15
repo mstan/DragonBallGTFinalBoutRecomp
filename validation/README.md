@@ -939,3 +939,47 @@ callers support preserving it. Negative ASR does not prove speech absence;
 menu instrument 3's reference decode does not establish native pitch. Receipt:
 `build-audio-review/local-asr/shared-audit/scope-audit.json`, SHA-256
 `c554f7d69578192e2dee0ff925d2afe561b160a7626b6340c13edacb843cf70f`.
+
+### Owner feedback refinements, 2026-10-15
+
+The owner accepts the in-game combat grunts/effects. Sound-test 000/001 and
+002/003 repeated because distinct CHARSEL slots reused the same donors, not
+because the original selector aliases them. The updated recipe changes only
+five intros: Goku variants 0/1 use US2 49180/49187; Pan variant 0 uses 55174 while
+variant 1 retains 55175; Piccolo variants 1/6 use 51187/51183. Piccolo variant 1
+now has 2.249 seconds of speech against the original 2.313, replacing 1.155.
+Variant 6 improves to 3.159 against 5.509; its remaining mouth-animation gap is
+explicit. All are intact performances, without word cuts or time stretching.
+New donor wording is an offline-ASR hypothesis awaiting listening/context review.
+
+Native preparation and full verification pass for the 72,184,832-byte pack,
+SHA-256 `1cc22741f158c096bac7173bbbc4cfeae9dafee829de8044d4879143473330f1`.
+All 381 other cue records and all pack bytes outside the five intro extents
+remain identical. SPU flags, three retained-original gaps and XA data are
+unchanged; no PCM rail samples occur. Independent Sol 6.1 review verifies the
+source hashes, exact integer fits and form/context qualifications. Evidence:
+`build-audio-review/menu-refine/` and the local source-discovery reports.
+The actual launcher media provider also prepares/verifies all eight overlays
+for the new recipe, fingerprint
+`5b68cbfb8d2bb4ede09ae5ee3b96a844dfe23092fecf9ce1265852f6b33efe19`.
+
+The red-sky/teal-floor KO/result rectangle is a separate title-side widescreen
+bug: stage 5 disables its panorama and the old fixed-address gradient recognizer
+misses the pair after pause/result packets shift it in the buffer. The existing
+archived `city-21-9` GAME OVER capture reproduces the report. No shared engine
+change or dependency bump is needed. Exact submitted-pair recognition passes an
+independent native fixture against eleven archived RAM images/thirty pairs,
+including malformed and stale-list rejection and 4:3 identity.
+
+Native Windows CLI rebuild and overlay-toolchain staging pass with two jobs.
+The final 9.25-second muted hidden-presenter replay loads the affected result save
+with completion receipts and captures 16:9/21:9/4:3. Sky/floor fill the wide frame;
+4:3 returns to mode zero. At 21:9 there are 344 background hits, zero rejected,
+stale or mismatched background tags. Normal TCP exit is frame 556, zero
+unsupported instructions or degraded compilation. Executable SHA-256:
+`8ae9ac2740782413ab153d11f4fcc179797c80579b5ae1510f757ce585b1cef4`.
+Evidence: `build-audio-review/effects-stage5/`. The rendering replay disables
+FuniDub to use the ordinary original-audio save and restores owner settings/mod
+selection byte-for-byte. It is result-rendering evidence, not manual progression
+or revised-intro listening acceptance. Broader rendering qualification and the
+earlier rare overlap remain open. Loading work stays parked.

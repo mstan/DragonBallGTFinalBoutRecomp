@@ -39,7 +39,7 @@ format = "file"
 hidden = true
 required = true
 size = 72184832
-sha256 = "56be7a893f913efb193d4de694fec76af11c28df36bbd736418d3fa1a23eaa76"
+sha256 = "1cc22741f158c096bac7173bbbc4cfeae9dafee829de8044d4879143473330f1"
 
 [[overlay]]
 feature = "funidub"
@@ -58,7 +58,7 @@ offset = 30679040
 resource = "pack"
 resource_offset = 9142272
 size = 3469312
-sha256 = "d32babed95e0219b0a325c36deabbd6b4ce8a039a0240242bdc94c10ef5aa7bf"
+sha256 = "e45d88bbfbdf2449c3e8862d8391850d84b200ac77fbba98bb04f11dac9ff198"
 expected_sha256 = "265f1b4e1a3d7694b38e089d3d9d77b8ccfe9c0c5e900d63ba348a06b6a4172d"
 
 [[overlay]]

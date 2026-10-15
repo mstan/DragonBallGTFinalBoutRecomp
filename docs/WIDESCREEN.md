@@ -228,7 +228,8 @@ coverage, not eleven live stage visits.
 
 The rebuilt native hook was exercised on stages 1/2/4/5, with composed captures
 at 16:9/21:9 and a return to 4:3. Green and the tall gradient-free panorama cover
-the displayed width; the disabled-panorama stage retains gradient coverage.
+the displayed width. The disabled-panorama stage was sampled, but the later
+result-effect review below found that its shifted gradients were still narrow.
 Legacy city snapshots restore to a title/selection screen with leftover combat
 RAM and cannot establish a live city pass. A bounded attempt to select a city
 fixture instead reached stages 1/5; its filenames do not establish stage identity.
@@ -261,3 +262,32 @@ ownership is `beads-h696`; game symptom ownership stays `beads-q6ao`.
 An 18.80-second native integration verifies explicit scale steps, composed
 21:9 coverage and 4:3 return. The rare overlap remains unresolved; no claim of
 all-stage live acceptance or a flicker cure follows from this separate fix.
+
+### Stage 5 pause/result background repair, 2026-10-15
+
+The owner's KO/GAME OVER captures exposed another title-side gap. Stage 5's
+panorama is disabled; its red-sky and teal-floor G4 gradients are standalone.
+The hook recognized them only at the beginning of each packet bank. Pause/result
+glyphs and an E1+TILE effect move the pair later in the bank, so it lost its
+background tags. The archived `city-21-9` result capture already contains this
+defect; its filename describes an attempted route, not a city-stage identity.
+The fade TILE itself already expands through the existing renderer service.
+
+The hook now recognizes the pair from the submitted DMA list. Exact stage,
+resource, producer, packet shape and OT-link guards qualify both gradients,
+including their authored outer Y edges and common horizon color. Recognition
+starts from the second allocation: its link proves the first allocation is also
+in this submission. Stale pairs elsewhere in RAM remain untagged. No guest RAM,
+projection, culling, dependency pin or shared renderer code changes.
+
+An independent native fixture executes the actual hook against eleven archived
+stage-5 RAM images and thirty serialized pairs. Guard/link/geometry/color
+mutations, stale-list exclusion and 4:3 identity checks pass. The rebuilt native
+release then replays the affected result save at 16:9, 21:9 and 4:3 in 9.25
+seconds. Composed captures show continuous sky/floor coverage and return to mode
+zero; background tags report no rejection or content mismatch. It exits normally
+via TCP at frame 556, with zero unsupported instructions. Local evidence is in
+`build-audio-review/effects-stage5/`; executable SHA-256:
+`8ae9ac2740782413ab153d11f4fcc179797c80579b5ae1510f757ce585b1cef4`.
+This repairs the demonstrated rectangle; broader effects and the earlier rare
+green-stage overlap remain outside this focused check.

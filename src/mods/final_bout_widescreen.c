@@ -82,6 +82,49 @@ static int is_gradient(uint32_t packet, uint32_t words, uint32_t opcode) {
     return gradient_shape_matches(packet, words, opcode);
 }
 
+/* Stage 5 disables its panorama, so there is no sky composite from which to
+ * discover these two gradients. Pause/result glyphs and the E1+TILE filter
+ * precede them in the pool. Prove the serialized pair and its OT links at the
+ * submitted position rather than assuming the first allocation in either bank.
+ * Camera/flash updates may already have changed the live source descriptors. */
+static int tag_standalone_gradients(uint32_t second) {
+    uint32_t bank, first, terminal;
+    if (second >= 0x801D0000u && second < 0x801D3000u) bank = 0x801D0000u;
+    else if (second >= 0x801D3000u && second < 0x801D6000u) bank = 0x801D3000u;
+    else return 0;
+    if ((second & 3u) || second < bank + 36u ||
+        second > bank + 0x3000u - 36u) return 0;
+    first = second - 36u;
+    if ((psx_mod_read_half(0x8003BC7Au) >> 8) != 5u ||
+        psx_mod_read_word(0x801B0004u) != 0x20200210u ||
+        psx_mod_read_word(0x801B1004u) != 0x01020002u ||
+        psx_mod_read_word(0x800A9BDCu) != 0x80000000u ||
+        /* Stage count, source base/stride, OT bucket and G4 serializer. */
+        psx_mod_read_word(0x8006F718u) != 0x01010200u ||
+        psx_mod_read_word(0x8004B86Cu) != 0x263188CCu ||
+        psx_mod_read_word(0x8004B890u) != 0x0C00855Au ||
+        psx_mod_read_word(0x8004B8B8u) != 0x26310024u ||
+        psx_mod_read_word(0x800555E4u) != 0x240503FFu ||
+        psx_mod_read_word(0x800555FCu) != 0x0C012DF8u ||
+        psx_mod_read_word(0x80021580u) != 0x8D020004u ||
+        psx_mod_read_word(0x8002170Cu) != 0x0C008535u) return 0;
+    terminal = bank == 0x801D0000u ? 0x001DFFF8u : 0x001E1FF8u;
+    if (psx_mod_read_word(first) != (0x08000000u | terminal) ||
+        psx_mod_read_word(second) != (0x08000000u | (first & 0xFFFFFFu)) ||
+        !gradient_shape_matches(first, 8u, psx_mod_read_word(first + 4u) >> 24) ||
+        !gradient_shape_matches(second, 8u, psx_mod_read_word(second + 4u) >> 24) ||
+        (int16_t)psx_mod_read_half(first + 10u) != -128 ||
+        (int16_t)psx_mod_read_half(second + 26u) != 128 ||
+        (psx_mod_read_word(first + 20u) & 0xFFFFFFu) !=
+            (psx_mod_read_word(second + 4u) & 0xFFFFFFu)) return 0;
+    /* The live walk reaches the second allocation first. Its checked link
+     * leads directly to the first, proving both belong to this submission. */
+    gpu_ws_tag_background_prim(first);
+    gpu_ws_tag_background_prim(second);
+    psx_mod_counter_add("finalbout.ws.standalone_gradient", 2u);
+    return 1;
+}
+
 /* 8004D534 submits the stage panorama object through 80020C3C. The HAIKEI
  * resources contain these exact map/atlas header pairs, all with 32px tiles.
  * 8004C244..384 copies their dimensions/pointers into the panorama object.
@@ -336,6 +379,8 @@ static void tag_list(CPUState *cpu, uint32_t address) {
         } else if (is_gradient(packet, words, opcode)) {
             gpu_ws_tag_background_prim(packet);
             psx_mod_counter_add("finalbout.ws.gradient", 1u);
+        } else if (words == 8u && opcode == 0x38u) {
+            (void)tag_standalone_gradients(packet);
         } else if ((words == 5u && opcode == 0xE1u) ||
                    (words == 9u && opcode == 0x2Cu)) {
             (void)tag_sky_composite(packet);

@@ -52,6 +52,16 @@ Saiyan Goku's silent short bank uses GT base child Goku recordings. Other
 era/form substitutions are explicit in the recipe. No adult Goku voice is
 silently assigned to child Goku.
 
+The owner accepted the combat grunts and effects during in-game listening.
+Menu variety and timing feedback led to five introduction changes: Goku
+variants 0/1 now use distinct complete lines, and Pan variant 0 now differs
+from the unchanged variant 1. Piccolo variant 1 grows from 1.155 to 2.249 seconds
+(stock: 2.313); variant 6 grows from 2.385 to 3.159 seconds (stock: 5.509).
+These refinements retain intact phrases without cutting words or stretching
+recordings. Stock mouth animation remains unchanged, so timing differences
+remain, especially Piccolo variant 6. The five revised introductions await
+owner audition.
+
 ## Preparation and validation
 
 The portable native builder checks the original resource hashes, donor PVD/AFS
@@ -70,7 +80,9 @@ establish perfect animation sync or prove the overwritten audio contains no
 embedded effects; short listening review remains appropriate.
 
 The current pack is 72,184,832 bytes, SHA-256
-`56be7a893f913efb193d4de694fec76af11c28df36bbd736418d3fa1a23eaa76`.
+`1cc22741f158c096bac7173bbbc4cfeae9dafee829de8044d4879143473330f1`.
+Its recipe SHA-256 is
+`ae45f125b8748d7df75262838a2572ef7f424e79966c40097d2ce1e0992a955d`.
 Full-pack checks find all 386 replacements nonzero, unchanged unmapped bytes,
 unchanged SPU flags and XA controls/reserved bytes, valid present EDCs and no
 PCM rail samples. Native XA decoding matches FFmpeg 7.1 byte for byte on four
@@ -78,6 +90,11 @@ whole original streams at both supported rates. The extended builder still
 produces the prior 290-cue pack byte for byte. Independent review checked
 source categories, form/age substitutions, exact fit and native timing; it
 caught the short Baby stream-switch exception above.
+
+The five-introduction refinement passed full verification and independent
+review: the other 381 recipe records and all pack bytes outside those five
+intro extents are identical; flags and retained-original gaps are unchanged,
+and no PCM rail samples were found.
 
 The prior native launcher checks cover source selection, progress/Cancel,
 closing during preparation and corrupt-cache repair. A representative muted
@@ -92,8 +109,9 @@ pack, native XA deliveries occur, and save/load followed by resumed frames
 succeeds. It exits normally with zero unsupported instructions or segment
 misses. The diagnostic watchdog allowance and a generated freeze diagnostic
 remain qualification limits; this is not a stall fix. Detailed evidence is in
-`validation/README.md`. The owner's earlier donor reel approval does not
-establish acceptance of every mapping. High-level listening remains open.
+`validation/README.md`. These runtime checks precede the five menu refinements;
+the current pack has not yet had a runtime check. Owner acceptance of the
+combat audio does not establish acceptance of every mapping.
 
 The framework installs eight immutable resource-backed overlays after checking
 the exact disc identity and stock ranges. Prepared bytes participate in the

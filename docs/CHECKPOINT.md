@@ -5,6 +5,13 @@ authorized Sol 6.1 subagents with adversarial review for this task. The record
 below describes the original checkpoint. Current evidence is appended to
 `validation/README.md` and `docs/WIDESCREEN.md`; the port remains incomplete.
 
+Latest owner feedback (2026-10-15): combat grunts/effects sound good. Five menu
+introductions now improve Goku/Pan variety and Piccolo duration; revised-line
+audition remains pending. The reported red-sky KO/result 4:3 rectangle is repaired
+with guarded standalone-gradient recognition and a short composed-capture replay.
+Read the latest entries in `docs/FUNIDUB.md`, `docs/WIDESCREEN.md` and validation.
+Loading work remains parked.
+
 Latest owner scope: complete FuniDub from the BT3 USA source. Source tables,
 original pitch and donor categories now support 386 selected SPU/XA replacements,
 including tournament wins. Three selected timing/fit gaps retain originals.

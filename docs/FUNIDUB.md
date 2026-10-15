@@ -38,6 +38,10 @@ retain originals. Looping/shared effects, unclassified sounds and movie/music
 assets also remain original. This denominator describes selected candidates,
 not a claim that every sound or performer in the game has been audited.
 
+A bounded shared-bank audit found no confirmed omitted spoken/menu cue. Two
+common attack samples remain ambiguous nonverbal vocals versus effects and
+are preserved. Negative transcription results do not establish absence of speech.
+
 The owner permits suitable generic introductions, victory lines and grunts.
 These mappings are context substitutions, not literal translations. Named calls
 are used where source evidence supports them; uncertain attacks use complete

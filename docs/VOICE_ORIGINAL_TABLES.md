@@ -360,6 +360,18 @@ it does **not** prove that any XA PCM is voice-only or lacks embedded effects.
 
 ## Guards and remaining qualification
 
+A final bounded shared-bank audit regenerated the common BTCHARA and both
+VABDATA tables. The resident 19-sample bank has nine looping waveforms, varied
+base notes and sequenced-music callers; replacing these as dialogue is
+unsupported. Twenty-two finite common-combat/menu candidates were decoded for
+local research. No confirmed omitted spoken announcer/menu cue emerged.
+Common waves 13/14 (events `1F/20`) remain possible nonverbal vocals versus
+effects; their shared, repetitive use across characters supports preserving
+them, not a claim they contain no voice. Menu instrument 3 lacks a recovered
+direct caller, so its note-60 decode is a reference pitch only. Ignored receipts
+live in `build-audio-review/local-asr/shared-audit/`; blank model output is not
+proof of speech absence. No shared-bank replacement was added from this audit.
+
 The local inventory guards exact resident lookup/KEYON instructions, pitch
 table, overlay call sites and all three sector tables by SHA-256 and raw words.
 Useful opcode checks include `0x80013B20=0x27BDFF88`,

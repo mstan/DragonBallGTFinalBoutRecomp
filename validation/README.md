@@ -930,3 +930,12 @@ coverage are not established by these byte checks. No broad netplay campaign or
 HLE/loading work was repeated. Game processes exit; owner settings/mod selection
 are restored, and the preexisting game.toml preference remains unstaged. No media,
 transcripts, packs, saves or generated code are included in Git.
+
+The final bounded shared-bank audit regenerates three tables and verifies 22
+finite local WAV/ASR records. No confirmed omitted spoken announcer/menu cue
+emerges; common combat waves 13/14 remain ambiguous vocal/effect candidates and
+are preserved. The resident instrument bank's loops, varying pitches and music
+callers support preserving it. Negative ASR does not prove speech absence;
+menu instrument 3's reference decode does not establish native pitch. Receipt:
+`build-audio-review/local-asr/shared-audit/scope-audit.json`, SHA-256
+`c554f7d69578192e2dee0ff925d2afe561b160a7626b6340c13edacb843cf70f`.

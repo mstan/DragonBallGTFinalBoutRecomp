@@ -51,11 +51,14 @@ hooks. Fresh resolution selection comes from the shared 4x mod, with bounded
 
 ## Dependency and feature preservation
 
-The engine pin is the reviewed shared master. Final Bout retains its original
-recomp-ui `1fa1f24da1efa91cf1e13fbb771507b433d78b83` pin because FuniDub uses
-its owned preparation progress and cooperative cancellation. Do not replace
-that UI with a revision lacking `RECOMP_LAUNCHER_HAS_MOD_PREPARATION_PROGRESS`.
-The engine keeps that optional bridge. FuniDub's native builder, verified
+The engine pin is the reviewed shared master. The recomp-ui pin
+`1f55b10858ac0118bf89fbc5274f39d816ec78c5` merges current shared UI `3f1d6f1`
+with Final Bout's original `1fa1f24` owned preparation progress and cooperative
+cancellation. This retains the current native memory-card exclusive-create
+safety fix, shared settings behavior and full Internal Resolution mod selector.
+Do not replace that UI with a revision lacking
+`RECOMP_LAUNCHER_HAS_MOD_PREPARATION_PROGRESS`. The engine keeps that optional
+bridge. FuniDub's native builder, verified
 recipe/output identities, cache and original-audio fallback are unchanged.
 
 Keep game dumps, generated game C, retail BIOS, extracted audio and packs out

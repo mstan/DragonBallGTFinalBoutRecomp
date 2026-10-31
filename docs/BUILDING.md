@@ -1,11 +1,10 @@
 # Building from source
 
-The downloadable Windows release includes its runtime setup tools. These
-instructions are for developers building the repository itself.
+The downloadable Windows release includes OpenBIOS and portable local overlay
+setup tools. Source developers use the pinned shared release builder and the
+title recipe in `packaging/release.toml`.
 
-Use the pinned framework's [setup guide](https://github.com/RetroPortingToolKit/psxrecomp/blob/c91331ff67c8797a5c0a74332e019f143bdb0270/docs/GAME_PROJECT_SETUP.md)
-and [local codegen contract](https://github.com/RetroPortingToolKit/psxrecomp/blob/c91331ff67c8797a5c0a74332e019f143bdb0270/docs/LOCAL_CODEGEN_SDK.md). Initialize
-the committed dependencies from the repository root:
+Initialize the committed dependencies from the repository root:
 
 ```powershell
 & "$env:ProgramFiles\Git\cmd\git.exe" submodule update --init --recursive
@@ -16,54 +15,51 @@ The configured single-track image has MD5 `2f869f926514278b72ffbd671e69b9f7`
 and SHA-1 `8a2373f133788256cba64a1a0ba9fbb4b4667f71`. These identify the
 tested source, not an independent dump-database certification.
 
-## Windows generation and build
+## Windows release
 
-Install the native RetComM `cmake-clang-v1` toolchain, version `1.0.14`, and
-native Python 3.12. Adjust the paths below to your installations. Run from
-the repository root:
-
-```powershell
-$env:RETCOMM_TOOLCHAIN_DIR = "$env:LOCALAPPDATA\RetComM\toolchains\cmake-clang-v1\1.0.14"
-$env:PSXRECOMP_TOOLCHAIN_DIR = $env:RETCOMM_TOOLCHAIN_DIR
-$env:CMAKE_BUILD_PARALLEL_LEVEL = '2'
-$nativePython = "$env:LOCALAPPDATA\Programs\Python\Python312\python.exe"
-& $nativePython psxrecomp/psxrecomp_cli.py generate --config game.toml --project-root . --disc 'disc/Dragon Ball GT - Final Bout (USA).cue'
-& $nativePython psxrecomp/psxrecomp_cli.py rebuild --config game.toml --project-root . --build-dir build-release --no-pgo --cmake-extra=-DPSX_DEBUG_TOOLS=OFF --cmake-extra=-DPSX_GAME_VERSION=1.0.0
-```
-
-Use explicit native executables when PATH contains MSYS/Cygwin shims.
-`RETCOMM_TOOLCHAIN_DIR` takes precedence over `PSXRECOMP_TOOLCHAIN_DIR`, so set
-both. The CLI rebuild stages the overlay toolchain beside the executable;
-a manual CMake build alone does not prepare that runtime path. Enable
-`PSX_DEBUG_TOOLS` only for diagnostic builds.
-
-## Release packaging
-
-After building the matching version, run the native packaging helper:
+With native Python 3.12+, CMake, Ninja and the supported native MinGW toolchain
+installed, keep the original CUE and BIN together under `disc/` with the names
+declared in `game.toml`. Extract the original boot executable using the shared
+disc probe, then invoke the shared builder from this title's repository root:
 
 ```powershell
-& $nativePython tools/package_release.py --build-dir build-release --output-dir dist
+python psxrecomp/tools/new_project_layout/probe_disc.py `
+  'disc/Dragon Ball GT - Final Bout (USA).cue' --write-boot-exe disc
+& psxrecomp/tools/package_title_release.ps1 --channel public --platform windows --jobs 2
 ```
 
-It stages a clean Windows x64 payload, strips the staged executable, binds its
-execution manifest, verifies the bundled mod catalog and writes a ZIP plus
-SHA-256 checksums. It uses committed runtime configuration, not personal
-settings from the build directory. The package includes OpenBIOS, notices,
-and the portable overlay toolchain; overlays compile locally from the
-player's disc. It excludes disc images, prepared audio, saves and generated
-game code. Check the extracted package with a fresh cache and without the
-developer SDK before publishing.
+The builder regenerates the game from the disc, builds both emitters, uses
+fresh per-title selective runtime PGO on supported GNU/Ninja builds, and
+verifies the clean public package. It requires real muted boot training and
+normal close before the strict use build. Training does not establish gameplay
+coverage or a per-title performance gain. Compiler/profile data is not shipped.
+Other toolchains must truthfully record their portable unprofiled path.
 
-## Repository layout
+`scripts/package_release.sh` delegates to the same builder; it accepts the
+shared command's options rather than the retired prebuilt-build-directory
+arguments. See the pinned engine's `docs/RELEASING_A_TITLE.md` for toolchain,
+output-directory and package-verification options. No title-specific packager
+or blanket developer-build archive is used.
 
-- `game.toml`, `catalog_identity.json`, `disc_probe.json`: title and disc identity.
-- `seeds/`, `symbols.toml`, `psx_symbols.h`: discovery and symbol map.
-- `psxrecomp/`, `recomp-ui/`: pinned submodules; recomp-net is nested.
-- `src/mods/`, `src/audio/`, `mods/preloaded/`: title plugins and FuniDub recipes.
-- `docs/`, `validation/`: design, provenance and validation evidence.
-- `disc/`, `generated/`, `build*/`, `analysis/`, `local-media/`: ignored local data.
+The public ZIP includes the compiled game, bundled OpenBIOS, reviewed mod
+catalog, notices and portable overlay toolchain. It excludes disc images,
+prepared voice recordings, settings, native saves and disposable snapshots.
+CD Speed and Fast Loading packages are excluded. The player config preserves
+digital-pad enforcement, local overlay caching, netplay and title widescreen
+hooks. Fresh resolution selection comes from the shared 4x mod, with bounded
+1x through 32x choices.
 
-Keep game dumps, generated game C, retail BIOS, Ghidra databases, extracted
-assets and audio out of commits. The selected gameplay screenshots in
-`docs/screenshots/` are documentation images. See [AGENTS.md](../AGENTS.md)
-for engineering and central issue-tracking instructions.
+## Dependency and feature preservation
+
+The engine pin is the reviewed shared master. The recomp-ui pin
+`1f55b10858ac0118bf89fbc5274f39d816ec78c5` merges current shared UI `3f1d6f1`
+with Final Bout's original `1fa1f24` owned preparation progress and cooperative
+cancellation. This retains the current native memory-card exclusive-create
+safety fix, shared settings behavior and full Internal Resolution mod selector.
+Do not replace that UI with a revision lacking
+`RECOMP_LAUNCHER_HAS_MOD_PREPARATION_PROGRESS`. The engine keeps that optional
+bridge. FuniDub's native builder, verified
+recipe/output identities, cache and original-audio fallback are unchanged.
+
+Keep game dumps, generated game C, retail BIOS, extracted audio and packs out
+of commits. Read [AGENTS.md](../AGENTS.md) for central tracking and scoped QA.

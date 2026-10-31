@@ -42,7 +42,6 @@ overlay_cache = true
 
 [video]
 renderer = "opengl"
-internal_resolution = "1080p"
 aspect_ratio = "4:3"
 
 [controller]

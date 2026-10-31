@@ -1,0 +1,31 @@
+Dragon Ball GT: Final Bout Recompiled @VERSION@
+Windows x64
+
+Extract the entire ZIP, then run DragonBallGTFinalBout_Recompiled.exe.
+Select your own USA Final Bout CUE + BIN image (SLUS-00493).
+Bundled OpenBIOS and portable setup tools need no compiler installation.
+First use compiles and caches overlays locally from your disc.
+
+Choose a controller in the launcher. This title uses digital pads; the mode
+is locked so a stale Analog setting cannot disconnect the controller.
+Native memory cards are persistent progress. Preserve them when updating.
+Disposable save states belong to this build; older snapshots may be rejected.
+
+Internal Resolution starts enabled at 4x for fresh settings. Choose 1x through
+32x in Mods; GPU texture and memory limits may clamp higher choices. Disabling
+the mod selects native resolution. Your existing saved choices are retained.
+
+Mods > Display > Widescreen: enable Adaptive framing through 21:9.
+Menus and movies retain their original proportions.
+Mods > Audio > FuniDub: enable and select your own USA PS2 Budokai Tenkaichi 3
+ISO (SLUS-21678). Preparation reports progress, supports cancellation, and
+reuses its verified local voice cache. No recordings are included.
+FuniDub uses separate disposable save-state slots; native memory cards remain shared.
+
+NETPLAY: online lobbies or LAN / Direct IP. Both players use the same release
+and compatible disc/mod content; each prepares FuniDub locally if enabled.
+No game media, personal settings, saves or prepared voice packs are included.
+CD Speed and Fast Loading packages are excluded.
+
+Help and known limitations:
+https://github.com/mstan/DragonBallGTFinalBoutRecomp

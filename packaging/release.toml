@@ -1,0 +1,26 @@
+schema = 1
+
+[product]
+name = "DragonBallGTFinalBoutRecompiled"
+display_name = "Dragon Ball GT: Final Bout Recompiled"
+exe_name = "DragonBallGTFinalBout_Recompiled"
+version_file = "VERSION"
+game_toml = "game.toml"
+runtime_target = "psx-runtime"
+
+[build]
+regenerate = true
+selective_pgo = true
+cmake_args = ["-DPSX_SDL_BACKEND=SDL3", "-DPSX_EXECUTION_PROFILE=ENHANCED"]
+windows_cmake_args = ["-DCMAKE_EXE_LINKER_FLAGS=-Wl,--no-insert-timestamp"]
+
+[aot]
+mode = "none"
+
+[overlay_toolchain]
+ship = true
+
+[payload]
+start_here = "packaging/START_HERE.txt"
+files = ["README.md", { from = "docs/RELEASE_NOTES_1.0.1.md", to = "RELEASE_NOTES.md" },
+  { from = "docs/FUNIDUB.md", to = "docs/FUNIDUB.md" }]

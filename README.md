@@ -4,7 +4,7 @@ Play **Dragon Ball GT: Final Bout** on PC with higher internal resolution,
 adaptive widescreen, online multiplayer, and an optional English voice mod
 using recordings from **Dragon Ball Z: Budokai Tenkaichi 3**.
 
-**[Download v1.0.0 for Windows x64](https://github.com/mstan/DragonBallGTFinalBoutRecomp/releases/tag/v1.0.0)**
+**[Download v1.0.1 for Windows x64](https://github.com/mstan/DragonBallGTFinalBoutRecomp/releases/tag/v1.0.1)**
 
 ![Ultrawide combat with the HUD positioned at the edges of the screen](docs/screenshots/combat-ultrawide.png)
 
@@ -17,8 +17,10 @@ using recordings from **Dragon Ball Z: Budokai Tenkaichi 3**.
   victory lines. Import once; subsequent launches reuse the local cache.
 - **Netplay powered by recomp-net:** two-player online lobbies and LAN / direct
   IP play, plus local versus with separate controller ports.
-- **Higher internal resolution**, controller configuration and save states,
-  all accessible from the launcher.
+- **Internal Resolution:** enabled at 4x for fresh settings, with 1x through
+  32x choices in Mods, subject to GPU texture and memory limits. Existing saved
+  choices are preserved. Controller configuration and save states remain
+  accessible from the launcher.
 
 ## Getting started
 

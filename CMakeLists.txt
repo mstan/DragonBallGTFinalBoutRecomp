@@ -37,6 +37,9 @@ psxrecomp_add_game_runtime(psx-runtime
     GEN_MARKER "generated/SLUS_004.93_dispatch.c"
     GEN_FULL_GLOB "generated/SLUS_004.93_full_*.c"
     CODEGEN_SETUP_SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/codegen_setup.c"
+    EXCLUDE_BUILTIN_MODS
+        psx.enhancement.cd-speed
+        psx.enhancement.fast-loading
 )
 
 foreach(_FINAL_BOUT_RUNTIME psx-runtime psx-runtime-pgxp)

@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Dragon Ball GT: Final Bout Recompiled
+Comment=Play Dragon Ball GT: Final Bout using your own game disc
+Exec=@EXE_NAME@
+Icon=io.github.mstan.DragonBallGTFinalBoutRecomp
+Categories=Game;
+Terminal=false

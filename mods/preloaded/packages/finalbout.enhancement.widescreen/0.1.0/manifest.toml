@@ -15,7 +15,7 @@ id = "widescreen"
 name = "Widescreen"
 description = "Reveal a wider combat view. Menus and movies preserve their original proportions."
 group = "Display"
-default_enabled = false
+default_enabled = true
 
 [[option]]
 feature = "widescreen"

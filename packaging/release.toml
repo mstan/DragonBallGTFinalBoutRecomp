@@ -22,5 +22,5 @@ ship = true
 
 [payload]
 start_here = "packaging/START_HERE.txt"
-files = ["README.md", { from = "docs/RELEASE_NOTES_1.0.1.md", to = "RELEASE_NOTES.md" },
+files = ["README.md", { from = "docs/RELEASE_NOTES_1.0.2.md", to = "RELEASE_NOTES.md" },
   { from = "docs/FUNIDUB.md", to = "docs/FUNIDUB.md" }]

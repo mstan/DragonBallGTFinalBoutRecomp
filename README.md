@@ -24,11 +24,11 @@ using recordings from **Dragon Ball Z: Budokai Tenkaichi 3**.
 
 ## Getting started
 
-1. Download the Windows x64 ZIP from the release page and extract it completely.
-2. Run **DragonBallGTFinalBout_Recompiled.exe**.
-3. Select your own **USA Final Bout disc image (SLUS-00493)** when prompted.
+1. On Windows, extract the Windows x64 ZIP and run **DragonBallGTFinalBout_Recompiled.exe**.
+   On Linux, make the AppImage executable and open it.
+2. Select your own **USA Final Bout disc image (SLUS-00493)** when prompted.
    Use a CUE + BIN image and keep its files together.
-4. Choose your controller in the launcher and press **PLAY**.
+3. Choose your controller in the launcher and press **PLAY**.
 
 The release includes OpenBIOS and the tools needed for local setup. You do not
 need to install a compiler, Python or a retail PlayStation BIOS. The first run

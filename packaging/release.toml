@@ -11,6 +11,7 @@ runtime_target = "psx-runtime"
 [build]
 regenerate = true
 selective_pgo = true
+pgo_train_frames = 600
 cmake_args = ["-DPSX_SDL_BACKEND=SDL3", "-DPSX_EXECUTION_PROFILE=ENHANCED"]
 windows_cmake_args = ["-DCMAKE_EXE_LINKER_FLAGS=-Wl,--no-insert-timestamp"]
 
@@ -24,3 +25,10 @@ ship = true
 start_here = "packaging/START_HERE.txt"
 files = ["README.md", { from = "docs/RELEASE_NOTES_1.0.2.md", to = "RELEASE_NOTES.md" },
   { from = "docs/FUNIDUB.md", to = "docs/FUNIDUB.md" }]
+
+[linux]
+app_run = "psxrecomp/tools/new_project_layout/templates/AppRun.in"
+desktop_file = "packaging/linux/io.github.mstan.DragonBallGTFinalBoutRecomp.desktop"
+icon = "assets/psxrecomp.png"
+payload_dir = "dragonballgtfinalbout-recomp"
+env_prefix = "FINALBOUT_RECOMP"

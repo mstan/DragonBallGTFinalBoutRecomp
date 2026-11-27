@@ -24,7 +24,7 @@
 #define FINAL_BOUT_HOST_ABI "win64-mingw-gcc15.2.0"
 #endif
 #define FINAL_BOUT_HOST_EXECUTION "13c9da33d6a6cfbe8cfeea05b8f7d28d03a51476292eb60b11dd386550d03ccb"
-#define FINAL_BOUT_HOST_POLICY FINAL_BOUT_HOST_PROFILE "/v1;abi=" FINAL_BOUT_HOST_ABI ";execution=" FINAL_BOUT_HOST_EXECUTION ";kernel=host-native-v1;cpu=x64-portable-known;fp=2;bios=OPENBIOS:c4daeb88;overlays=interpreted-sealed;manifest=sha256-v1;artifact=exact;seats=2;mode=delay;renderer=opengl-dual-raster;texture-banks=off;aspect=0-2;loading=0-1;pgxp=compiled;observer=off;debug=off;route=normal"
+#define FINAL_BOUT_HOST_POLICY FINAL_BOUT_HOST_PROFILE "/v1;abi=" FINAL_BOUT_HOST_ABI ";execution=" FINAL_BOUT_HOST_EXECUTION ";kernel=host-native-v1;cpu=x64-portable-known;fp=2;bios=OPENBIOS:c4daeb88;overlays=interpreted-sealed;manifest=sha256-v1;artifact=exact;seats=2;mode=delay;renderer=opengl-dual-raster;texture-banks=off;aspect=0-2;loading=0-1;precision=artifact-and-execution-id;observer=off;debug=off;route=normal"
 
 static bool valid_sha(const char *s) {
     if (!s || std::strlen(s) != 64) return false;
@@ -53,7 +53,7 @@ static int final_bout_native_host_profiles(const PSXModNetplayHostStartup *c, PS
     if (!out) return 0;
     out->rules = nullptr;
     out->count = 0;
-#if FINAL_BOUT_HOST_COMPILER && defined(PSX_NO_DEBUG_TOOLS) && defined(PSX_PGXP) && PSX_PGXP
+#if FINAL_BOUT_HOST_COMPILER && defined(PSX_NO_DEBUG_TOOLS)
     if (!c || !c->actual_executable_sha256 || !PSX_EXECUTION_ENHANCED ||
         std::strcmp(PSX_EXECUTION_ID, FINAL_BOUT_HOST_EXECUTION) || psx_mod_netplay_profile()) return refuse_context(c);
     unsigned image_nonzero = 0;
@@ -92,8 +92,7 @@ static int final_bout_native_host_profiles(const PSXModNetplayHostStartup *c, PS
     out->count = 1;
     return 1;
 #else
-    (void)c;
-    return 0;
+    return refuse_context(c);
 #endif
 }
 

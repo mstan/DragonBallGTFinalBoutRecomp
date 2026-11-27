@@ -17,10 +17,10 @@
 #endif
 
 #if defined(__linux__)
-#define FINAL_BOUT_HOST_PROFILE "final_bout.linux64.enhanced.release"
+#define FINAL_BOUT_HOST_PROFILE "finalbout.linux64.native"
 #define FINAL_BOUT_HOST_ABI "linux-gnu-gcc13.3.0"
 #else
-#define FINAL_BOUT_HOST_PROFILE "final_bout.win64.enhanced.release"
+#define FINAL_BOUT_HOST_PROFILE "finalbout.win64.native"
 #define FINAL_BOUT_HOST_ABI "win64-mingw-gcc15.2.0"
 #endif
 #define FINAL_BOUT_HOST_EXECUTION "13c9da33d6a6cfbe8cfeea05b8f7d28d03a51476292eb60b11dd386550d03ccb"
@@ -75,8 +75,10 @@ static int final_bout_native_host_profiles(const PSXModNetplayHostStartup *c, PS
         (c->direct_loopback_scope != 0 && c->direct_loopback_scope != 1) ||
         c->declared_build_manifest_schema != 1 || !valid_sha(c->declared_build_manifest_sha256)) return refuse_context(c);
     static PSXHostProfileRule rule;
+    static_assert(sizeof(FINAL_BOUT_HOST_PROFILE) <= sizeof rule.profile,
+        "Final Bout profile name exceeds the shared host-profile field");
     std::memset(&rule, 0, sizeof rule);
-    std::strcpy(rule.profile, FINAL_BOUT_HOST_PROFILE);
+    std::memcpy(rule.profile, FINAL_BOUT_HOST_PROFILE, sizeof(FINAL_BOUT_HOST_PROFILE));
     rule.revision = 1;
     rule.priority = 1;
     rule.flags = PSX_HOST_PROFILE_PORTABLE;

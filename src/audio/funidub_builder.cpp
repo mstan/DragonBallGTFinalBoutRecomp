@@ -1,5 +1,6 @@
 #include "funidub_builder.h"
 #include "psx_sha256.h"
+#include "psx_path_utf8.h"
 #include "toml.hpp"
 #include <algorithm>
 #include <array>
@@ -60,7 +61,7 @@ static BuildResult build_impl(const fs::path& target_path,const fs::path& donor_
     const auto recipe_bytes=read(recipe_file,0,fs::file_size(recipe_path));
     BuildResult result;result.recipe_sha256=digest(recipe_bytes);
     std::istringstream recipe_stream(std::string(recipe_bytes.begin(),recipe_bytes.end()));
-    const auto recipe=toml::parse(recipe_stream,recipe_path.u8string());
+    const auto recipe=toml::parse(recipe_stream,psx_path::utf8(recipe_path));
     const auto recipe_version=number(recipe,"format_version");
     need((recipe_version==1 || recipe_version==2) && toml::find<std::string>(recipe,"codec")==codec_version,"Unsupported FuniDub recipe version");
     need(fs::file_size(target_path)==158811744 && fs::file_size(donor_path)==3020816384,"Unsupported game image size");

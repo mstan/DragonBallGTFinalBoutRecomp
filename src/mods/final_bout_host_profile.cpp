@@ -23,8 +23,8 @@
 #define FINAL_BOUT_HOST_PROFILE "finalbout.win64.native"
 #define FINAL_BOUT_HOST_ABI "win64-mingw-gcc15.2.0"
 #endif
-#define FINAL_BOUT_HOST_EXECUTION "13c9da33d6a6cfbe8cfeea05b8f7d28d03a51476292eb60b11dd386550d03ccb"
-#define FINAL_BOUT_HOST_POLICY FINAL_BOUT_HOST_PROFILE "/v1;abi=" FINAL_BOUT_HOST_ABI ";execution=" FINAL_BOUT_HOST_EXECUTION ";kernel=host-native-v1;cpu=x64-portable-known;fp=2;bios=OPENBIOS:c4daeb88;overlays=interpreted-sealed;manifest=sha256-v1;artifact=exact;seats=2;mode=delay;renderer=opengl-dual-raster;texture-banks=off;aspect=0-2;loading=0-1;precision=artifact-and-execution-id;observer=off;debug=off;route=normal"
+#define FINAL_BOUT_HOST_EXECUTION "2cee93581df7c4f1e119990ecebb2a4b5a9fcdeb5342f576c79940e4a2cf3294"
+#define FINAL_BOUT_HOST_POLICY FINAL_BOUT_HOST_PROFILE "/v2;abi=" FINAL_BOUT_HOST_ABI ";execution=" FINAL_BOUT_HOST_EXECUTION ";kernel=compiled-openbios-v1;cpu=x64-portable-known;fp=2;bios=OPENBIOS:c4daeb88;overlays=interpreted-sealed;manifest=sha256-v1;artifact=exact;seats=2;mode=delay;renderer=opengl-dual-raster;texture-banks=off;aspect=0-2;loading=0-1;precision=artifact-and-execution-id;observer=off;debug=off;route=normal"
 
 static bool valid_sha(const char *s) {
     if (!s || std::strlen(s) != 64) return false;
@@ -79,7 +79,7 @@ static int final_bout_native_host_profiles(const PSXModNetplayHostStartup *c, PS
         "Final Bout profile name exceeds the shared host-profile field");
     std::memset(&rule, 0, sizeof rule);
     std::memcpy(rule.profile, FINAL_BOUT_HOST_PROFILE, sizeof(FINAL_BOUT_HOST_PROFILE));
-    rule.revision = 1;
+    rule.revision = 2;
     rule.priority = 1;
     rule.flags = PSX_HOST_PROFILE_PORTABLE;
     rule.implementation_count = 1;

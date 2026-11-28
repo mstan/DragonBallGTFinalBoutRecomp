@@ -65,6 +65,7 @@ if(BUILD_TESTING AND CMAKE_CXX_COMPILER_ID STREQUAL "GNU" AND
         src/mods/final_bout_host_profile.cpp "${PSXRECOMP_ROOT}/runtime/src/psx_sha256.c"
         "${PSXRECOMP_ROOT}/runtime/src/netplay_host_profile.c")
     target_include_directories(final-bout-host-profile-test PRIVATE "${PSXRECOMP_ROOT}/runtime/include")
+    target_link_libraries(final-bout-host-profile-test PRIVATE recomp-mod-core::core)
     target_compile_definitions(final-bout-host-profile-test PRIVATE PSX_NO_DEBUG_TOOLS=1
         "PSX_EXECUTION_PROFILE_CONFIG=\"${CMAKE_CURRENT_BINARY_DIR}/psx_execution/psx-runtime/profile.h\"")
     target_compile_options(final-bout-host-profile-test PRIVATE -UNDEBUG)
